@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/Users/mlandgrebe/AndroidStudioProjects/Attu/app/build/intermediates/exploded-aar/com.spotify.sdk/spotify-player/1.0.0-beta9/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="7d7c27f03215dfdf3c7b6d34a106e2fd0b061fe3">
+        <dex dex="/Users/mlandgrebe/AndroidStudioProjects/Attu/app/build/intermediates/pre-dexed/debug/classes-91ac1f9d268c7084f6bc13a3bb569362faf133d0.jar" />
+    </item>
+    <item
+        jar="/Users/mlandgrebe/AndroidStudioProjects/Attu/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="4e86306289ace4aa0cfec44a05ed2b410d36989d">
+        <dex dex="/Users/mlandgrebe/AndroidStudioProjects/Attu/app/build/intermediates/pre-dexed/debug/classes-6adcab7622d1711392e0eca83e75b8dfba1962fa.jar" />
+    </item>
+    <item
+        jar="/Users/mlandgrebe/AndroidStudioProjects/Attu/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.0.0/libs/internal_impl-22.0.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="b5b92f469d515a13d778900f6d50c03d12f35504">
+        <dex dex="/Users/mlandgrebe/AndroidStudioProjects/Attu/app/build/intermediates/pre-dexed/debug/internal_impl-22.0.0-ea6fef6274d3052e5504934a302325e5c72d14fc.jar" />
+    </item>
+    <item
+        jar="/Users/mlandgrebe/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/22.0.0/support-annotations-22.0.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="685d0b2c590447e85284ed84712cb363ba04eff8">
+        <dex dex="/Users/mlandgrebe/AndroidStudioProjects/Attu/app/build/intermediates/pre-dexed/debug/support-annotations-22.0.0-e9ca743ca9796697be042b8bde86e1658909fe0a.jar" />
+    </item>
+    <item
+        jar="/Users/mlandgrebe/AndroidStudioProjects/Attu/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="d84409890828e07d344a3b9b1da545dba9897b51">
+        <dex dex="/Users/mlandgrebe/AndroidStudioProjects/Attu/app/build/intermediates/pre-dexed/debug/classes-2e0d22f6282d9f5664288fcaef861a05ca5226b9.jar" />
+    </item>
+    <item
+        jar="/Users/mlandgrebe/AndroidStudioProjects/Attu/app/build/intermediates/exploded-aar/com.spotify.sdk/spotify-auth/1.0.0-beta9/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="ce48e0e9dcaaba897077f28799eb564516430920">
+        <dex dex="/Users/mlandgrebe/AndroidStudioProjects/Attu/app/build/intermediates/pre-dexed/debug/classes-482b521e7d4c79e4feec7b9dca8e18d3b6638a3b.jar" />
+    </item>
+    <item
+        jar="/Users/mlandgrebe/AndroidStudioProjects/Attu/app/build/intermediates/exploded-aar/com.spotify.sdk/spotify-player/1.0.0-beta9/libs/jnihelpers-1.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="8f967424e27e42f211ecc43e63912a8bed1f17bd">
+        <dex dex="/Users/mlandgrebe/AndroidStudioProjects/Attu/app/build/intermediates/pre-dexed/debug/jnihelpers-1.0-84378bcb199da1bfcc4a36b699526f6c7d091be1.jar" />
+    </item>
+
+</items>
