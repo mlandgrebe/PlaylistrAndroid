@@ -15,6 +15,12 @@ import com.spotify.sdk.android.player.Player;
 import com.spotify.sdk.android.player.PlayerNotificationCallback;
 import com.spotify.sdk.android.player.PlayerState;
 
+import kaaes.spotify.webapi.android.models.*;
+import kaaes.spotify.webapi.android.*;
+
+import retrofit.client.*;
+import retrofit.RetrofitError;
+import retrofit.Callback;
 
 public class MainActivity extends Activity implements
         PlayerNotificationCallback, ConnectionStateCallback {
@@ -63,6 +69,25 @@ public class MainActivity extends Activity implements
                     @Override
                     public void onError(Throwable throwable) {
                         Log.e("MainActivity", "Could not initialize player: " + throwable.getMessage());
+                    }
+                });
+                SpotifyApi api = new SpotifyApi();
+
+// Most (but not all) of the Spotify Web API endpoints require authorisation.
+// If you know you'll only use the ones that don't require authorisation you can skip this step
+                api.setAccessToken(response.getAccessToken());
+
+                SpotifyService spotify = api.getService();
+
+                spotify.getAlbum("2dIGnmEIy1WZIcZCFSj6i8", new Callback<Album>() {
+                    @Override
+                    public void success(Album album, Response response) {
+                        Log.d("Album success", album.name);
+                    }
+
+                    @Override
+                    public void failure(RetrofitError error) {
+                        Log.d("Album failure", error.toString());
                     }
                 });
             }

@@ -2,53 +2,88 @@
 <items version="2" >
 
     <item
-        jar="/Users/mlandgrebe/AndroidStudioProjects/Attu/app/build/intermediates/exploded-aar/com.spotify.sdk/spotify-player/1.0.0-beta9/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="7d7c27f03215dfdf3c7b6d34a106e2fd0b061fe3">
-        <dex dex="/Users/mlandgrebe/AndroidStudioProjects/Attu/app/build/intermediates/pre-dexed/debug/classes-91ac1f9d268c7084f6bc13a3bb569362faf133d0.jar" />
-    </item>
-    <item
-        jar="/Users/mlandgrebe/AndroidStudioProjects/Attu/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.0.0/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="4e86306289ace4aa0cfec44a05ed2b410d36989d">
-        <dex dex="/Users/mlandgrebe/AndroidStudioProjects/Attu/app/build/intermediates/pre-dexed/debug/classes-6adcab7622d1711392e0eca83e75b8dfba1962fa.jar" />
-    </item>
-    <item
-        jar="/Users/mlandgrebe/AndroidStudioProjects/Attu/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.0.0/libs/internal_impl-22.0.0.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="b5b92f469d515a13d778900f6d50c03d12f35504">
-        <dex dex="/Users/mlandgrebe/AndroidStudioProjects/Attu/app/build/intermediates/pre-dexed/debug/internal_impl-22.0.0-ea6fef6274d3052e5504934a302325e5c72d14fc.jar" />
-    </item>
-    <item
-        jar="/Users/mlandgrebe/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/22.0.0/support-annotations-22.0.0.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="685d0b2c590447e85284ed84712cb363ba04eff8">
-        <dex dex="/Users/mlandgrebe/AndroidStudioProjects/Attu/app/build/intermediates/pre-dexed/debug/support-annotations-22.0.0-e9ca743ca9796697be042b8bde86e1658909fe0a.jar" />
-    </item>
-    <item
-        jar="/Users/mlandgrebe/AndroidStudioProjects/Attu/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="d84409890828e07d344a3b9b1da545dba9897b51">
-        <dex dex="/Users/mlandgrebe/AndroidStudioProjects/Attu/app/build/intermediates/pre-dexed/debug/classes-2e0d22f6282d9f5664288fcaef861a05ca5226b9.jar" />
-    </item>
-    <item
-        jar="/Users/mlandgrebe/AndroidStudioProjects/Attu/app/build/intermediates/exploded-aar/com.spotify.sdk/spotify-auth/1.0.0-beta9/classes.jar"
+        jar="/Users/zacharyjenkins/Desktop/AndroidPlaylistr/PlaylistrAndroid/app/build/intermediates/exploded-aar/com.spotify.sdk/spotify-auth/1.0.0-beta9/classes.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="ce48e0e9dcaaba897077f28799eb564516430920">
-        <dex dex="/Users/mlandgrebe/AndroidStudioProjects/Attu/app/build/intermediates/pre-dexed/debug/classes-482b521e7d4c79e4feec7b9dca8e18d3b6638a3b.jar" />
+        <dex dex="/Users/zacharyjenkins/Desktop/AndroidPlaylistr/PlaylistrAndroid/app/build/intermediates/pre-dexed/debug/classes-81148c98847fe39a2a5b16f87dc00b02bae0be5b.jar" />
     </item>
     <item
-        jar="/Users/mlandgrebe/AndroidStudioProjects/Attu/app/build/intermediates/exploded-aar/com.spotify.sdk/spotify-player/1.0.0-beta9/libs/jnihelpers-1.0.jar"
+        jar="/Users/zacharyjenkins/Desktop/AndroidPlaylistr/PlaylistrAndroid/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="d84409890828e07d344a3b9b1da545dba9897b51">
+        <dex dex="/Users/zacharyjenkins/Desktop/AndroidPlaylistr/PlaylistrAndroid/app/build/intermediates/pre-dexed/debug/classes-cb22be79823693b1cefd7f00f200be971e4587a1.jar" />
+    </item>
+    <item
+        jar="/Users/zacharyjenkins/Desktop/AndroidPlaylistr/PlaylistrAndroid/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.0.0/libs/internal_impl-22.0.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="b5b92f469d515a13d778900f6d50c03d12f35504">
+        <dex dex="/Users/zacharyjenkins/Desktop/AndroidPlaylistr/PlaylistrAndroid/app/build/intermediates/pre-dexed/debug/internal_impl-22.0.0-9321b68ef6ab9556239b89489f4bc361568778a5.jar" />
+    </item>
+    <item
+        jar="/Users/zacharyjenkins/.gradle/caches/modules-2/files-2.1/com.squareup.okio/okio/1.2.0/c0b52915a48fa91b1b94a28d4a2997bac5f524df/okio-1.2.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="c0b52915a48fa91b1b94a28d4a2997bac5f524df">
+        <dex dex="/Users/zacharyjenkins/Desktop/AndroidPlaylistr/PlaylistrAndroid/app/build/intermediates/pre-dexed/debug/okio-1.2.0-30f038e82a5ae7115450a1fa8ab334fe4a3d55cc.jar" />
+    </item>
+    <item
+        jar="/Users/zacharyjenkins/Desktop/AndroidPlaylistr/PlaylistrAndroid/app/build/intermediates/exploded-aar/com.spotify.sdk/spotify-player/1.0.0-beta9/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="7d7c27f03215dfdf3c7b6d34a106e2fd0b061fe3">
+        <dex dex="/Users/zacharyjenkins/Desktop/AndroidPlaylistr/PlaylistrAndroid/app/build/intermediates/pre-dexed/debug/classes-2e902483d1be36468187a892260697e547a7a4c4.jar" />
+    </item>
+    <item
+        jar="/Users/zacharyjenkins/.gradle/caches/modules-2/files-2.1/com.squareup.retrofit/retrofit/1.9.0/a681c044244d9fc375198588297a39ba78028423/retrofit-1.9.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="a681c044244d9fc375198588297a39ba78028423">
+        <dex dex="/Users/zacharyjenkins/Desktop/AndroidPlaylistr/PlaylistrAndroid/app/build/intermediates/pre-dexed/debug/retrofit-1.9.0-714af0d56e742c776e7ce5ba444f02de9357e2ba.jar" />
+    </item>
+    <item
+        jar="/Users/zacharyjenkins/Desktop/AndroidPlaylistr/PlaylistrAndroid/app/build/intermediates/exploded-aar/com.spotify.sdk/spotify-player/1.0.0-beta9/libs/jnihelpers-1.0.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="8f967424e27e42f211ecc43e63912a8bed1f17bd">
-        <dex dex="/Users/mlandgrebe/AndroidStudioProjects/Attu/app/build/intermediates/pre-dexed/debug/jnihelpers-1.0-84378bcb199da1bfcc4a36b699526f6c7d091be1.jar" />
+        <dex dex="/Users/zacharyjenkins/Desktop/AndroidPlaylistr/PlaylistrAndroid/app/build/intermediates/pre-dexed/debug/jnihelpers-1.0-25034054811d1668bc266582654927fb2e557194.jar" />
+    </item>
+    <item
+        jar="/Users/zacharyjenkins/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp/okhttp/2.2.0/959c454243581fdf730abfd4f4745441724bcf2c/okhttp-2.2.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="959c454243581fdf730abfd4f4745441724bcf2c">
+        <dex dex="/Users/zacharyjenkins/Desktop/AndroidPlaylistr/PlaylistrAndroid/app/build/intermediates/pre-dexed/debug/okhttp-2.2.0-6da1e9a560d98449683df2f65de83ef63737231f.jar" />
+    </item>
+    <item
+        jar="/Users/zacharyjenkins/Desktop/AndroidPlaylistr/PlaylistrAndroid/app/libs/spotify-web-api-android-0.1.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="551950aa07acc568951dc92e87c442515bbc8118">
+        <dex dex="/Users/zacharyjenkins/Desktop/AndroidPlaylistr/PlaylistrAndroid/app/build/intermediates/pre-dexed/debug/spotify-web-api-android-0.1.0-58df5af5b3fc57aeda5738db5c26cf8202adde5d.jar" />
+    </item>
+    <item
+        jar="/Users/zacharyjenkins/Desktop/AndroidPlaylistr/PlaylistrAndroid/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="4e86306289ace4aa0cfec44a05ed2b410d36989d">
+        <dex dex="/Users/zacharyjenkins/Desktop/AndroidPlaylistr/PlaylistrAndroid/app/build/intermediates/pre-dexed/debug/classes-30427bf4d4472ecc4e3535fdcace6b7010d2901b.jar" />
+    </item>
+    <item
+        jar="/Users/zacharyjenkins/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.3.1/ecb6e1f8e4b0e84c4b886c2f14a1500caf309757/gson-2.3.1.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="ecb6e1f8e4b0e84c4b886c2f14a1500caf309757">
+        <dex dex="/Users/zacharyjenkins/Desktop/AndroidPlaylistr/PlaylistrAndroid/app/build/intermediates/pre-dexed/debug/gson-2.3.1-8bc3e72c8f456704d3730768acf2c4deb74850bb.jar" />
+    </item>
+    <item
+        jar="/Users/zacharyjenkins/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/22.0.0/support-annotations-22.0.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="685d0b2c590447e85284ed84712cb363ba04eff8">
+        <dex dex="/Users/zacharyjenkins/Desktop/AndroidPlaylistr/PlaylistrAndroid/app/build/intermediates/pre-dexed/debug/support-annotations-22.0.0-12e8a9a26275584706b7ba3bec76b5a4cee1a248.jar" />
     </item>
 
 </items>
