@@ -218,12 +218,12 @@ public class MainActivity extends Activity implements
 
     @Override
     public void onLoggedIn() {
-        Log.d("MainActivity", "User logged in");
+        Log.d("MainActivity", "APIUser logged in");
     }
 
     @Override
     public void onLoggedOut() {
-        Log.d("MainActivity", "User logged out");
+        Log.d("MainActivity", "APIUser logged out");
     }
 
     @Override
