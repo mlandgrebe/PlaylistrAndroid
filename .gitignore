@@ -1,1 +1,9 @@
 .DS_Store
+.idea/*
+~*
+local.properties
+.idea/workspsace.xml
+PlaylistrAndroid.iml
+app/app.iml
+.gradle/*
+.gradle
