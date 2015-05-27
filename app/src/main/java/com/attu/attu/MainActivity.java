@@ -16,6 +16,8 @@ import com.spotify.sdk.android.player.PlayerNotificationCallback;
 import com.spotify.sdk.android.player.PlayerState;
 
 import java.util.List;
+import java.util.Observer;
+import java.util.Observable;
 
 import kaaes.spotify.webapi.android.models.*;
 import kaaes.spotify.webapi.android.*;
@@ -30,7 +32,7 @@ import android.util.TypedValue;
 import android.view.ViewGroup.LayoutParams;
 
 public class MainActivity extends Activity implements
-        PlayerNotificationCallback, ConnectionStateCallback {
+        PlayerNotificationCallback, ConnectionStateCallback, Observer, Runnable {
 
     // TODO: Replace with your client ID
     private static final String CLIENT_ID = "2de62f40903247208d3dd5e91846c410";
@@ -42,11 +44,13 @@ public class MainActivity extends Activity implements
     private static final int REQUEST_CODE = 1337;
 
     private Player mPlayer;
+    private UpdatePlaylistThread upThread;
     TableLayout country_table;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Log.d("started", "content view");
 
         AuthenticationRequest.Builder builder =
                 new AuthenticationRequest.Builder(CLIENT_ID, AuthenticationResponse.Type.TOKEN, REDIRECT_URI);
@@ -99,7 +103,12 @@ public class MainActivity extends Activity implements
                         Log.d("Album failure", error.toString());
                     }
                 });
-
+                upThread = new UpdatePlaylistThread();
+                upThread.toUpdate = this;
+                upThread.spotify = spotify;
+                upThread.addObserver(this);
+                Thread t = new Thread(upThread);
+                t.start();
                 spotify.getMe(new SpotifyCallback<User>() {
                     @Override
                     public void success(User user, Response response) {
@@ -117,7 +126,48 @@ public class MainActivity extends Activity implements
             }
         }
     }
+
+    public void run(){
+        TextView t1, t2;
+        TableRow row;
+        //Converting to dip unit
+        int dip = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
+                (float) 1, getResources().getDisplayMetrics());
+        for (PlaylistSimple play : upThread.l) {
+            row = new TableRow(this);
+
+            t1 = new TextView(this);
+            t2 = new TextView(this);
+
+            t1.setText(play.name);
+            t2.setText(play.uri);
+            t1.setTypeface(null, 1);
+            t2.setTypeface(null, 1);
+
+            t1.setTextSize(15);
+            t2.setTextSize(15);
+
+            t1.setWidth(50 * dip);
+            t2.setWidth(150 * dip);
+            t1.setPadding(20 * dip, 0, 0, 0);
+            row.addView(t1);
+            row.addView(t2);
+            country_table.addView(row, new TableLayout.LayoutParams(
+                    LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+        }
+    }
+    public void update(Observable obs, Object obj){
+        Log.d("Update", "observer notified");
+
+        // handle successful response
+        if(upThread == null){
+            Log.d("Null", "Going to Crash");
+        }
+        runOnUiThread(this);
+    }
+
     public void getUserPlayLists(String id, SpotifyService spotify){
+        /*
         spotify.getPlaylists(id, new SpotifyCallback<Pager<PlaylistSimple>>() {
             @Override
             public void success(Pager<PlaylistSimple> p, Response response) {
@@ -152,10 +202,9 @@ public class MainActivity extends Activity implements
 
                     country_table.addView(row, new TableLayout.LayoutParams(
                             LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
-                            */
+                            *//*
                     Log.d("Success", play.name);
                 }
-
 
             }
 
@@ -164,7 +213,7 @@ public class MainActivity extends Activity implements
                 // handle error
                 Log.d("SavedTracks failure", error.toString());
             }
-        });
+        });*/
     }
 
     @Override
