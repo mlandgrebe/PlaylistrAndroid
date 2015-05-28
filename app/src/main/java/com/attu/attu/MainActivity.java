@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
+import android.view.View;
 import com.attu.models.APIUser;
 import com.attu.remote.Server;
 import com.spotify.sdk.android.player.Spotify;
@@ -69,7 +70,7 @@ public class MainActivity extends Activity implements
         country_table=(TableLayout)findViewById(R.id.country_table);
     }
 
-    public void loadProfile() {
+    public void loadProfile(View view) {
         Intent prof = new Intent(getApplicationContext(), ProfileActivity.class);
         prof.putExtra("currentUser", currentUser);
         startActivity(prof);
