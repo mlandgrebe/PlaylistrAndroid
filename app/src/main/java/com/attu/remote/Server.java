@@ -17,8 +17,8 @@ public class Server {
     private RestAPI api = null;
 
     private interface RestAPI {
-        @GET("/createuser")
-        APIUser createUser(@Query("spotifyuri") String spotifyURI,
+        @GET("/createUser")
+        APIUser createUser(@Query("spotifyURI") String spotifyURI,
                            @Query("name") String name);
 
         @GET("/lookupUser")

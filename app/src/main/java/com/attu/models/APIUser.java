@@ -1,5 +1,7 @@
 package com.attu.models;
 
+import android.os.Parcelable;
+
 import java.io.Serializable;
 
 /**

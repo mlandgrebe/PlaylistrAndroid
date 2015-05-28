@@ -16,25 +16,18 @@
         <dex dex="/home/patrick/hacking/courses/PlaylistrAndroid/app/build/intermediates/pre-dexed/debug/internal_impl-22.0.0-3443b90311711d6484ec664eb87554632f9304ad.jar" />
     </item>
     <item
-        jar="/home/patrick/hacking/mobile/android-sdk-linux/extras/android/m2repository/com/android/support/support-annotations/22.0.0/support-annotations-22.0.0.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="685d0b2c590447e85284ed84712cb363ba04eff8">
-        <dex dex="/home/patrick/hacking/courses/PlaylistrAndroid/app/build/intermediates/pre-dexed/debug/support-annotations-22.0.0-2ee9787cb4f57ea7d0478dfbc518392ca0c32209.jar" />
-    </item>
-    <item
-        jar="/home/patrick/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp/okhttp-urlconnection/2.0.0/afe8399d352713b66e597e9670c741d1e60ae923/okhttp-urlconnection-2.0.0.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="afe8399d352713b66e597e9670c741d1e60ae923">
-        <dex dex="/home/patrick/hacking/courses/PlaylistrAndroid/app/build/intermediates/pre-dexed/debug/okhttp-urlconnection-2.0.0-ccd9b29ab090da13994f8e2857690d2a0e50d58c.jar" />
-    </item>
-    <item
         jar="/home/patrick/hacking/courses/PlaylistrAndroid/app/build/intermediates/exploded-aar/com.spotify.sdk/spotify-player/1.0.0-beta9/libs/jnihelpers-1.0.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="8f967424e27e42f211ecc43e63912a8bed1f17bd">
         <dex dex="/home/patrick/hacking/courses/PlaylistrAndroid/app/build/intermediates/pre-dexed/debug/jnihelpers-1.0-9d61614e24aa1a15a2b11c7ed8d7c064aeb8abb2.jar" />
+    </item>
+    <item
+        jar="/home/patrick/hacking/mobile/android-sdk-linux/extras/android/m2repository/com/android/support/support-annotations/22.0.0/support-annotations-22.0.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="685d0b2c590447e85284ed84712cb363ba04eff8">
+        <dex dex="/home/patrick/hacking/courses/PlaylistrAndroid/app/build/intermediates/pre-dexed/debug/support-annotations-22.0.0-2ee9787cb4f57ea7d0478dfbc518392ca0c32209.jar" />
     </item>
     <item
         jar="/home/patrick/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.3.1/ecb6e1f8e4b0e84c4b886c2f14a1500caf309757/gson-2.3.1.jar"
@@ -63,6 +56,13 @@
         revision="21.1.2"
         sha1="7d7c27f03215dfdf3c7b6d34a106e2fd0b061fe3">
         <dex dex="/home/patrick/hacking/courses/PlaylistrAndroid/app/build/intermediates/pre-dexed/debug/classes-09943f7a3c42c215cce0aaf840778d396017d508.jar" />
+    </item>
+    <item
+        jar="/home/patrick/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp/okhttp-urlconnection/2.0.0/afe8399d352713b66e597e9670c741d1e60ae923/okhttp-urlconnection-2.0.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="afe8399d352713b66e597e9670c741d1e60ae923">
+        <dex dex="/home/patrick/hacking/courses/PlaylistrAndroid/app/build/intermediates/pre-dexed/debug/okhttp-urlconnection-2.0.0-ccd9b29ab090da13994f8e2857690d2a0e50d58c.jar" />
     </item>
     <item
         jar="/home/patrick/hacking/courses/PlaylistrAndroid/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/classes.jar"
