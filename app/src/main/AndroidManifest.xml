@@ -25,10 +25,8 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity
             android:name=".ProfileActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/title_activity_profile"
-            android:parentActivityName=".MainActivity"
-            android:theme="@style/FullscreenTheme" >
+            android:label="@string/title_activity_profile_activity2"
+            android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.attu.attu.MainActivity" />
