@@ -17,9 +17,13 @@ public class Server {
 
     private interface RestAPI {
         @GET("/createUser")
-        public APIUser createUser(@Query("spotifyURI") String spotifyURI,
-                                  @Query("name") String name);
+        APIUser createUser(@Query("spotifyURI") String spotifyURI,
+                           @Query("name") String name);
+
+        @GET("/lookupUser")
+        APIUser lookupUser(@Query("userId") String userId);
     }
+
 
 
     public Server(String host) {
@@ -34,6 +38,8 @@ public class Server {
     public APIUser createUser(User spotifyUser) {
         return api.createUser(spotifyUser.uri, spotifyUser.display_name);
     }
+
+
 //
 //    @GET("/login")
 //    public APIUser login(@Path("spotifyData") String spotifyData) {
