@@ -7,3 +7,6 @@ PlaylistrAndroid.iml
 app/app.iml
 .gradle/*
 .gradle
+
+.idea
+build/intermediates

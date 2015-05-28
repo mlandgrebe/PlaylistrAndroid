@@ -22,7 +22,8 @@
     <RelativeLayout android:id="@+id/rl_country_heading"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="#555555">
+        android:background="#555555"
+                    android:gravity="top">
         <TextView android:id="@+id/tv_11"
             android:layout_width="70dip"
             android:layout_height="wrap_content"
@@ -44,7 +45,7 @@
         </TextView>
     </RelativeLayout>
     <LinearLayout android:id="@+id/ll_country"
-        android:layout_height="fill_parent" android:layout_width="fill_parent">
+        android:layout_height="522dp" android:layout_width="fill_parent">
         <ScrollView android:id="@+id/ScrollView11"
             android:layout_width="fill_parent" android:layout_height="fill_parent"
             android:fillViewport="true">
@@ -59,4 +60,19 @@
             </LinearLayout>
         </ScrollView>
     </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:weightSum="1">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/profileButtonTitle"
+            android:id="@+id/toProfileButton"
+            android:onClick="loadProfile"/>
+    </LinearLayout>
+
 </LinearLayout>

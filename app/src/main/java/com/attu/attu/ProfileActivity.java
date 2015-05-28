@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+import com.attu.models.APIUser;
 
 
 public class ProfileActivity extends Activity {
@@ -13,6 +14,14 @@ public class ProfileActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+        TextView nameView = (TextView) findViewById(R.id.nameValue);
+        TextView uriView = (TextView) findViewById(R.id.uriValue);
+
+        Bundle extras = getIntent().getExtras();
+        APIUser user = (APIUser)extras.get("currentUser");
+
+        nameView.setText(user.getName());
+        uriView.setText(user.getSpotifyURI());
 //        R.drawable.
 //        TextView nameView = findViewById(R.)
     }

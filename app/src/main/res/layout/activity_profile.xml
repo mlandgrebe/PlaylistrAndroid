@@ -58,7 +58,8 @@
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="Large Text"
                     android:id="@+id/nameValue"
-                    android:textIsSelectable="false" />
+                    android:textIsSelectable="false"
+                    android:autoText="false"/>
             </GridLayout>
         </TableRow>
 

@@ -8,7 +8,6 @@ android {
     lintOptions {
         abortOnError false
     }
-3
 
     defaultConfig {
         applicationId "com.attu.attu"

@@ -1,6 +1,7 @@
 package com.attu.remote;
 
 
+import android.util.Log;
 import com.attu.models.APIUser;
 import kaaes.spotify.webapi.android.models.User;
 import retrofit.RestAdapter;
@@ -16,8 +17,8 @@ public class Server {
     private RestAPI api = null;
 
     private interface RestAPI {
-        @GET("/createUser")
-        APIUser createUser(@Query("spotifyURI") String spotifyURI,
+        @GET("/createuser")
+        APIUser createUser(@Query("spotifyuri") String spotifyURI,
                            @Query("name") String name);
 
         @GET("/lookupUser")
@@ -29,6 +30,8 @@ public class Server {
     public Server(String host) {
         RestAdapter adapter = new RestAdapter.Builder().setEndpoint(host).build();
         api = adapter.create(RestAPI.class);
+        Log.d("Got API. Null ?", api == null ? "yes" : "no");
+
     }
 
     public Server() {
@@ -36,6 +39,8 @@ public class Server {
     }
 
     public APIUser createUser(User spotifyUser) {
+        Log.d("Submitting user's URI", spotifyUser.uri);
+        Log.d("Submitting user's name", spotifyUser.display_name);
         return api.createUser(spotifyUser.uri, spotifyUser.display_name);
     }
 
