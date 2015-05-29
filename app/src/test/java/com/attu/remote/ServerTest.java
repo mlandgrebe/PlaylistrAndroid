@@ -1,6 +1,8 @@
 package com.attu.remote;
 
+import com.attu.models.APIUser;
 import junit.framework.TestCase;
+import kaaes.spotify.webapi.android.models.User;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.*;
@@ -13,7 +15,11 @@ public class ServerTest extends TestCase {
 
     @Test
     public void testCreateUser() throws Exception {
-        assertThat(0, equalTo(1));
+        Server server = new Server("http://www.foo.com");
+        User spotifyUser = new User();
+        spotifyUser.display_name = "John Doe";
+        spotifyUser.uri = "some:uri";
+        APIUser user = server.createUser(spotifyUser);
 
     }
 }

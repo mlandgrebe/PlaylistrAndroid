@@ -12,7 +12,7 @@ import retrofit.http.Query;
  * Created by patrick on 5/27/15.
  */
 public class Server {
-    private String DEFAULT_HOST = "localhost";
+    private String DEFAULT_HOST = "http://localhost";
     private RestAPI api = null;
 
     private interface RestAPI {
