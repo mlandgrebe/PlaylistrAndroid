@@ -1,36 +1,24 @@
 package com.attu.attu;
 
-import android.app.Activity;
+import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
-import com.attu.models.APIUser;
 
 
-public class ProfileActivity extends Activity {
+public class CreateSRActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile);
-        TextView nameView = (TextView) findViewById(R.id.nameValue);
-        TextView uriView = (TextView) findViewById(R.id.uriValue);
-
-        Bundle extras = getIntent().getExtras();
-        APIUser user = (APIUser)extras.get("currentUser");
-
-        nameView.setText(user.getName());
-        uriView.setText(user.getSpotifyURI());
-//        R.drawable.
-//        TextView nameView = findViewById(R.)
+        setContentView(R.layout.activity_create_sr);
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_create_sr, menu);
         return true;
     }
 

@@ -5,6 +5,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
+import android.view.View;
+import com.attu.models.APIUser;
+import com.attu.remote.Server;
 import com.spotify.sdk.android.player.Spotify;
 import com.spotify.sdk.android.authentication.AuthenticationClient;
 import com.spotify.sdk.android.authentication.AuthenticationRequest;
@@ -46,6 +49,10 @@ public class MainActivity extends Activity implements
     private Player mPlayer;
     private UpdatePlaylistThread upThread;
     TableLayout country_table;
+    APIUser currentUser;
+    Server server;
+    private SpotifyService spotify;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,8 +64,16 @@ public class MainActivity extends Activity implements
         builder.setScopes(new String[]{"user-read-private", "streaming", "user-library-read"});
         AuthenticationRequest request = builder.build();
 
+        server = new Server();
+
         AuthenticationClient.openLoginActivity(this, REQUEST_CODE, request);
         country_table=(TableLayout)findViewById(R.id.country_table);
+    }
+
+    public void loadProfile(View view) {
+        Intent prof = new Intent(getApplicationContext(), ProfileActivity.class);
+        prof.putExtra("currentUser", currentUser);
+        startActivity(prof);
     }
 
     @Override
@@ -89,7 +104,7 @@ public class MainActivity extends Activity implements
 // If you know you'll only use the ones that don't require authorisation you can skip this step
                 api.setAccessToken(response.getAccessToken());
 
-                final SpotifyService spotify = api.getService();
+                spotify = api.getService();
 
                 spotify.getAlbum("2dIGnmEIy1WZIcZCFSj6i8", new Callback<Album>() {
                     @Override
@@ -103,6 +118,7 @@ public class MainActivity extends Activity implements
                         Log.d("Album failure", error.toString());
                     }
                 });
+                initCurrentUser();
                 upThread = new UpdatePlaylistThread();
                 upThread.toUpdate = this;
                 upThread.spotify = spotify;
@@ -125,6 +141,23 @@ public class MainActivity extends Activity implements
                 });
             }
         }
+    }
+
+    private void initCurrentUser() {
+        spotify.getMe(new SpotifyCallback<User>() {
+            @Override
+            public void failure(SpotifyError spotifyError) {
+                Log.d("Error finding me: ", spotifyError.toString());
+            }
+
+            @Override
+            public void success(User user, Response response) {
+                Log.d("Found me: ", response.toString());
+                Log.d("Found me: ", user.toString());
+                Log.d("Found me: ", user.display_name);
+                currentUser = server.createUser(user);
+            }
+        });
     }
 
     public void run(){

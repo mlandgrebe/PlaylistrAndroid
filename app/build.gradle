@@ -8,11 +8,10 @@ android {
     lintOptions {
         abortOnError false
     }
-3
 
     defaultConfig {
         applicationId "com.attu.attu"
-        minSdkVersion 15
+        minSdkVersion 16
         targetSdkVersion 21
         versionCode 1
         versionName "1.0"
@@ -39,7 +38,8 @@ dependencies {
     // This library handles music playback
     compile 'com.spotify.sdk:spotify-player:1.0.0-beta9@aar'
     // All other dependencies for your app should also be here:
-    compile 'com.android.support:appcompat-v7:22.0.0'
+    compile 'com.android.support:appcompat-v7:22.1.1'
+
     compile files('libs/spotify-web-api-android-0.1.0.jar')
     compile 'com.squareup.retrofit:retrofit:1.9.0'
     compile 'com.squareup.okhttp:okhttp-urlconnection:2.0.0'

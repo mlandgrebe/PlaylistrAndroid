@@ -31,6 +31,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.attu.attu.MainActivity" />
         </activity>
+        <activity
+            android:name=".CreateSRActivity"
+            android:label="@string/title_activity_create_sr"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.attu.attu.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

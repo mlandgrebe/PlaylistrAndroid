@@ -12,4 +12,6 @@
     <string name="displayNameIsCalled">Name</string>
     <string name="uriIsCalled">Spotify URI</string>
     <string name="profileTItle">Profile</string>
+    <string name="profileButtonTitle">View Profile</string>
+    <string name="title_activity_create_sr">CreateSRActivity</string>
 </resources>
