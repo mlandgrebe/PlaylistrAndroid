@@ -12,6 +12,7 @@ import android.view.*;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.*;
+import android.content.Context;
 
 import com.spotify.sdk.android.authentication.AuthenticationClient;
 import com.spotify.sdk.android.authentication.AuthenticationRequest;
@@ -34,16 +35,23 @@ import retrofit.client.*;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 
+import com.attu.attu.UpdatePlaylistTracksActivity;
 
 public class UpdatePlaylistsActivity extends Activity implements Observer, Runnable {
     private UpdatePlaylistsThread upThread;
     public SpotifyService spotify;
+    private String SID;
     // TODO: rename country_table to playlist_table
     TableLayout playlist_table;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d("Starting", "Update Playlist Tracks");
         super.onCreate(savedInstanceState);
+        SpotifyApi api = new SpotifyApi();
+        SID = (String) getIntent().getSerializableExtra("spotifyToken");
+        api.setAccessToken(SID);
+        spotify = api.getService();
         setContentView(R.layout.activity_update_playlists);
         playlist_table = (TableLayout)findViewById(R.id.playlist_table);
 
@@ -84,7 +92,6 @@ public class UpdatePlaylistsActivity extends Activity implements Observer, Runna
                 (float) 1, getResources().getDisplayMetrics());
         for (PlaylistSimple play : upThread.l) {
             row = new TableRow(this);
-
             t1 = new TextView(this);
             t2 = new TextView(this);
 
@@ -101,6 +108,7 @@ public class UpdatePlaylistsActivity extends Activity implements Observer, Runna
             t1.setPadding(20 * dip, 0, 0, 0);
             row.addView(t1);
             row.addView(t2);
+            row.setTag(play.id);
 
             playlist_table.addView(row, new TableLayout.LayoutParams(
                     LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
@@ -111,6 +119,11 @@ public class UpdatePlaylistsActivity extends Activity implements Observer, Runna
                     // here is where we will need to swap out view with view of the playlist's tracks
                     v.setBackgroundColor(Color.GRAY);
                     System.out.println("Row clicked: " + v.getId());
+                    Context x = v.getContext();
+                    Intent i = new Intent(x, UpdatePlaylistTracksActivity.class);
+                    i.putExtra("spotifyToken", SID);
+                    i.putExtra("plist", (String)v.getTag());
+                    startActivity(i);
                 }
 
             });

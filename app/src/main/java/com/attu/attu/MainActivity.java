@@ -34,6 +34,8 @@ import retrofit.client.*;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 
+import com.attu.attu.UpdatePlaylistsActivity;
+
 public class MainActivity extends Activity implements
         PlayerNotificationCallback, ConnectionStateCallback {
 
@@ -83,6 +85,10 @@ public class MainActivity extends Activity implements
                 SpotifyApi api = new SpotifyApi();
                 api.setAccessToken(response.getAccessToken());
                 final SpotifyService spotify = api.getService();
+                Intent i = new Intent(this, UpdatePlaylistsActivity.class);
+                i.putExtra("spotifyToken", response.getAccessToken());
+                startActivity(i);
+                Log.d("Sent", "should start");
             }
         }
     }

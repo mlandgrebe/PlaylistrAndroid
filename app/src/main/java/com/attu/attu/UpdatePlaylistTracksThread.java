@@ -37,6 +37,7 @@ public class UpdatePlaylistTracksThread extends Observable implements Runnable{
     public SpotifyService spotify;
     public List<PlaylistTrack> ts;
     public Playlist plist;
+    public String uri;
     public void run(){
         User user = null;
         try {
@@ -51,7 +52,7 @@ public class UpdatePlaylistTracksThread extends Observable implements Runnable{
             Log.d("Successful login", user.id);
             ts = null;
             try {
-                Pager<PlaylistTrack> pt = spotify.getPlaylistTracks(user.id, plist.id);
+                Pager<PlaylistTrack> pt = spotify.getPlaylistTracks(user.id, uri);
                 ts = pt.items;
             } catch (RetrofitError error) {
                 SpotifyError spotifyError = SpotifyError.fromRetrofitError(error);

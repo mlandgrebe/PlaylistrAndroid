@@ -37,18 +37,24 @@ import retrofit.RetrofitError;
 public class UpdatePlaylistTracksActivity extends Activity implements Observer, Runnable {
     private UpdatePlaylistTracksThread upThread;
     public SpotifyService spotify;
+    public String plist;
     // TODO: rename country_table to playlist_table
     TableLayout playlist_tracks_table;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d("Starting", "Update Playlist Tracks");
+        plist = (String) getIntent().getSerializableExtra("plist");
+        SpotifyApi api = new SpotifyApi();
+        api.setAccessToken((String) getIntent().getSerializableExtra("spotifyToken"));
+        spotify = api.getService();
         setContentView(R.layout.activity_update_playlist_tracks);
         playlist_tracks_table = (TableLayout)findViewById(R.id.playlist_tracks_table);
-
         upThread = new UpdatePlaylistTracksThread();
         upThread.toUpdate = this;
         upThread.spotify = spotify;
+        upThread.uri = plist;
         upThread.addObserver(this);
         Thread t = new Thread(upThread);
         t.start();
@@ -99,6 +105,7 @@ public class UpdatePlaylistTracksActivity extends Activity implements Observer, 
             t1.setPadding(20 * dip, 0, 0, 0);
             row.addView(t1);
             row.addView(t2);
+            row.setTag(plTrack.track);
 
             playlist_tracks_table.addView(row, new TableLayout.LayoutParams(
                     LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
@@ -111,6 +118,7 @@ public class UpdatePlaylistTracksActivity extends Activity implements Observer, 
                     // for Admin & User and in SongRoom or Your Music
                     v.setBackgroundColor(Color.GRAY);
                     System.out.println("Row clicked: " + v.getId());
+                    Track toPlay = (Track) v.getTag();
                 }
 
             });
