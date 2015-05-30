@@ -9,23 +9,22 @@ import java.util.List;
 /**
  * Created by patrick on 5/27/15.
  */
-public class APIUser extends ServerLinked implements Serializable {
+public class APIUser extends Identified implements Serializable {
     private final String spotifyURI;
     private final String name;
-    private final int id;
     private SongRoom songRoom;
     private final float DEFAULT_DISTANCE_CUTOFF_METERS = 100.0f;
 
     // The LocationListener should set this
     private Location location;
 
-
-
-    public APIUser(String spotifyURI, String name, int userId) {
+    public APIUser(ObjectId id, String spotifyURI, String name) {
+        super(id);
         this.spotifyURI = spotifyURI;
         this.name = name;
-        this.id = userId;
     }
+
+    //    public static fromSpotifyUser()
 
     public String getSpotifyURI() {
         return spotifyURI;
@@ -33,10 +32,6 @@ public class APIUser extends ServerLinked implements Serializable {
 
     public String getName() {
         return name;
-    }
-
-    public int getId() {
-        return id;
     }
 
     public void joinSR(SongRoom songRoom) {

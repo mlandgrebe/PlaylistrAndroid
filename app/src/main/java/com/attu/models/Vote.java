@@ -8,7 +8,9 @@ public class Vote extends ServerLinked {
     private boolean isUp;
 
     // Exposing this constructor would be ugly
-    private Vote(APIUser castBy, boolean isUp) {
+
+
+    public Vote(APIUser castBy, boolean isUp) {
         this.castBy = castBy;
         this.isUp = isUp;
     }

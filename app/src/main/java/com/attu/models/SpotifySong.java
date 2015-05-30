@@ -5,14 +5,14 @@ import com.attu.remote.Server;
 /**
  * Created by patrick on 5/29/15.
  */
-public class SpotifySong extends ServerLinked {
+public class SpotifySong extends Identified {
     Server server;
-    String spotifyUri;
+    String spotifyURI;
 
-    public SpotifySong(String spotifyUri) {
-        this.spotifyUri = spotifyUri;
+    public SpotifySong(ObjectId id, String spotifyURI) {
+        super(id);
+        this.spotifyURI = spotifyURI;
     }
-
 
     // There should be some method to fetch the spotify info about this, i dont know what that is though
 

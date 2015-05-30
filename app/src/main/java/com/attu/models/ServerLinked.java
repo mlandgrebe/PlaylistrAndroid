@@ -3,10 +3,10 @@ package com.attu.models;
 import com.attu.remote.Server;
 
 /**
- * Created by patrick on 5/29/15.
+ * Created by patrick on 5/30/15.
  */
 public class ServerLinked {
-    Server server;
+    protected Server server;
 
     public ServerLinked setServer(Server server) {
         this.server = server;

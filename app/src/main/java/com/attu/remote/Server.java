@@ -23,38 +23,45 @@ public class Server {
                            @Query("name") String name);
 
         @GET("/lookupUser")
-        APIUser lookupUser(@Query("userId") String userId);
+        APIUser lookupUser(@Query("userId") ObjectId userId);
 
         @GET("/createSR")
-        SongRoom createSR(@Query("hostId") int hostId,
+        SongRoom createSR(@Query("hostId") String hostId,
                           @Query("location") Location location,
                           @Query("name") String name);
 
         @GET("/joinSR")
-        void joinSR(@Query("srId") Integer srId, @Query("userId") int userId);
+        void joinSR(@Query("srId") ObjectId srId, @Query("userId") ObjectId userId);
 
         @GET("/getVotes")
-        List<Vote> getVotes(@Query("songId") int songId);
+        List<Vote> getVotes(@Query("songId") ObjectId songId);
 
         @GET("/submitVote")
-        void submitVote(@Query("userId") int userId, boolean isUp);
+        void submitVote(@Query("userId") ObjectId userId, boolean isUp);
 
         @GET("/getQueue")
-        SongQueue getQueue(@Query("srId") int songRoomId);
+        SongQueue getQueue(@Query("srId") ObjectId songRoomId);
+
+        @GET("/setQueue")
+        void setQueue(@Query("srId") String srId, @Query("songIds") List<Integer> songIds);
 
         @GET("/changeQueue")
-        void changeQueue(@Query("queueId") int songQueueId,
-                         @Query("songId") int songId,
+        void changeQueue(@Query("queueId") ObjectId songQueueId,
+                         @Query("songId") ObjectId songId,
                          @Query("isEnq") boolean isEnq);
 
         @GET("/leaveSR")
-        void leaveSR(@Query("userId") int userId, @Query("srId") int songRoomId);
+        void leaveSR(@Query("userId") ObjectId userId, @Query("srId") ObjectId songRoomId);
 
         @GET("/nearbySR")
         List<SongRoom> nearbySR(@Query("location") Location location);
 
         @GET("/srMembers")
-        List<APIUser> srMembers(@Query("srId") int srId);
+        List<APIUser> srMembers(@Query("srId") String srId);
+
+        // Needs a return type to compile
+        @GET("/dropUsers")
+        String dropUsers();
     }
 
 
@@ -77,50 +84,55 @@ public class Server {
     }
 
     @GET("/lookupUser")
-    public APIUser lookupUser(@Query("userId") String userId) {
-        return api.lookupUser(userId);
+    public APIUser lookupUser(@Query("userId") ObjectId userId) {
+        return (APIUser)api.lookupUser(userId).setServer(this);
     }
 
     @GET("/createSR")
-    public SongRoom createSR(@Query("hostId") int hostId,
+    public SongRoom createSR(@Query("hostId") String hostId,
                              @Query("location") Location location,
                              @Query("name") String name) {
-        return api.createSR(hostId, location, name);
+        return (SongRoom)api.createSR(hostId, location, name).setServer(this);
     }
 
     @GET("/joinSR")
-    public void joinSR(@Query("srId") Integer srId, @Query("userId") int userId) {
+    public void joinSR(@Query("srId") ObjectId srId, @Query("userId") ObjectId userId) {
         api.joinSR(srId, userId);
     }
 
-    public List<Vote> getVotes(int songId) {
+    public List<Vote> getVotes(ObjectId songId) {
         return api.getVotes(songId);
     }
 
     @GET("/createUser")
     public APIUser createUser(@Query("spotifyURI") String spotifyURI, @Query("name") String name) {
-        return api.createUser(spotifyURI, name);
+        return (APIUser)api.createUser(spotifyURI, name).setServer(this);
     }
 
     @GET("/submitVote")
-    public void submitVote(@Query("userId") int userId, boolean isUp) {
+    public void submitVote(@Query("userId") ObjectId userId, boolean isUp) {
         api.submitVote(userId, isUp);
     }
 
     @GET("/getQueue")
-    public SongQueue getQueue(@Query("songRoomId") int songRoomId) {
+    public SongQueue getQueue(@Query("srId") ObjectId songRoomId) {
         return (SongQueue)api.getQueue(songRoomId).setServer(this);
     }
 
+    @GET("/setQueue")
+    public void setQueue(@Query("srId") String srId, @Query("songIds") List<Integer> songIds) {
+        api.setQueue(srId, songIds);
+    }
+
     @GET("/changeQueue")
-    public void changeQueue(@Query("songQueueId") int songQueueId,
-                            @Query("songId") int songId,
+    public void changeQueue(@Query("songQueueId") ObjectId songQueueId,
+                            @Query("songId") ObjectId songId,
                             @Query("isEnq") boolean isEnq) {
         api.changeQueue(songQueueId, songId, isEnq);
     }
 
     @GET("/leaveSR")
-    public void leaveSR(@Query("userId") int userId, @Query("srId") int songRoomId) {
+    public void leaveSR(@Query("userId") ObjectId userId, @Query("srId") ObjectId songRoomId) {
         api.leaveSR(userId, songRoomId);
     }
 
@@ -130,7 +142,12 @@ public class Server {
     }
 
     @GET("/srMembers")
-    public List<APIUser> srMembers(@Query("srId") int srId) {
+    public List<APIUser> srMembers(@Query("srId") String srId) {
         return api.srMembers(srId);
+    }
+
+    @GET("/dropUsers")
+    public void dropUsers() {
+        api.dropUsers();
     }
 }
