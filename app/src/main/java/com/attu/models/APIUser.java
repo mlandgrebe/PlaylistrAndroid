@@ -36,7 +36,7 @@ public class APIUser extends Identified implements Serializable {
 
     public SongRoom createSR(String name) {
         System.out.println(location);
-        return server.createSR(id, PointLocation.fromLocation(location), name);
+        return server.createSR(id, getLocation(), name);
     }
 
     public void joinSR(SongRoom songRoom) {
@@ -54,8 +54,8 @@ public class APIUser extends Identified implements Serializable {
         }
     }
 
-    public Location getLocation() {
-        return location;
+    public PointLocation getLocation() {
+        return PointLocation.fromLocation(location);
     }
 
     public void setLocation(Location location) {
@@ -71,7 +71,7 @@ public class APIUser extends Identified implements Serializable {
         List<SongRoom> srs = getNearbySRs();
 
         for (SongRoom sr : srs) {
-            if (sr.getLocation().distanceTo(location) < DEFAULT_DISTANCE_CUTOFF_METERS) {
+            if (sr.getLocation().distanceTo(getLocation()) < DEFAULT_DISTANCE_CUTOFF_METERS) {
                 return new Maybe<SongRoom>(sr);
             }
         }

@@ -77,6 +77,7 @@ public class Server {
     public Server(String host) {
         Gson gson = new GsonBuilder()
                 .registerTypeAdapter(ObjectId.class, new ObjectIdDeserializer())
+                .registerTypeAdapter(PointLocation.class, new PointLocationDeserializer())
                 .create();
 
         RestAdapter adapter = new RestAdapter.Builder().setEndpoint(host)

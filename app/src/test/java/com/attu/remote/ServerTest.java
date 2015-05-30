@@ -67,7 +67,7 @@ public class ServerTest extends TestCase {
         APIUser user = server.createUser(spotifyUser);
         PointLocation loc = new PointLocation(15, 16);
 
-        SongRoom room = server.createSR(user.getId(), loc, "testSr");
+        SongRoom room = server.createSR(user.getId(), loc, "testSR");
 
         assertThat(room.getName(), equalTo("testSR"));
         assertThat(room.getLocation(), equalTo(loc));

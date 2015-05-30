@@ -6,10 +6,10 @@ import android.location.Location;
  * Created by patrick on 5/29/15.
  */
 public class SongRoom extends Identified {
-    private Location location;
+    private PointLocation location;
     private String name;
 
-    public SongRoom(ObjectId id, Location location, String name) {
+    public SongRoom(ObjectId id, PointLocation location, String name) {
         super(id);
         this.location = location;
         this.name = name;
@@ -23,7 +23,7 @@ public class SongRoom extends Identified {
         return server.getQueue(id);
     }
 
-    public Location getLocation() {
+    public PointLocation getLocation() {
         return location;
     }
 
