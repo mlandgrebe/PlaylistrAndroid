@@ -3,8 +3,11 @@ package com.attu.remote;
 
 import android.location.Location;
 import com.attu.models.*;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import kaaes.spotify.webapi.android.models.User;
 import retrofit.RestAdapter;
+import retrofit.converter.GsonConverter;
 import retrofit.http.GET;
 import retrofit.http.Query;
 
@@ -71,7 +74,15 @@ public class Server {
     }
 
     public Server(String host) {
-        RestAdapter adapter = new RestAdapter.Builder().setEndpoint(host).build();
+        Gson gson = new GsonBuilder()
+                .registerTypeAdapter(ObjectId.class, new ObjectIdDeserializer())
+                .registerTypeAdapter(ObjectId.class, new ObjectIdSerializer())
+                .create();
+
+        RestAdapter adapter = new RestAdapter.Builder().setEndpoint(host)
+                .setConverter(new GsonConverter(gson))
+                .setLogLevel(RestAdapter.LogLevel.BASIC)
+                .build();
         api = adapter.create(RestAPI.class);
     }
 
