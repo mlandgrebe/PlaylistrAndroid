@@ -1,6 +1,8 @@
 package com.attu.remote;
 
 import com.attu.models.APIUser;
+import com.attu.models.Identified;
+import com.attu.models.ObjectId;
 import junit.framework.TestCase;
 import kaaes.spotify.webapi.android.models.User;
 import org.junit.Before;
@@ -53,6 +55,12 @@ public class ServerTest extends TestCase {
         assertThat(userFromLookup.getName(), equalTo(spotifyUser.display_name));
         assertThat(userFromLookup.getSpotifyURI(), equalTo(spotifyUser.uri));
         assertThat(userFromLookup.getId(), equalTo(user.getId()));
+    }
+
+    public void testSerializeObjectId() throws Exception {
+        Identified identified = new Identified(new ObjectId("abc"));
+
+        assertThat(identified.toString(), equalTo("{\"_id\"={\"$oid\"=\"abc\"}}"));
     }
 
     public void testSongRoomCRUD() throws Exception {

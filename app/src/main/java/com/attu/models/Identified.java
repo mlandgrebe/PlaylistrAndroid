@@ -22,11 +22,4 @@ public class Identified extends ServerLinked implements Serializable {
     public void setId(ObjectId id) {
         this.id = id;
     }
-
-    @Override
-    public String toString() {
-        return "Identified{" +
-                "_id=" + id +
-                '}';
-    }
 }

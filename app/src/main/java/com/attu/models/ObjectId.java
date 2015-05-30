@@ -21,10 +21,25 @@ public class ObjectId {
         this.oid = oid;
     }
 
+    // Defined like this so retrofit understands
     @Override
     public String toString() {
-        return "{" +
-                "$oid='" + oid + '\'' +
-                '}';
+        return getOid();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ObjectId objectId = (ObjectId) o;
+
+        return oid.equals(objectId.oid);
+
+    }
+
+    @Override
+    public int hashCode() {
+        return oid.hashCode();
     }
 }
