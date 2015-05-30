@@ -1,8 +1,8 @@
 package com.attu.remote;
 
-import com.attu.models.APIUser;
-import com.attu.models.Identified;
-import com.attu.models.ObjectId;
+import android.content.Intent;
+import android.location.Location;
+import com.attu.models.*;
 import junit.framework.TestCase;
 import kaaes.spotify.webapi.android.models.User;
 import org.junit.Before;
@@ -10,6 +10,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.BlockJUnit4ClassRunner;
 import retrofit.RetrofitError;
+
+import java.util.Date;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
@@ -57,17 +59,22 @@ public class ServerTest extends TestCase {
         assertThat(userFromLookup.getId(), equalTo(user.getId()));
     }
 
-    public void testSerializeObjectId() throws Exception {
-        Identified identified = new Identified(new ObjectId("abc"));
-
-        assertThat(identified.toString(), equalTo("{\"_id\"={\"$oid\"=\"abc\"}}"));
-    }
-
+    @Test
     public void testSongRoomCRUD() throws Exception {
-        Server server = new Server("http://localhost");
+        Server server = new Server("http://localhost:5000");
+        server.dropUsers();
 
+        APIUser user = server.createUser(spotifyUser);
+        PointLocation loc = new PointLocation(15, 16);
+
+        SongRoom room = server.createSR(user.getId(), loc, "testSr");
+
+        assertThat(room.getName(), equalTo("testSR"));
+        assertThat(room.getLocation(), equalTo(loc));
+        assertNotNull(room.getId());
 
     }
+
 
     //    @Test
 //    public void testCreateUser() throws Exception {

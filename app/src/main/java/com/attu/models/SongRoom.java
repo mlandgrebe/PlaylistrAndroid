@@ -6,11 +6,17 @@ import android.location.Location;
  * Created by patrick on 5/29/15.
  */
 public class SongRoom extends Identified {
-    Location location;
+    private Location location;
+    private String name;
 
-    public SongRoom(ObjectId id, Location location) {
+    public SongRoom(ObjectId id, Location location, String name) {
         super(id);
         this.location = location;
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public SongQueue getQueue() {

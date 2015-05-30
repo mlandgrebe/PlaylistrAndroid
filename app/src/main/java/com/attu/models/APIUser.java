@@ -34,6 +34,11 @@ public class APIUser extends Identified implements Serializable {
         return name;
     }
 
+    public SongRoom createSR(String name) {
+        System.out.println(location);
+        return server.createSR(id, PointLocation.fromLocation(location), name);
+    }
+
     public void joinSR(SongRoom songRoom) {
         server.joinSR(songRoom.getId(), id);
         songRoom = songRoom;

@@ -29,8 +29,8 @@ public class Server {
         APIUser lookupUser(@Query("userId") ObjectId userId);
 
         @GET("/createSR")
-        SongRoom createSR(@Query("hostId") String hostId,
-                          @Query("location") Location location,
+        SongRoom createSR(@Query("hostId") ObjectId hostId,
+                          @Query("location") PointLocation location,
                           @Query("name") String name);
 
         @GET("/joinSR")
@@ -56,6 +56,7 @@ public class Server {
         @GET("/leaveSR")
         void leaveSR(@Query("userId") ObjectId userId, @Query("srId") ObjectId songRoomId);
 
+        // FIXME: this needs to be a PointLocation eventually
         @GET("/nearbySR")
         List<SongRoom> nearbySR(@Query("location") Location location);
 
@@ -99,8 +100,8 @@ public class Server {
     }
 
     @GET("/createSR")
-    public SongRoom createSR(@Query("hostId") String hostId,
-                             @Query("location") Location location,
+    public SongRoom createSR(@Query("hostId") ObjectId hostId,
+                             @Query("location") PointLocation location,
                              @Query("name") String name) {
         return (SongRoom)api.createSR(hostId, location, name).setServer(this);
     }
