@@ -40,10 +40,10 @@ public class Server {
         void submitVote(@Query("userId") int userId, boolean isUp);
 
         @GET("/getQueue")
-        SongQueue getQueue(@Query("songRoomId") int songRoomId);
+        SongQueue getQueue(@Query("srId") int songRoomId);
 
         @GET("/changeQueue")
-        void changeQueue(@Query("songQueueId") int songQueueId,
+        void changeQueue(@Query("queueId") int songQueueId,
                          @Query("songId") int songId,
                          @Query("isEnq") boolean isEnq);
 
@@ -52,6 +52,9 @@ public class Server {
 
         @GET("/nearbySR")
         List<SongRoom> nearbySR(@Query("location") Location location);
+
+        @GET("/srMembers")
+        List<APIUser> srMembers(@Query("srId") int srId);
     }
 
 
@@ -124,5 +127,10 @@ public class Server {
     @GET("/nearbySR")
     public List<SongRoom> nearbySR(@Query("location") Location location) {
         return api.nearbySR(location);
+    }
+
+    @GET("/srMembers")
+    public List<APIUser> srMembers(@Query("srId") int srId) {
+        return api.srMembers(srId);
     }
 }

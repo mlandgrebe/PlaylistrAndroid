@@ -28,4 +28,6 @@ public class SongRoom extends ServerLinked {
     public Location getLocation() {
         return location;
     }
+
+
 }
