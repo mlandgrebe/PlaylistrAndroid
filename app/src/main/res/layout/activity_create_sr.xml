@@ -12,44 +12,44 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:columnCount="2"
-        android:rowCount="3"
+        android:rowCount="4"
         android:layout_gravity="bottom">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Large Text"
-            android:id="@+id/textView2"
-            android:layout_row="0"
+            android:text="Name"
+            android:id="@+id/srName"
+            android:layout_row="1"
             android:layout_column="0"/>
 
-        <TextView
+        <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Large Text"
-            android:id="@+id/textView3"
-            android:layout_row="0"
-            android:layout_column="1"/>
+            android:inputType="numberPassword"
+            android:ems="10"
+            android:id="@+id/srNameInput"
+            android:layout_row="1"
+            android:layout_column="1" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/locationName"
+            android:layout_row="2"
+            android:layout_column="0"
+            android:text="Location"
+            android:focusable="true" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="225dp"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Large Text"
-            android:id="@+id/textView4"
+            android:id="@+id/currentLocText"
             android:layout_row="2"
-            android:layout_column="0"/>
+            android:layout_column="1"
+            android:focusableInTouchMode="true" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Large Text"
-            android:id="@+id/textView5"
-            android:layout_row="2"
-            android:layout_column="1"/>
     </GridLayout>
 
 </RelativeLayout>

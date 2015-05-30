@@ -76,6 +76,11 @@ public class MainActivity extends Activity implements
         startActivity(prof);
     }
 
+    public void createSongRoom(View view) {
+        Intent sr = new Intent(getApplicationContext(), CreateSRActivity.class);
+
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);

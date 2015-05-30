@@ -6,7 +6,8 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="#ff7087ff"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:weightSum="1">
     <TextView
         android:text="PlayLists"
         android:textColor="#ff16b30f"
@@ -52,7 +53,7 @@
             <LinearLayout android:layout_width="fill_parent"
                 android:layout_height="wrap_content" android:layout_margin="5dip">
                 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                    android:layout_width="fill_parent" android:layout_height="fill_parent"
+                    android:layout_width="fill_parent" android:layout_height="376dp"
                     android:stretchColumns="0,1" android:id="@+id/country_table"
                     android:focusable="false"
                     android:focusableInTouchMode="false">
@@ -63,16 +64,32 @@
 
     <LinearLayout
         android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_width="match_parent"
+        android:layout_height="59dp"
         android:weightSum="1">
 
         <Button
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Create Song Room"
+            android:id="@+id/createSRButton"
+            android:layout_gravity="center_vertical"
+            android:clickable="true" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="1"
+        android:id="@+id/">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="123dp"
             android:text="@string/profileButtonTitle"
             android:id="@+id/toProfileButton"
-            android:onClick="loadProfile"/>
+            android:onClick="loadProfile" />
     </LinearLayout>
 
 </LinearLayout>
