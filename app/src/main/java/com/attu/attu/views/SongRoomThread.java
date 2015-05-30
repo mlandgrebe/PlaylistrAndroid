@@ -1,42 +1,23 @@
-package com.attu.attu;
+package com.attu.attu.views;
 
 import android.app.Activity;
-import android.content.Intent;
-import android.graphics.Color;
-import android.os.Bundle;
-import android.util.*;
 import android.util.Log;
-import android.util.TypedValue;
-import android.view.View;
-import android.view.ViewGroup.LayoutParams;
-import android.widget.*;
-
-import com.spotify.sdk.android.authentication.AuthenticationClient;
-import com.spotify.sdk.android.authentication.AuthenticationRequest;
-import com.spotify.sdk.android.authentication.AuthenticationResponse;
-import com.spotify.sdk.android.player.Config;
-import com.spotify.sdk.android.player.ConnectionStateCallback;
-import com.spotify.sdk.android.player.Player;
-import com.spotify.sdk.android.player.PlayerNotificationCallback;
-import com.spotify.sdk.android.player.PlayerState;
-import com.spotify.sdk.android.player.Spotify;
 
 import java.util.List;
 import java.util.Observable;
-import java.util.Observer;
 
-import kaaes.spotify.webapi.android.models.*;
-import kaaes.spotify.webapi.android.*;
-
-import retrofit.client.*;
-import retrofit.Callback;
+import kaaes.spotify.webapi.android.SpotifyError;
+import kaaes.spotify.webapi.android.SpotifyService;
+import kaaes.spotify.webapi.android.models.Pager;
+import kaaes.spotify.webapi.android.models.PlaylistTrack;
+import kaaes.spotify.webapi.android.models.User;
 import retrofit.RetrofitError;
 
-public class UpdatePlaylistTracksThread extends Observable implements Runnable{
+public class SongRoomThread extends Observable implements Runnable {
     public Activity toUpdate;
     public SpotifyService spotify;
     public List<PlaylistTrack> ts;
-    public Playlist plist;
+    //public Playlist plist;
     public String uri;
     public void run(){
         User user = null;

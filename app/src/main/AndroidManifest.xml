@@ -11,7 +11,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".MainActivity"
+            android:name=".views.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,12 +28,24 @@
             android:label="@string/title_activity_update_playlists" >
         </activity>
         <activity
-            android:name=".UpdatePlaylistTracksActivity"
+            android:name=".views.UpdatePlaylistTracksActivity"
             android:label="@string/title_activity_update_playlist_tracks" >
         </activity>
         <activity
-            android:name=".UpdatePlaylistsActivity"
+            android:name=".views.UpdatePlaylistsActivity"
             android:label="@string/title_activity_update_playlists" >
+        </activity>
+        <activity
+            android:name=".views.CreateSongRoomActivity"
+            android:label="@string/title_activity_create_song_room" >
+        </activity>
+        <activity
+            android:name=".views.SongRoomActivity"
+            android:label="@string/title_activity_song_room" >
+        </activity>
+        <activity
+            android:name=".views.SongRoomThread"
+            android:label="@string/title_activity_song_room_thread" >
         </activity>
     </application>
 

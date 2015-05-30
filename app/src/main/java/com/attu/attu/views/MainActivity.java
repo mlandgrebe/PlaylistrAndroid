@@ -1,18 +1,17 @@
-package com.attu.attu;
+package com.attu.attu.views;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.*;
 import android.util.Log;
 import android.util.TypedValue;
-import android.view.Menu;
-import android.view.*;
-import android.view.View.OnClickListener;
-import android.view.ViewGroup.LayoutParams;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.*;
 
+import com.attu.attu.R;
 import com.spotify.sdk.android.authentication.AuthenticationClient;
 import com.spotify.sdk.android.authentication.AuthenticationRequest;
 import com.spotify.sdk.android.authentication.AuthenticationResponse;
@@ -23,18 +22,13 @@ import com.spotify.sdk.android.player.PlayerNotificationCallback;
 import com.spotify.sdk.android.player.PlayerState;
 import com.spotify.sdk.android.player.Spotify;
 
-import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
-import kaaes.spotify.webapi.android.models.*;
+import kaaes.spotify.webapi.android.models.PlaylistSimple;
+import remote.Server;
+
 import kaaes.spotify.webapi.android.*;
-
-import retrofit.client.*;
-import retrofit.Callback;
-import retrofit.RetrofitError;
-
-import com.attu.attu.UpdatePlaylistsActivity;
 
 public class MainActivity extends Activity implements
         PlayerNotificationCallback, ConnectionStateCallback {
@@ -42,23 +36,64 @@ public class MainActivity extends Activity implements
     private static final String CLIENT_ID = "2de62f40903247208d3dd5e91846c410";
     private static final String REDIRECT_URI = "attuapp://callback";
     private static final int REQUEST_CODE = 1337;
+    Server server;
     private Player mPlayer;
-    TableLayout country_table;
+
+    // Access Token String
+    private String SID;
+
+    Button create_songroom_button;
+    Button join_songroom_button;
+    Button listen_yourself_button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         Log.d("started", "content view");
 
         AuthenticationRequest.Builder builder =
                 new AuthenticationRequest.Builder(CLIENT_ID, AuthenticationResponse.Type.TOKEN, REDIRECT_URI);
         builder.setScopes(new String[]{"user-read-private", "streaming", "user-library-read"});
         AuthenticationRequest request = builder.build();
+        server = new Server();
+
+        create_songroom_button = (Button) findViewById(R.id.create_songroom_button);
+        join_songroom_button = (Button) findViewById(R.id.join_songroom_button);
+        listen_yourself_button = (Button) findViewById(R.id.listen_yourself_button);
+
+        create_songroom_button.setOnClickListener(createSongRoomHandler);
+        join_songroom_button.setOnClickListener(joinSongRoomHandler);
+        listen_yourself_button.setOnClickListener(listenYourselfHandler);
 
         AuthenticationClient.openLoginActivity(this, REQUEST_CODE, request);
-        country_table=(TableLayout)findViewById(R.id.country_table);
     }
+
+    View.OnClickListener createSongRoomHandler = new View.OnClickListener() {
+        public void onClick(View v) {
+            v.setBackgroundColor(Color.RED);
+            System.out.println("Button clicked: " + v.getId());
+            //Track toPlay = (Track) v.getTag();
+        }
+    };
+
+    View.OnClickListener joinSongRoomHandler = new View.OnClickListener() {
+        public void onClick(View v) {
+            v.setBackgroundColor(Color.GREEN);
+            System.out.println("Button clicked: " + v.getId());
+            //Track toPlay = (Track) v.getTag();
+        }
+    };
+
+    View.OnClickListener listenYourselfHandler = new View.OnClickListener() {
+        public void onClick(View v) {
+            Context con = v.getContext();
+            Intent i = new Intent(con, UpdatePlaylistsActivity.class);
+            i.putExtra("spotifyToken", SID);
+            startActivity(i);
+        }
+    };
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
@@ -74,7 +109,7 @@ public class MainActivity extends Activity implements
                     public void onInitialized(Player player) {
                         mPlayer.addConnectionStateCallback(MainActivity.this);
                         mPlayer.addPlayerNotificationCallback(MainActivity.this);
-                        mPlayer.play("spotify:track:2TpxZ7JUBn3uw46aR7qd6V");
+                        //mPlayer.play("spotify:track:2TpxZ7JUBn3uw46aR7qd6V");
                     }
 
                     @Override
@@ -83,12 +118,9 @@ public class MainActivity extends Activity implements
                     }
                 });
                 SpotifyApi api = new SpotifyApi();
-                api.setAccessToken(response.getAccessToken());
+                SID = response.getAccessToken();
+                api.setAccessToken(SID);
                 final SpotifyService spotify = api.getService();
-                Intent i = new Intent(this, UpdatePlaylistsActivity.class);
-                i.putExtra("spotifyToken", response.getAccessToken());
-                startActivity(i);
-                Log.d("Sent", "should start");
             }
         }
     }

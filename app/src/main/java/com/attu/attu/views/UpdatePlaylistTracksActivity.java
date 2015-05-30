@@ -1,10 +1,8 @@
-package com.attu.attu;
+package com.attu.attu.views;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.*;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Menu;
@@ -13,32 +11,19 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.*;
 
-import com.spotify.sdk.android.authentication.AuthenticationClient;
-import com.spotify.sdk.android.authentication.AuthenticationRequest;
-import com.spotify.sdk.android.authentication.AuthenticationResponse;
-import com.spotify.sdk.android.player.Config;
-import com.spotify.sdk.android.player.ConnectionStateCallback;
-import com.spotify.sdk.android.player.Player;
-import com.spotify.sdk.android.player.PlayerNotificationCallback;
-import com.spotify.sdk.android.player.PlayerState;
-import com.spotify.sdk.android.player.Spotify;
+import com.attu.attu.R;
 
-import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
 import kaaes.spotify.webapi.android.models.*;
 import kaaes.spotify.webapi.android.*;
 
-import retrofit.client.*;
-import retrofit.Callback;
-import retrofit.RetrofitError;
-
 public class UpdatePlaylistTracksActivity extends Activity implements Observer, Runnable {
     private UpdatePlaylistTracksThread upThread;
     public SpotifyService spotify;
     public String plist;
-    // TODO: rename country_table to playlist_table
+
     TableLayout playlist_tracks_table;
 
     @Override
