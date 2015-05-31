@@ -12,35 +12,31 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.*;
 import android.content.Context;
+import com.attu.util.State;
 
 import com.attu.attu.R;
 
 import java.util.Observable;
 import java.util.Observer;
+import com.attu.util.State;
 
 import kaaes.spotify.webapi.android.models.*;
 import kaaes.spotify.webapi.android.*;
 
 public class UpdatePlaylistsActivity extends Activity implements Observer, Runnable {
+
     private UpdatePlaylistsThread upThread;
-    public SpotifyService spotify;
-    private String SID;
     TableLayout playlist_table;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d("Starting", "Update Playlist Tracks");
         super.onCreate(savedInstanceState);
-        SpotifyApi api = new SpotifyApi();
-        SID = (String) getIntent().getSerializableExtra("spotifyToken");
-        api.setAccessToken(SID);
-        spotify = api.getService();
         setContentView(R.layout.activity_update_playlists);
         playlist_table = (TableLayout)findViewById(R.id.playlist_table);
 
         upThread = new UpdatePlaylistsThread();
         upThread.toUpdate = this;
-        upThread.spotify = spotify;
         upThread.addObserver(this);
         Thread t = new Thread(upThread);
         t.start();
@@ -104,7 +100,6 @@ public class UpdatePlaylistsActivity extends Activity implements Observer, Runna
                     System.out.println("Row clicked: " + v.getId());
                     Context x = v.getContext();
                     Intent i = new Intent(x, UpdatePlaylistTracksActivity.class);
-                    i.putExtra("spotifyToken", SID);
                     i.putExtra("plist", (String)v.getTag());
                     startActivity(i);
                 }

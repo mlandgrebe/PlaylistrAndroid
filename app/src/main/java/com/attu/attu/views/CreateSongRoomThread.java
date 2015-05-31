@@ -14,6 +14,7 @@ import kaaes.spotify.webapi.android.models.User;
 import retrofit.RetrofitError;
 
 import com.attu.remote.*;
+import com.attu.util.State;
 
 /**
  * Created by marklandgrebe on 5/30/15.
@@ -21,30 +22,20 @@ import com.attu.remote.*;
 
 public class CreateSongRoomThread extends Observable implements Runnable {
     public Activity toUpdate;
-    public SpotifyService spotify;
-    public Server server;
     public List<PlaylistSimple> l;
-    public void run(){
-        User user = null;
-        try {
-            user = spotify.getMe();
-            Log.d("Success", user.id);
-        } catch (RetrofitError error) {
-            SpotifyError spotifyError = SpotifyError.fromRetrofitError(error);
-            Log.d("sync error", spotifyError.getMessage());
-            // handle error
-        }
-        if(user != null) {
-            Log.d("Successful login", user.id);
 
+    public void run(){
+        State state = State.getState();
+        if(state != null) {
             l = null;
             try {
+                SpotifyService spotify = state.getSpotifyService();
+                User user = spotify.getMe();
                 Pager<PlaylistSimple> pp = spotify.getPlaylists(user.id);
                 l = pp.items;
             } catch (RetrofitError error) {
                 SpotifyError spotifyError = SpotifyError.fromRetrofitError(error);
                 Log.d("sync error", spotifyError.getMessage());
-                // handle error
             }
             if(l != null) {
                 setChanged();
