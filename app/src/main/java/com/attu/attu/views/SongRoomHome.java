@@ -15,9 +15,9 @@ import java.util.Observer;
 
 import kaaes.spotify.webapi.android.SpotifyApi;
 import kaaes.spotify.webapi.android.SpotifyService;
-import models.APIUser;
-import models.SongRoom;
-import remote.Server;
+import com.attu.models.APIUser;
+import com.attu.models.SongRoom;
+import com.attu.remote.Server;
 
 public class SongRoomHome extends ActionBarActivity implements Observer, Runnable{
     private APIUser self;

@@ -59,9 +59,9 @@ public class Server {
         void setQueue(@Query(SR_ID) String srId, @Query("songIds") List<Integer> songIds);
 
         @GET("/changeQueue")
-        void changeQueue(@Query(QUEUE_ID) ObjectId songQueueId,
-                         @Query(SONG_ID) ObjectId songId,
-                         @Query("isEnq") boolean isEnq);
+        List<Song> changeQueue(@Query(QUEUE_ID) ObjectId songQueueId,
+                               @Query(SONG_ID) ObjectId songId,
+                               @Query("isEnq") boolean isEnq);
 
         @GET("/leaveSR")
         String leaveSR(@Query(USER_ID) ObjectId userId, @Query(SR_ID) ObjectId songRoomId);
@@ -152,10 +152,10 @@ public class Server {
     }
 
 
-    public void changeQueue(ObjectId songQueueId,
-                            ObjectId songId,
-                            boolean isEnq) {
-        api.changeQueue(songQueueId, songId, isEnq);
+    public List<Song> changeQueue(ObjectId songQueueId,
+                                  ObjectId songId,
+                                  boolean isEnq) {
+        return api.changeQueue(songQueueId, songId, isEnq);
     }
 
 
