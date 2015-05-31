@@ -1,6 +1,8 @@
 package com.attu.models;
 
 import android.location.Location;
+import com.attu.data.MotionListener;
+import com.attu.data.MotionMonitor;
 import com.attu.util.Maybe;
 
 import java.io.Serializable;
@@ -13,6 +15,7 @@ public class APIUser extends Identified implements Serializable {
     private final String spotifyURI;
     private final String name;
     private SongRoom songRoom;
+    private final MotionMonitor motionMonitor;
     private final float DEFAULT_DISTANCE_CUTOFF_METERS = 100.0f;
 
     // The LocationListener should set this
@@ -22,9 +25,8 @@ public class APIUser extends Identified implements Serializable {
         super(id);
         this.spotifyURI = spotifyURI;
         this.name = name;
+        this.motionMonitor = new MotionMonitor();
     }
-
-    //    public static fromSpotifyUser()
 
     public String getSpotifyURI() {
         return spotifyURI;
@@ -44,7 +46,6 @@ public class APIUser extends Identified implements Serializable {
         this.songRoom = server.joinSR(songRoom.getId(), id);
     }
 
-    //
     public void leaveSR() throws BadStateException {
         if (songRoom == null) {
             throw new BadStateException("User " + id + "is not part of a songRoom.");
@@ -107,5 +108,9 @@ public class APIUser extends Identified implements Serializable {
 
     public List<Vote> downvote(Song song) {
         return server.submitVote(song.getId(), getId(), false);
+    }
+
+    public MotionListener getMotionListener() {
+        return new MotionListener(motionMonitor);
     }
 }
