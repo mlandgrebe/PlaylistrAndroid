@@ -41,6 +41,7 @@ public class MainActivity extends Activity implements
 
     // Access Token String
     private String SID;
+    private String serverURI;
 
     Button create_songroom_button;
     Button join_songroom_button;
@@ -51,7 +52,7 @@ public class MainActivity extends Activity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Log.d("started", "content view");
+        serverURI = "http://10.0.3.2:5000";
 
         AuthenticationRequest.Builder builder =
                 new AuthenticationRequest.Builder(CLIENT_ID, AuthenticationResponse.Type.TOKEN, REDIRECT_URI);
@@ -74,6 +75,10 @@ public class MainActivity extends Activity implements
         public void onClick(View v) {
             v.setBackgroundColor(Color.RED);
             System.out.println("Button clicked: " + v.getId());
+            Intent i = new Intent(v.getContext(), CreateSongRoomActivity.class);
+            i.putExtra("spotifyToken", SID);
+            i.putExtra("server", serverURI);
+            startActivity(i);
             //Track toPlay = (Track) v.getTag();
         }
     };
@@ -82,6 +87,9 @@ public class MainActivity extends Activity implements
         public void onClick(View v) {
             v.setBackgroundColor(Color.GREEN);
             System.out.println("Button clicked: " + v.getId());
+            Intent i = new Intent(v.getContext(), SongRoomActivity.class);
+            i.putExtra("spotifyToken", SID);
+            startActivity(i);
             //Track toPlay = (Track) v.getTag();
         }
     };

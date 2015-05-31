@@ -9,4 +9,6 @@
     <string name="title_activity_create_song_room">CreateSongRoomActivity</string>
     <string name="title_activity_song_room">SongRoomActivity</string>
     <string name="title_activity_song_room_thread">SongRoomThread</string>
+    <string name="title_activity_load__song_room__options">load_SongRoom_Options</string>
+    <string name="title_activity_song_room_home">SongRoomHome</string>
 </resources>

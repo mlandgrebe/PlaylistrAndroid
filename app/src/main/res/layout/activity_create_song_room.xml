@@ -22,8 +22,15 @@
         android:text="Done"
         android:id="@+id/button_name_done"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
-
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/scrollView1"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/field_name"
+        android:paddingBottom="20dip"
+        android:layout_above="@+id/button_name_done">
     <TableLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
@@ -32,9 +39,9 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_above="@+id/join_songroom_button"
         android:layout_marginTop="10dip"
-        android:layout_marginBottom="10dip"
-        android:id="@+id/playlist_options"></TableLayout>
+        android:id="@+id/playlist_options"
+        android:layout_above="@+id/button_name_done"></TableLayout>
+    </ScrollView>
 
 </RelativeLayout>

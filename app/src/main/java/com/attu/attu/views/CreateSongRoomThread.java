@@ -13,6 +13,9 @@ import kaaes.spotify.webapi.android.models.PlaylistSimple;
 import kaaes.spotify.webapi.android.models.User;
 import retrofit.RetrofitError;
 
+import models.*;
+import remote.*;
+
 /**
  * Created by marklandgrebe on 5/30/15.
  */
@@ -20,6 +23,7 @@ import retrofit.RetrofitError;
 public class CreateSongRoomThread extends Observable implements Runnable {
     public Activity toUpdate;
     public SpotifyService spotify;
+    public Server server;
     public List<PlaylistSimple> l;
     public void run(){
         User user = null;

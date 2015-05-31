@@ -27,10 +27,13 @@ import java.util.Observer;
 import kaaes.spotify.webapi.android.models.*;
 import kaaes.spotify.webapi.android.*;
 
+import models.*;
+import remote.*;
+
 public class CreateSongRoomActivity extends ActionBarActivity implements
         View.OnClickListener, Observer, Runnable {
 
-    private UpdatePlaylistsThread upThread;
+    private CreateSongRoomThread upThread;
     public SpotifyService spotify;
     private String SID;
     TableLayout playlist_table;
@@ -38,7 +41,8 @@ public class CreateSongRoomActivity extends ActionBarActivity implements
     EditText field_name;
     Button button_name_done;
     TableLayout playlist_options;
-
+    Server server;
+    String serverURL;
     String plistTag;
     //Context plistContext;
 
@@ -51,11 +55,13 @@ public class CreateSongRoomActivity extends ActionBarActivity implements
         button_name_done.setOnClickListener(this);
 
         SpotifyApi api = new SpotifyApi();
+        serverURL = (String) getIntent().getSerializableExtra("server");
+        //server = new Server(serverURL);
         SID = (String) getIntent().getSerializableExtra("spotifyToken");
         api.setAccessToken(SID);
         spotify = api.getService();
         playlist_options = (TableLayout)findViewById(R.id.playlist_options);
-        upThread = new UpdatePlaylistsThread();
+        upThread = new CreateSongRoomThread();
         upThread.toUpdate = this;
         upThread.spotify = spotify;
         upThread.addObserver(this);
@@ -89,8 +95,10 @@ public class CreateSongRoomActivity extends ActionBarActivity implements
         TextView t1, t2;
         TableRow row;
         //Converting to dip unit
+        Log.d("observer", "running");
         int dip = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
                 (float) 1, getResources().getDisplayMetrics());
+        Log.d("observer", "calculated dip");
         for (PlaylistSimple play : upThread.l) {
             row = new TableRow(this);
             t1 = new TextView(this);
@@ -104,17 +112,17 @@ public class CreateSongRoomActivity extends ActionBarActivity implements
             t1.setTextSize(15);
             t2.setTextSize(15);
 
-            t1.setWidth(50 * dip);
+            t1.setWidth(350 * dip);
             t2.setWidth(150 * dip);
             t1.setPadding(20 * dip, 0, 0, 0);
             row.addView(t1);
-            row.addView(t2);
+            //row.addView(t2);
             row.setTag(play.id);
-
-            playlist_table.addView(row, new TableLayout.LayoutParams(
+            playlist_options.addView(row, new TableLayout.LayoutParams(
                     ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
             row.setClickable(true); //allows you to select a specific row
+            Log.d("observer", "set clickable");
             row.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     // here is where we will need to swap out view with view of the playlist's tracks
@@ -151,6 +159,9 @@ public class CreateSongRoomActivity extends ActionBarActivity implements
             intent.putExtra("srname", name);
             intent.putExtra("spotifyToken", SID);
             intent.putExtra("plist", plistTag);
+            // use this to instantiate a server and make the songroom on
+            // the songroom home activity
+            intent.putExtra("server", serverURL);
             this.startActivity(intent);
         }
     }

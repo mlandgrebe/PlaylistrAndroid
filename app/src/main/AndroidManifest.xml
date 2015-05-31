@@ -47,6 +47,14 @@
             android:name=".views.SongRoomThread"
             android:label="@string/title_activity_song_room_thread" >
         </activity>
+        <activity
+            android:name=".views.load_SongRoom_Options"
+            android:label="@string/title_activity_load__song_room__options" >
+        </activity>
+        <activity
+            android:name=".views.SongRoomHome"
+            android:label="@string/title_activity_song_room_home" >
+        </activity>
     </application>
 
 </manifest>
