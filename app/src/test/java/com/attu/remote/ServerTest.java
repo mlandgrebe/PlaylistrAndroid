@@ -131,12 +131,41 @@ public class ServerTest extends TestCase {
         assertThat(emptyAgain, empty());
     }
 
-    //    @Test
-//    public void testCreateUser() throws Exception {
-//        Server server = new Server("http://www.foo.com");
-//        User spotifyUser = new User();
-//        spotifyUser.display_name = "John Doe";
-//        spotifyUser.uri = "some:uri";
-//        APIUser user = server.createUser(spotifyUser);
-//    }
+    @Test
+    public void testSongVoteCRUD() throws Exception {
+        Server server = new Server("http://localhost:5000");
+        server.dropUsers();
+
+        User spotifyUser2 = new User();
+        spotifyUser2.display_name = "Some Guy";
+        spotifyUser2.uri = "another:uri";
+
+        APIUser user = server.createUser(spotifyUser);
+        APIUser user2 = server.createUser(spotifyUser2);
+
+        Song song = server.createSong("foo:bar");
+        Vote up = new Vote(user, song, true);
+        Vote down = new Vote(user2, song, false);
+
+        List<Vote> emptyVotes = song.getVotes();
+
+        assertThat(emptyVotes, empty());
+
+        List<Vote> oneVote = user.upvote(song);
+
+        assertThat(oneVote, hasSize(1));
+        assertThat(oneVote, contains(up));
+
+        List<Vote> oneVote2 = user.upvote(song);
+        List<Vote> oneVote3 = user.downvote(song);
+
+        assertThat(oneVote, equalTo(oneVote2));
+        assertThat(oneVote, equalTo(oneVote3));
+
+        List<Vote> twoVotes = user2.downvote(song);
+
+        assertThat(twoVotes, hasSize(2));
+        assertThat(twoVotes, contains(up));
+        assertThat(twoVotes, contains(down));
+    }
 }

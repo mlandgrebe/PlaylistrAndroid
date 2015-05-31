@@ -49,8 +49,11 @@ public class Server {
         @GET("/getVotes")
         List<Vote> getVotes(@Query(SONG_ID) ObjectId songId);
 
+
         @GET("/submitVote")
-        void submitVote(@Query(USER_ID) ObjectId userId, @Query("isUp") boolean isUp);
+        List<Vote> submitVote(@Query(SONG_ID) ObjectId songId,
+                              @Query(USER_ID) ObjectId userId,
+                              @Query("isUp") boolean isUp);
 
         @GET("/getQueue")
         SongQueue getQueue(@Query(SR_ID) ObjectId songRoomId);
@@ -136,11 +139,12 @@ public class Server {
         return (APIUser)api.createUser(spotifyURI, name).setServer(this);
     }
 
-
-    public void submitVote(ObjectId userId, boolean isUp) {
-        api.submitVote(userId, isUp);
+    @GET("/submitVote")
+    public List<Vote> submitVote(@Query(SONG_ID) ObjectId songId,
+                                 @Query(USER_ID) ObjectId userId,
+                                 @Query("isUp") boolean isUp) {
+        return api.submitVote(songId, userId, isUp);
     }
-
 
     public SongQueue getQueue(ObjectId songRoomId) {
         return (SongQueue)api.getQueue(songRoomId).setServer(this);
@@ -185,6 +189,7 @@ public class Server {
 
     @GET("/createSong")
     public Song createSong(@Query(SPOTIFY_URI) String spotifyUri) {
-        return api.createSong(spotifyUri);
+        return (Song)api.createSong(spotifyUri).setServer(this);
     }
+
 }

@@ -96,4 +96,12 @@ public class APIUser extends Identified implements Serializable {
         result = 31 * result + name.hashCode();
         return result;
     }
+
+    public List<Vote> upvote(Song song) {
+        return server.submitVote(song.getId(), getId(), true);
+    }
+
+    public List<Vote> downvote(Song song) {
+        return server.submitVote(song.getId(), getId(), false);
+    }
 }

@@ -13,7 +13,8 @@ public class Song extends SpotifySong {
     }
 
     public List<Vote> getVotes() {
-        return server.getVotes(id);
+        System.out.println("server = " + server);
+        return server.getVotes(getId());
     }
 
     @Override
