@@ -158,20 +158,6 @@ public class CreateSongRoomActivity extends Activity implements
             intent.putExtra("spotifyToken", SID);
             intent.putExtra("plist", plistTag);
 
-            // instantiate a server, create SongRoom, and move to SongRoomHomeActivity
-            Server server = new Server(serverURL);
-            //server.dropUsers();
-
-            User spotifyUser = spotify.getMe();
-
-            APIUser user = server.createUser(spotifyUser);
-            // need to get the actual location, which should work now
-            PointLocation loc = new PointLocation(15, 16);
-            SongRoom room = server.createSR(user.getId(), loc, name);
-
-            Log.d("Got passed songroom", "Awesome");
-
-            intent.putExtra("songroom", room);
             intent.putExtra("serverUrl", serverURL);
             this.startActivity(intent);
         }

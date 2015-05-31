@@ -30,17 +30,27 @@ public class SongRoomHomeActivity extends Activity implements Observer, Runnable
     // spotify ID to give to next  activity
     private String SID;
     private SongRoom room;
+    private String name;
+    private SongRoomHomeThread upThread;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_song_room_home);
-        //serverURL = (String) getIntent().getSerializableExtra("server");
-        //server = new Server(serverURL);
+        serverURL = (String) getIntent().getSerializableExtra("serverUrl");
         SpotifyApi api = new SpotifyApi();
-        //SID = (String) getIntent().getSerializableExtra("spotifyToken");
-        //api.setAccessToken(SID);
-        //spotify = api.getService();
+        SID = (String) getIntent().getSerializableExtra("spotifyToken");
+        api.setAccessToken(SID);
+        spotify = api.getService();
+        name = (String) getIntent().getSerializableExtra("srname");
+
+        upThread = new SongRoomHomeThread();
+        upThread.spotify = spotify;
+        upThread.name = name;
+        upThread.serverURL = serverURL;
+        upThread.addObserver(this);
+        Thread t = new Thread(upThread);
+        t.start();
 
     }
     public void run(){
