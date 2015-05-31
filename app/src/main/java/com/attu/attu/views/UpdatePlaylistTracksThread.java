@@ -15,7 +15,6 @@ public class UpdatePlaylistTracksThread extends Observable implements Runnable{
     public Activity toUpdate;
     public SpotifyService spotify;
     public List<PlaylistTrack> ts;
-    //public Playlist plist;
     public String uri;
     public void run(){
         User user = null;

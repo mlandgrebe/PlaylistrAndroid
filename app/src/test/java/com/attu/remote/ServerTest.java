@@ -117,8 +117,18 @@ public class ServerTest extends TestCase {
 
         assertThat(emptySongs, empty());
 
+        Song song = server.createSong("foo:bar");
 
+        List<Song> oneSong = queue.enqueue(song);
+        List<Song> oneSong2 = queue.getSongs();
 
+        assertThat(oneSong, hasSize(1));
+        assertThat(oneSong, contains(song));
+        assertThat(oneSong2, equalTo(oneSong));
+
+        List<Song> emptyAgain = queue.dequeue(song);
+
+        assertThat(emptyAgain, empty());
     }
 
     //    @Test

@@ -13,7 +13,6 @@ import kaaes.spotify.webapi.android.models.PlaylistSimple;
 import kaaes.spotify.webapi.android.models.User;
 import retrofit.RetrofitError;
 
-import com.attu.models.*;
 import com.attu.remote.*;
 
 /**

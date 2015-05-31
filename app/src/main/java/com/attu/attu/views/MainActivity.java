@@ -6,12 +6,14 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.*;
+import android.os.StrictMode;
+import android.os.StrictMode.ThreadPolicy;
 
 import com.attu.attu.R;
+import com.attu.remote.Server;
+
 import com.spotify.sdk.android.authentication.AuthenticationClient;
 import com.spotify.sdk.android.authentication.AuthenticationRequest;
 import com.spotify.sdk.android.authentication.AuthenticationResponse;
@@ -21,12 +23,6 @@ import com.spotify.sdk.android.player.Player;
 import com.spotify.sdk.android.player.PlayerNotificationCallback;
 import com.spotify.sdk.android.player.PlayerState;
 import com.spotify.sdk.android.player.Spotify;
-
-import java.util.Observable;
-import java.util.Observer;
-
-import kaaes.spotify.webapi.android.models.PlaylistSimple;
-import com.attu.remote.Server;
 
 import kaaes.spotify.webapi.android.*;
 
@@ -52,7 +48,21 @@ public class MainActivity extends Activity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        serverURI = "http://10.0.3.2:5000";
+        // needed to add these two lines of code to silence runtime errors
+        ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
+        // currently cannot hit our server when running app from physical device
+        // because our server runs on the local host
+        // we should probably deploy it remotely
+
+        // use 10.0.3.2 when running on Genymotion
+        //serverURI = "http://10.0.3.2:5000";
+
+        // use 10.0.2.2 when running on default AVD
+        serverURI = "http://10.0.2.2:5000";
+
+
 
         AuthenticationRequest.Builder builder =
                 new AuthenticationRequest.Builder(CLIENT_ID, AuthenticationResponse.Type.TOKEN, REDIRECT_URI);
@@ -74,7 +84,6 @@ public class MainActivity extends Activity implements
     View.OnClickListener createSongRoomHandler = new View.OnClickListener() {
         public void onClick(View v) {
             v.setBackgroundColor(Color.RED);
-            System.out.println("Button clicked: " + v.getId());
             Intent i = new Intent(v.getContext(), CreateSongRoomActivity.class);
             i.putExtra("spotifyToken", SID);
             i.putExtra("server", serverURI);
@@ -87,8 +96,9 @@ public class MainActivity extends Activity implements
         public void onClick(View v) {
             v.setBackgroundColor(Color.GREEN);
             System.out.println("Button clicked: " + v.getId());
-            Intent i = new Intent(v.getContext(), SongRoomActivity.class);
+            Intent i = new Intent(v.getContext(), SongRoomHomeActivity.class);
             i.putExtra("spotifyToken", SID);
+            i.putExtra("server", serverURI);
             startActivity(i);
             //Track toPlay = (Track) v.getTag();
         }
@@ -100,6 +110,7 @@ public class MainActivity extends Activity implements
             Intent i = new Intent(con, UpdatePlaylistsActivity.class);
             i.putExtra("spotifyToken", SID);
             startActivity(i);
+            //Track toPlay = (Track) v.getTag();
         }
     };
 

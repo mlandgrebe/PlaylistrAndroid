@@ -1,9 +1,7 @@
 package com.attu.attu.views;
 
 import android.app.Activity;
-import android.content.Context;
 import android.graphics.Color;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.TypedValue;
@@ -20,7 +18,6 @@ import android.widget.TextView;
 
 import com.attu.attu.R;
 
-import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -30,37 +27,47 @@ import kaaes.spotify.webapi.android.*;
 import com.attu.models.*;
 import com.attu.remote.*;
 
-public class CreateSongRoomActivity extends ActionBarActivity implements
+public class CreateSongRoomActivity extends Activity implements
         View.OnClickListener, Observer, Runnable {
 
     private CreateSongRoomThread upThread;
     public SpotifyService spotify;
+    // Access Token String
     private String SID;
-    TableLayout playlist_table;
 
-    EditText field_name;
-    Button button_name_done;
-    TableLayout playlist_options;
     Server server;
     String serverURL;
     String plistTag;
-    //Context plistContext;
+
+    EditText text_sr_input;
+    TableLayout playlist_options;
+    Button button_done;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_song_room);
-        field_name = (EditText)this.findViewById(R.id.field_name);
-        button_name_done = (Button)this.findViewById(R.id.button_name_done);
-        button_name_done.setOnClickListener(this);
+        text_sr_input = (EditText)this.findViewById(R.id.text_sr_input);
+        //view_init_queue_opts = (ScrollView)findViewById(R.id.view_init_queue_opts);
+        playlist_options = (TableLayout)findViewById(R.id.playlist_options);
 
-        SpotifyApi api = new SpotifyApi();
+        // get button and set a listener on it in order to move to next view
+        button_done = (Button)this.findViewById(R.id.button_done);
+        button_done.setOnClickListener(this);
+
+        // get serverURL from MainActivity and instantiate server
         serverURL = (String) getIntent().getSerializableExtra("server");
         //server = new Server(serverURL);
+
+        // we get token this token from MainActivity
         SID = (String) getIntent().getSerializableExtra("spotifyToken");
+
+        // create Spotify API instance and set AccessToken
+        SpotifyApi api = new SpotifyApi();
         api.setAccessToken(SID);
         spotify = api.getService();
-        playlist_options = (TableLayout)findViewById(R.id.playlist_options);
+
+        // create thread to fetch user's playlists, which may be used to init SongRoom
         upThread = new CreateSongRoomThread();
         upThread.toUpdate = this;
         upThread.spotify = spotify;
@@ -94,41 +101,30 @@ public class CreateSongRoomActivity extends ActionBarActivity implements
     public void run(){
         TextView t1, t2;
         TableRow row;
+        //Log.d("observer", "running");
         //Converting to dip unit
-        Log.d("observer", "running");
         int dip = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
                 (float) 1, getResources().getDisplayMetrics());
-        Log.d("observer", "calculated dip");
+        //Log.d("observer", "calculated dip");
         for (PlaylistSimple play : upThread.l) {
             row = new TableRow(this);
             t1 = new TextView(this);
-            t2 = new TextView(this);
-
             t1.setText(play.name);
-            t2.setText(play.uri);
             t1.setTypeface(null, 1);
-            t2.setTypeface(null, 1);
-
             t1.setTextSize(15);
-            t2.setTextSize(15);
-
             t1.setWidth(350 * dip);
-            t2.setWidth(150 * dip);
             t1.setPadding(20 * dip, 0, 0, 0);
             row.addView(t1);
-            //row.addView(t2);
             row.setTag(play.id);
             playlist_options.addView(row, new TableLayout.LayoutParams(
                     ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
             row.setClickable(true); //allows you to select a specific row
-            Log.d("observer", "set clickable");
+            //Log.d("observer", "set clickable");
             row.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-                    // here is where we will need to swap out view with view of the playlist's tracks
+                    // change a clicked row's color to gray & get playlist ID for selected playlist
                     v.setBackgroundColor(Color.GRAY);
-                    //System.out.println("Row clicked: " + v.getId());
-                    //plistContext = v.getContext();
                     plistTag = (String)v.getTag();
                 }
             });
@@ -145,9 +141,11 @@ public class CreateSongRoomActivity extends ActionBarActivity implements
     }
 
     public void onClick(View v) {
-        String name = field_name.getText().toString();
+        String name = text_sr_input.getText().toString();
+        Log.d("Text Entered: ", name);
         if (name != null) {
             if (plistTag != null) {
+
                 // call createSR that Patrick needs to write
                 // it should allow user to set a playlist for the sr
             }
@@ -155,15 +153,27 @@ public class CreateSongRoomActivity extends ActionBarActivity implements
                 // call createSR that Patrick needs to write
                 // it should allow user to set a playlist for the sr
             }
-            Intent intent = new Intent(this, SongRoomActivity.class);
+            Intent intent = new Intent(this, SongRoomHomeActivity.class);
             intent.putExtra("srname", name);
             intent.putExtra("spotifyToken", SID);
             intent.putExtra("plist", plistTag);
-            // use this to instantiate a server and make the songroom on
-            // the songroom home activity
-            intent.putExtra("server", serverURL);
+
+            // instantiate a server, create SongRoom, and move to SongRoomHomeActivity
+            Server server = new Server(serverURL);
+            //server.dropUsers();
+
+            User spotifyUser = spotify.getMe();
+
+            APIUser user = server.createUser(spotifyUser);
+            // need to get the actual location, which should work now
+            PointLocation loc = new PointLocation(15, 16);
+            SongRoom room = server.createSR(user.getId(), loc, name);
+
+            Log.d("Got passed songroom", "Awesome");
+
+            intent.putExtra("songroom", room);
+            intent.putExtra("serverUrl", serverURL);
             this.startActivity(intent);
         }
     }
-
 }

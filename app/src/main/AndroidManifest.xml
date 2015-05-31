@@ -25,10 +25,6 @@
             android:name="com.spotify.sdk.android.authentication.LoginActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity
-            android:name=".UpdatePlaylists"
-            android:label="@string/title_activity_update_playlists" >
-        </activity>
-        <activity
             android:name=".views.UpdatePlaylistTracksActivity"
             android:label="@string/title_activity_update_playlist_tracks" >
         </activity>
@@ -41,19 +37,7 @@
             android:label="@string/title_activity_create_song_room" >
         </activity>
         <activity
-            android:name=".views.SongRoomActivity"
-            android:label="@string/title_activity_song_room" >
-        </activity>
-        <activity
-            android:name=".views.SongRoomThread"
-            android:label="@string/title_activity_song_room_thread" >
-        </activity>
-        <activity
-            android:name=".views.load_SongRoom_Options"
-            android:label="@string/title_activity_load__song_room__options" >
-        </activity>
-        <activity
-            android:name=".views.SongRoomHome"
+            android:name=".views.SongRoomHomeActivity"
             android:label="@string/title_activity_song_room_home" >
         </activity>
     </application>
