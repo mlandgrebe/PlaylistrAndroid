@@ -40,8 +40,8 @@ public class APIUser extends Identified implements Serializable {
     }
 
     public void joinSR(SongRoom songRoom) {
-        server.joinSR(songRoom.getId(), id);
-        songRoom = songRoom;
+        System.out.println("APIUser.joinSR");
+        this.songRoom = server.joinSR(songRoom.getId(), id);
     }
 
     //
@@ -78,5 +78,22 @@ public class APIUser extends Identified implements Serializable {
         return new Maybe<SongRoom>();
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
 
+        APIUser apiUser = (APIUser) o;
+
+        if (!spotifyURI.equals(apiUser.spotifyURI)) return false;
+        return name.equals(apiUser.name);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = spotifyURI.hashCode();
+        result = 31 * result + name.hashCode();
+        return result;
+    }
 }

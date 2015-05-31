@@ -34,7 +34,7 @@ public class Server {
                           @Query("name") String name);
 
         @GET("/joinSR")
-        void joinSR(@Query("srId") ObjectId srId, @Query("userId") ObjectId userId);
+        SongRoom joinSR(@Query("srId") ObjectId srId, @Query("userId") ObjectId userId);
 
         @GET("/getVotes")
         List<Vote> getVotes(@Query("songId") ObjectId songId);
@@ -54,7 +54,7 @@ public class Server {
                          @Query("isEnq") boolean isEnq);
 
         @GET("/leaveSR")
-        void leaveSR(@Query("userId") ObjectId userId, @Query("srId") ObjectId songRoomId);
+        String leaveSR(@Query("userId") ObjectId userId, @Query("srId") ObjectId songRoomId);
 
         // FIXME: this needs to be a PointLocation eventually
         @GET("/nearbySR")
@@ -108,8 +108,8 @@ public class Server {
     }
 
     @GET("/joinSR")
-    public void joinSR(@Query("srId") ObjectId srId, @Query("userId") ObjectId userId) {
-        api.joinSR(srId, userId);
+    public SongRoom joinSR(@Query("srId") ObjectId srId, @Query("userId") ObjectId userId) {
+        return (SongRoom)api.joinSR(srId, userId).setServer(this);
     }
 
     public List<Vote> getVotes(ObjectId songId) {
