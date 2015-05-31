@@ -3,15 +3,12 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-
-    <string name="title_activity_profile_activity2">ProfileActivity2</string>
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
-
-    <string name="title_activity_profile">ProfileActivity</string>
-    <string name="displayNameIsCalled">Name</string>
-    <string name="uriIsCalled">Spotify URI</string>
-    <string name="profileTItle">Profile</string>
-    <string name="profileButtonTitle">View Profile</string>
-    <string name="title_activity_create_sr">CreateSRActivity</string>
+    <string name="title_activity_update_playlists">UpdatePlaylists</string>
+    <string name="title_activity_update_playlist_tracks">UpdatePlaylistTracksActivity</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="title_activity_create_song_room">CreateSongRoomActivity</string>
+    <string name="title_activity_song_room">SongRoomActivity</string>
+    <string name="title_activity_song_room_thread">SongRoomThread</string>
+    <string name="title_activity_load__song_room__options">load_SongRoom_Options</string>
+    <string name="title_activity_song_room_home">SongRoomHome</string>
 </resources>
