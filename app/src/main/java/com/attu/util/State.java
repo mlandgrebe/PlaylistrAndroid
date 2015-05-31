@@ -2,6 +2,7 @@ package com.attu.util;
 
 import com.attu.models.APIUser;
 import com.attu.remote.Server;
+import com.spotify.sdk.android.player.Player;
 import kaaes.spotify.webapi.android.SpotifyService;
 
 /**
@@ -12,6 +13,7 @@ public class State {
     private Server server;
     private APIUser user;
     private SpotifyService spotifyService;
+    private Player player;
 
     private State() {
 
@@ -47,5 +49,13 @@ public class State {
 
     public void setSpotifyService(SpotifyService spotifyService) {
         this.spotifyService = spotifyService;
+    }
+
+    public Player getPlayer() {
+        return player;
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
     }
 }
