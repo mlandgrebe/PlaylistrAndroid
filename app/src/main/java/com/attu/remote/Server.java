@@ -76,6 +76,9 @@ public class Server {
         @GET("/getSongs")
         List<Song> getSongs(@Query(QUEUE_ID) ObjectId songQueueId);
 
+        @GET("/createSong")
+        Song createSong(@Query(SPOTIFY_URI) String spotifyUri);
+
         // Needs a return type to compile
         @GET("/dropUsers")
         String dropUsers();
@@ -178,5 +181,10 @@ public class Server {
 
     public List<Song> getSongs(ObjectId songQueueId) {
         return api.getSongs(songQueueId);
+    }
+
+    @GET("/createSong")
+    public Song createSong(@Query(SPOTIFY_URI) String spotifyUri) {
+        return api.createSong(spotifyUri);
     }
 }
