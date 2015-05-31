@@ -98,9 +98,28 @@ public class ServerTest extends TestCase {
         List<APIUser> emptyAgain = room.getMembers();
 
         assertThat(emptyAgain, empty());
-
     }
 
+    @Test
+    public void testSongQueueCRUD() throws Exception {
+        Server server = new Server("http://localhost:5000");
+        server.dropUsers();
+
+        APIUser user = server.createUser(spotifyUser);
+        PointLocation loc = new PointLocation(15, 16);
+
+        SongRoom room = server.createSR(user.getId(), loc, "testSR");
+        SongQueue queue = room.getQueue();
+
+        assertNotNull(queue);
+
+        List<Song> emptySongs = queue.getSongs();
+
+        assertThat(emptySongs, empty());
+
+
+
+    }
 
     //    @Test
 //    public void testCreateUser() throws Exception {

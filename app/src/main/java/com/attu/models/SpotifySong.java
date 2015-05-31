@@ -6,8 +6,7 @@ import com.attu.remote.Server;
  * Created by patrick on 5/29/15.
  */
 public class SpotifySong extends Identified {
-    Server server;
-    String spotifyURI;
+    protected String spotifyURI;
 
     public SpotifySong(ObjectId id, String spotifyURI) {
         super(id);

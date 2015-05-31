@@ -6,11 +6,9 @@ import java.util.List;
  * Created by patrick on 5/29/15.
  */
 public class SongQueue extends Identified {
-    List<Song> queue;
 
-    public SongQueue(ObjectId id, List<Song> queue) {
+    public SongQueue(ObjectId id) {
         super(id);
-        this.queue = queue;
     }
 
     // We're not going to bother updating our local state --- we should fetch one of these from the server every time
@@ -22,5 +20,10 @@ public class SongQueue extends Identified {
     // See comment above
     public void dequeue(Song song) {
         server.changeQueue(id, song.getId(), false);
+    }
+
+    public List<Song> getSongs() {
+        System.out.println(getId());
+        return server.getSongs(getId());
     }
 }
