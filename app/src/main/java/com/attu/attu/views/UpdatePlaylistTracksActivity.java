@@ -36,9 +36,9 @@ public class UpdatePlaylistTracksActivity extends Activity implements Observer, 
         spotify = api.getService();
         setContentView(R.layout.activity_update_playlist_tracks);
         playlist_tracks_table = (TableLayout)findViewById(R.id.playlist_tracks_table);
+
         upThread = new UpdatePlaylistTracksThread();
         upThread.toUpdate = this;
-        upThread.spotify = spotify;
         upThread.uri = plist;
         upThread.addObserver(this);
         Thread t = new Thread(upThread);

@@ -17,26 +17,17 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.attu.attu.R;
+import com.attu.util.State;
 
 import java.util.Observable;
 import java.util.Observer;
 
 import kaaes.spotify.webapi.android.models.*;
-import kaaes.spotify.webapi.android.*;
-
-import com.attu.models.*;
-import com.attu.remote.*;
 
 public class CreateSongRoomActivity extends Activity implements
         View.OnClickListener, Observer, Runnable {
 
     private CreateSongRoomThread upThread;
-    public SpotifyService spotify;
-    // Access Token String
-    private String SID;
-
-    Server server;
-    String serverURL;
     String plistTag;
 
     EditText text_sr_input;
@@ -55,22 +46,12 @@ public class CreateSongRoomActivity extends Activity implements
         button_done = (Button)this.findViewById(R.id.button_done);
         button_done.setOnClickListener(this);
 
-        // get serverURL from MainActivity and instantiate server
-        serverURL = (String) getIntent().getSerializableExtra("server");
-        //server = new Server(serverURL);
-
-        // we get token this token from MainActivity
-        SID = (String) getIntent().getSerializableExtra("spotifyToken");
-
-        // create Spotify API instance and set AccessToken
-        SpotifyApi api = new SpotifyApi();
-        api.setAccessToken(SID);
-        spotify = api.getService();
+        // get state singleton
+        State state = State.getState();
 
         // create thread to fetch user's playlists, which may be used to init SongRoom
         upThread = new CreateSongRoomThread();
         upThread.toUpdate = this;
-        upThread.spotify = spotify;
         upThread.addObserver(this);
         Thread t = new Thread(upThread);
         t.start();
@@ -101,11 +82,9 @@ public class CreateSongRoomActivity extends Activity implements
     public void run(){
         TextView t1, t2;
         TableRow row;
-        //Log.d("observer", "running");
         //Converting to dip unit
         int dip = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
                 (float) 1, getResources().getDisplayMetrics());
-        //Log.d("observer", "calculated dip");
         for (PlaylistSimple play : upThread.l) {
             row = new TableRow(this);
             t1 = new TextView(this);
@@ -120,7 +99,6 @@ public class CreateSongRoomActivity extends Activity implements
                     ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
             row.setClickable(true); //allows you to select a specific row
-            //Log.d("observer", "set clickable");
             row.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     // change a clicked row's color to gray & get playlist ID for selected playlist
@@ -145,7 +123,6 @@ public class CreateSongRoomActivity extends Activity implements
         Log.d("Text Entered: ", name);
         if (name != null) {
             if (plistTag != null) {
-
                 // call createSR that Patrick needs to write
                 // it should allow user to set a playlist for the sr
             }
@@ -154,11 +131,7 @@ public class CreateSongRoomActivity extends Activity implements
                 // it should allow user to set a playlist for the sr
             }
             Intent intent = new Intent(this, SongRoomHomeActivity.class);
-            intent.putExtra("srname", name);
-            intent.putExtra("spotifyToken", SID);
             intent.putExtra("plist", plistTag);
-
-            intent.putExtra("serverUrl", serverURL);
             this.startActivity(intent);
         }
     }
