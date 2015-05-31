@@ -1,4 +1,4 @@
-package com.attu.attu;
+/*package com.attu.attu;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -37,3 +37,4 @@ public class CreateSRActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 }
+*/

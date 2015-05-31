@@ -1,0 +1,47 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="wrap_content"
+    android:layout_height="match_parent" android:paddingLeft="50dip"
+    android:paddingRight="50dip"
+    android:paddingBottom="50dip"
+    tools:context="com.attu.attu.views.CreateSongRoomActivity">
+
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:id="@+id/text_sr_input"
+        android:hint="Enter SongRoom Name"
+        android:singleLine="true"
+        android:inputType="textCapWords"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dip" />
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Done"
+        android:id="@+id/button_done"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/view_init_queue_opts"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/text_sr_input"
+        android:paddingBottom="20dip"
+        android:layout_above="@+id/button_done">
+    <TableLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/text_sr_input"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="10dip"
+        android:id="@+id/playlist_options"
+        android:layout_above="@+id/button_done"></TableLayout>
+    </ScrollView>
+
+</RelativeLayout>

@@ -1,4 +1,5 @@
-package com.attu.attu;
+/*
+package com.attu.attu.views.unused_views;
 
 import android.location.Location;
 import android.location.LocationListener;
@@ -8,7 +9,7 @@ import com.attu.models.APIUser;
 /**
  * Created by patrick on 5/29/15.
  */
-// TODO: All of this
+/*
 public class SRLocationListener implements LocationListener {
     APIUser user;
 
@@ -36,3 +37,4 @@ public class SRLocationListener implements LocationListener {
 
     }
 }
+*/

@@ -14,4 +14,13 @@
     <string name="profileTItle">Profile</string>
     <string name="profileButtonTitle">View Profile</string>
     <string name="title_activity_create_sr">CreateSRActivity</string>
+    
+    <string name="title_activity_update_playlists">UpdatePlaylists</string>
+    <string name="title_activity_update_playlist_tracks">UpdatePlaylistTracksActivity</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="title_activity_create_song_room">CreateSongRoomActivity</string>
+    <string name="title_activity_song_room">SongRoomActivity</string>
+    <string name="title_activity_song_room_thread">SongRoomThread</string>
+    <string name="title_activity_load__song_room__options">load_SongRoom_Options</string>
+    <string name="title_activity_song_room_home">SongRoomHome</string>
 </resources>

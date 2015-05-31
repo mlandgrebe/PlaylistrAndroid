@@ -1,4 +1,4 @@
-package com.attu.attu;
+/*package com.attu.attu;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -49,3 +49,4 @@ public class ProfileActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 }
+*/

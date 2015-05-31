@@ -11,15 +11,24 @@ public class SongQueue extends Identified {
         super(id);
     }
 
+    private List<Song> changeQueue(Song song, boolean isEnq) {
+        return server.changeQueue(id, song.getId(), isEnq);
+    }
+
     // We're not going to bother updating our local state --- we should fetch one of these from the server every time
     // we want one
-    public void enqueue(Song song) {
-        server.changeQueue(id, song.getId(), true);
+    public List<Song> enqueue(Song song) {
+        return changeQueue(song, true);
+    }
+
+    public List<Song> enqueue(SpotifySong spotifySong) {
+        Song song = server.createSong(spotifySong.spotifyURI);
+        return enqueue(song);
     }
 
     // See comment above
-    public void dequeue(Song song) {
-        server.changeQueue(id, song.getId(), false);
+    public List<Song> dequeue(Song song) {
+        return  changeQueue(song, false);
     }
 
     public List<Song> getSongs() {

@@ -49,8 +49,11 @@ public class Server {
         @GET("/getVotes")
         List<Vote> getVotes(@Query(SONG_ID) ObjectId songId);
 
+
         @GET("/submitVote")
-        void submitVote(@Query(USER_ID) ObjectId userId, @Query("isUp") boolean isUp);
+        List<Vote> submitVote(@Query(SONG_ID) ObjectId songId,
+                              @Query(USER_ID) ObjectId userId,
+                              @Query("isUp") boolean isUp);
 
         @GET("/getQueue")
         SongQueue getQueue(@Query(SR_ID) ObjectId songRoomId);
@@ -59,22 +62,25 @@ public class Server {
         void setQueue(@Query(SR_ID) String srId, @Query("songIds") List<Integer> songIds);
 
         @GET("/changeQueue")
-        void changeQueue(@Query(QUEUE_ID) ObjectId songQueueId,
-                         @Query(SONG_ID) ObjectId songId,
-                         @Query("isEnq") boolean isEnq);
+        List<Song> changeQueue(@Query(QUEUE_ID) ObjectId songQueueId,
+                               @Query(SONG_ID) ObjectId songId,
+                               @Query("isEnq") boolean isEnq);
 
         @GET("/leaveSR")
         String leaveSR(@Query(USER_ID) ObjectId userId, @Query(SR_ID) ObjectId songRoomId);
 
         // FIXME: this needs to be a PointLocation eventually
         @GET("/nearbySR")
-        List<SongRoom> nearbySR(@Query(LOCATION) Location location);
+        List<SongRoom> nearbySR(@Query(LOCATION) PointLocation location);
 
         @GET("/srMembers")
         List<APIUser> srMembers(@Query(SR_ID) ObjectId srId);
 
         @GET("/getSongs")
         List<Song> getSongs(@Query(QUEUE_ID) ObjectId songQueueId);
+
+        @GET("/createSong")
+        Song createSong(@Query(SPOTIFY_URI) String spotifyUri);
 
         // Needs a return type to compile
         @GET("/dropUsers")
@@ -95,7 +101,7 @@ public class Server {
 
         RestAdapter adapter = new RestAdapter.Builder().setEndpoint(host)
                 .setConverter(new GsonConverter(gson))
-                .setLogLevel(RestAdapter.LogLevel.FULL)
+                .setLogLevel(RestAdapter.LogLevel.BASIC)
                 .build();
         api = adapter.create(RestAPI.class);
     }
@@ -133,11 +139,12 @@ public class Server {
         return (APIUser)api.createUser(spotifyURI, name).setServer(this);
     }
 
-
-    public void submitVote(ObjectId userId, boolean isUp) {
-        api.submitVote(userId, isUp);
+    @GET("/submitVote")
+    public List<Vote> submitVote(@Query(SONG_ID) ObjectId songId,
+                                 @Query(USER_ID) ObjectId userId,
+                                 @Query("isUp") boolean isUp) {
+        return api.submitVote(songId, userId, isUp);
     }
-
 
     public SongQueue getQueue(ObjectId songRoomId) {
         return (SongQueue)api.getQueue(songRoomId).setServer(this);
@@ -149,10 +156,10 @@ public class Server {
     }
 
 
-    public void changeQueue(ObjectId songQueueId,
-                            ObjectId songId,
-                            boolean isEnq) {
-        api.changeQueue(songQueueId, songId, isEnq);
+    public List<Song> changeQueue(ObjectId songQueueId,
+                                  ObjectId songId,
+                                  boolean isEnq) {
+        return api.changeQueue(songQueueId, songId, isEnq);
     }
 
 
@@ -161,7 +168,7 @@ public class Server {
     }
 
 
-    public List<SongRoom> nearbySR(Location location) {
+    public List<SongRoom> nearbySR(PointLocation location) {
         return api.nearbySR(location);
     }
 
@@ -179,4 +186,10 @@ public class Server {
     public List<Song> getSongs(ObjectId songQueueId) {
         return api.getSongs(songQueueId);
     }
+
+    @GET("/createSong")
+    public Song createSong(@Query(SPOTIFY_URI) String spotifyUri) {
+        return (Song)api.createSong(spotifyUri).setServer(this);
+    }
+
 }

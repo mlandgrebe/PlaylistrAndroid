@@ -9,7 +9,7 @@ import java.io.Serializable;
  */
 public class Identified extends ServerLinked implements Serializable {
     @SerializedName("_id")
-    protected ObjectId id;
+    protected final ObjectId id;
 
     public Identified(ObjectId id) {
         this.id = id;
@@ -19,7 +19,20 @@ public class Identified extends ServerLinked implements Serializable {
         return id;
     }
 
-    public void setId(ObjectId id) {
-        this.id = id;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Identified that = (Identified) o;
+
+        return id.equals(that.id);
+
+    }
+
+    @Override
+    public int hashCode() {
+        return id.hashCode();
     }
 }
