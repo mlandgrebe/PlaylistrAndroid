@@ -98,7 +98,7 @@ public class Server {
 
         RestAdapter adapter = new RestAdapter.Builder().setEndpoint(host)
                 .setConverter(new GsonConverter(gson))
-                .setLogLevel(RestAdapter.LogLevel.FULL)
+                .setLogLevel(RestAdapter.LogLevel.BASIC)
                 .build();
         api = adapter.create(RestAPI.class);
     }
