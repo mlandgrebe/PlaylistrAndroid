@@ -22,8 +22,10 @@ public class SRLocationListener implements LocationListener {
     @Override
     public void onLocationChanged(Location location) {
         user.setLocation(location);
-        Maybe<SongRoom> toJoin = user.getJoinable();
-        Log.d("LocationListener", "NOW WE SEND A PUSH NOTIFICATION");
+        if (!user.inRoom()) {
+            Maybe<SongRoom> toJoin = user.getJoinable();
+            Log.d("LocationListener", "NOW WE SEND A PUSH NOTIFICATION");
+        }
     }
 
     @Override

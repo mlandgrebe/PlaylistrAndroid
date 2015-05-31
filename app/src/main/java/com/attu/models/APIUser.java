@@ -113,4 +113,8 @@ public class APIUser extends Identified implements Serializable {
     public MotionListener getMotionListener() {
         return new MotionListener(motionMonitor);
     }
+
+    public boolean inRoom() {
+        return songRoom != null;
+    }
 }
