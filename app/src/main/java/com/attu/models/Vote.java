@@ -4,26 +4,42 @@ package com.attu.models;
  * Created by patrick on 5/29/15.
  */
 public class Vote extends ServerLinked {
-    private APIUser castBy;
+    private ObjectId user;
+    private ObjectId song;
     private boolean isUp;
 
-    // Exposing this constructor would be ugly
-
-
-    public Vote(APIUser castBy, boolean isUp) {
-        this.castBy = castBy;
+    public Vote(ObjectId user, ObjectId song, boolean isUp) {
+        this.user = user;
+        this.song = song;
         this.isUp = isUp;
     }
 
-    public static Vote upvote(APIUser castBy) {
-        return new Vote(castBy, true);
+
+
+    public boolean isUp() {
+        return isUp;
     }
 
-    public static Vote downvote(APIUser castBy) {
-        return new Vote(castBy, false);
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Vote vote = (Vote) o;
+
+        if (isUp != vote.isUp) return false;
+        if (!user.equals(vote.user)) return false;
+        return song.equals(vote.song);
+
     }
 
-    public void submit() {
-        server.submitVote(castBy.getId(), isUp);
+
+    @Override
+    public String toString() {
+        return "Vote{" +
+                "user=" + user +
+                ", song=" + song +
+                ", isUp=" + isUp +
+                "} " + super.toString();
     }
 }
