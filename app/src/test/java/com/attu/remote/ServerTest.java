@@ -144,15 +144,15 @@ public class ServerTest extends TestCase {
         APIUser user2 = server.createUser(spotifyUser2);
 
         Song song = server.createSong("foo:bar");
-        Vote up = new Vote(user, song, true);
-        Vote down = new Vote(user2, song, false);
+        Vote up = new Vote(user.getId(), song.getId(), true);
+        Vote down = new Vote(user2.getId(), song.getId(), false);
 
         List<Vote> emptyVotes = song.getVotes();
 
         assertThat(emptyVotes, empty());
 
         List<Vote> oneVote = user.upvote(song);
-
+        System.out.println("oneVote = " + oneVote);
         assertThat(oneVote, hasSize(1));
         assertThat(oneVote, contains(up));
 
@@ -165,7 +165,6 @@ public class ServerTest extends TestCase {
         List<Vote> twoVotes = user2.downvote(song);
 
         assertThat(twoVotes, hasSize(2));
-        assertThat(twoVotes, contains(up));
-        assertThat(twoVotes, contains(down));
+        assertThat(twoVotes, contains(up, down));
     }
 }

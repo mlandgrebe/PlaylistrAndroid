@@ -4,23 +4,17 @@ package com.attu.models;
  * Created by patrick on 5/29/15.
  */
 public class Vote extends ServerLinked {
-    private APIUser user;
-    private Song song;
+    private ObjectId user;
+    private ObjectId song;
     private boolean isUp;
 
-
-    // Exposing this constructor would be ugly
-
-    public Vote(APIUser user, Song song, boolean isUp) {
+    public Vote(ObjectId user, ObjectId song, boolean isUp) {
         this.user = user;
         this.song = song;
         this.isUp = isUp;
     }
 
 
-    public APIUser getUser() {
-        return user;
-    }
 
     public boolean isUp() {
         return isUp;
@@ -39,11 +33,13 @@ public class Vote extends ServerLinked {
 
     }
 
+
     @Override
-    public int hashCode() {
-        int result = user.hashCode();
-        result = 31 * result + song.hashCode();
-        result = 31 * result + (isUp ? 1 : 0);
-        return result;
+    public String toString() {
+        return "Vote{" +
+                "user=" + user +
+                ", song=" + song +
+                ", isUp=" + isUp +
+                "} " + super.toString();
     }
 }
