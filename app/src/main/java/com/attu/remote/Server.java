@@ -71,7 +71,7 @@ public class Server {
 
         // FIXME: this needs to be a PointLocation eventually
         @GET("/nearbySR")
-        List<SongRoom> nearbySR(@Query(LOCATION) Location location);
+        List<SongRoom> nearbySR(@Query(LOCATION) PointLocation location);
 
         @GET("/srMembers")
         List<APIUser> srMembers(@Query(SR_ID) ObjectId srId);
@@ -168,7 +168,7 @@ public class Server {
     }
 
 
-    public List<SongRoom> nearbySR(Location location) {
+    public List<SongRoom> nearbySR(PointLocation location) {
         return api.nearbySR(location);
     }
 

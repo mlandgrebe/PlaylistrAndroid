@@ -16,7 +16,7 @@ public class APIUser extends Identified implements Serializable {
     private final float DEFAULT_DISTANCE_CUTOFF_METERS = 100.0f;
 
     // The LocationListener should set this
-    private Location location;
+    private PointLocation location;
 
     public APIUser(ObjectId id, String spotifyURI, String name) {
         super(id);
@@ -55,19 +55,23 @@ public class APIUser extends Identified implements Serializable {
     }
 
     public PointLocation getLocation() {
-        return PointLocation.fromLocation(location);
+        return location;
     }
 
-    public void setLocation(Location location) {
+    public void setLocation(PointLocation location) {
         this.location = location;
     }
 
-    private List<SongRoom> getNearbySRs() {
+    public void setLocation(Location location) {
+        this.location = PointLocation.fromLocation(location);
+    }
+
+    public List<SongRoom> getNearbySRs() {
         return server.nearbySR(location);
     }
 
     // Return a songroom if there is a songroom within range that this user should be prompted to join.
-    private Maybe<SongRoom> getSRToJoin() {
+    public Maybe<SongRoom> getJoinable() {
         List<SongRoom> srs = getNearbySRs();
 
         for (SongRoom sr : srs) {

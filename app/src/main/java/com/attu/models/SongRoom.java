@@ -33,4 +33,18 @@ public class SongRoom extends Identified {
         return server.srMembers(getId());
     }
 
+    @Override
+    public int hashCode() {
+        int result = getLocation() != null ? getLocation().hashCode() : 0;
+        result = 31 * result + (getName() != null ? getName().hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "SongRoom{" +
+                "location=" + location +
+                ", name='" + name + '\'' +
+                "} " + super.toString();
+    }
 }
