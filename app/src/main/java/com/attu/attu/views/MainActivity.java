@@ -26,7 +26,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import kaaes.spotify.webapi.android.models.PlaylistSimple;
-import remote.Server;
+import com.attu.remote.Server;
 
 import kaaes.spotify.webapi.android.*;
 

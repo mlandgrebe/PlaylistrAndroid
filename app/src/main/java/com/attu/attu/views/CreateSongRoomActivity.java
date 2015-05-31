@@ -27,8 +27,8 @@ import java.util.Observer;
 import kaaes.spotify.webapi.android.models.*;
 import kaaes.spotify.webapi.android.*;
 
-import models.*;
-import remote.*;
+import com.attu.models.*;
+import com.attu.remote.*;
 
 public class CreateSongRoomActivity extends ActionBarActivity implements
         View.OnClickListener, Observer, Runnable {
