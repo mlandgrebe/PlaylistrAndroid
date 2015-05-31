@@ -12,8 +12,13 @@ import org.junit.runners.BlockJUnit4ClassRunner;
 import retrofit.RetrofitError;
 
 import java.util.Date;
+import java.util.List;
 
 import static org.hamcrest.CoreMatchers.*;
+//import static org.hamcrest;
+import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
+import static org.hamcrest.collection.IsEmptyCollection.empty;
+import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
 import static org.junit.Assert.*;
 
 /**
@@ -72,6 +77,27 @@ public class ServerTest extends TestCase {
         assertThat(room.getName(), equalTo("testSR"));
         assertThat(room.getLocation(), equalTo(loc));
         assertNotNull(room.getId());
+
+        List<APIUser> emptyList = room.getMembers();
+        assertThat(emptyList, is(empty()));
+
+        User spotifyMember = new User();
+        spotifyMember.display_name = "member";
+        spotifyMember.uri = "uri";
+        APIUser member = server.createUser(spotifyMember);
+
+        member.joinSR(room);
+
+        List<APIUser> singletonList = room.getMembers();
+
+        assertThat(singletonList, hasSize(1));
+        assertThat(singletonList, contains(member));
+
+        member.leaveSR();
+
+        List<APIUser> emptyAgain = room.getMembers();
+
+        assertThat(emptyAgain, empty());
 
     }
 

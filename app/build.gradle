@@ -46,4 +46,5 @@ dependencies {
     compile 'com.squareup.okhttp:okhttp:2.2.0'
 
     testCompile "junit:junit:4.12"
+    testCompile "org.hamcrest:hamcrest-all:1.3"
 }

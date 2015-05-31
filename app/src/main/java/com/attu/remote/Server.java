@@ -61,7 +61,7 @@ public class Server {
         List<SongRoom> nearbySR(@Query("location") Location location);
 
         @GET("/srMembers")
-        List<APIUser> srMembers(@Query("srId") String srId);
+        List<APIUser> srMembers(@Query("srId") ObjectId srId);
 
         // Needs a return type to compile
         @GET("/dropUsers")
@@ -154,7 +154,7 @@ public class Server {
     }
 
     @GET("/srMembers")
-    public List<APIUser> srMembers(@Query("srId") String srId) {
+    public List<APIUser> srMembers(@Query("srId") ObjectId srId) {
         return api.srMembers(srId);
     }
 
