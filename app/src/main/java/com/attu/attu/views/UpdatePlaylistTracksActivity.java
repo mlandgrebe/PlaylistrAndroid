@@ -109,7 +109,7 @@ public class UpdatePlaylistTracksActivity extends Activity implements Observer, 
                     //System.out.println("Row clicked: " + v.getId());
                     //Track toPlay = (Track) v.getTag();
                     Player mPlayer = state.getPlayer();
-                    mPlayer.play((String)v.getTag());
+                    mPlayer.play((String) v.getTag());
                 }
 
             });
