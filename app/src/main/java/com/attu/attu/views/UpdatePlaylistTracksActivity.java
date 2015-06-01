@@ -11,11 +11,14 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.*;
 
+
 import com.attu.attu.R;
 
 import java.util.Observable;
 import java.util.Observer;
 
+import com.attu.util.State;
+import com.spotify.sdk.android.player.Player;
 import kaaes.spotify.webapi.android.models.*;
 import kaaes.spotify.webapi.android.*;
 
@@ -66,6 +69,7 @@ public class UpdatePlaylistTracksActivity extends Activity implements Observer, 
     }
 
     public void run(){
+        final State state = State.getState();
         TextView t1, t2;
         TableRow row;
         //Converting to dip unit
@@ -90,7 +94,7 @@ public class UpdatePlaylistTracksActivity extends Activity implements Observer, 
             t1.setPadding(20 * dip, 0, 0, 0);
             row.addView(t1);
             row.addView(t2);
-            row.setTag(plTrack.track);
+            row.setTag(plTrack.track.uri);
 
             playlist_tracks_table.addView(row, new TableLayout.LayoutParams(
                     LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
@@ -101,12 +105,15 @@ public class UpdatePlaylistTracksActivity extends Activity implements Observer, 
                     // here is where we will need to swap out view with
                     // song details view, need to handle this differently
                     // for Admin & User and in SongRoom or Your Music
-                    v.setBackgroundColor(Color.GRAY);
-                    System.out.println("Row clicked: " + v.getId());
+                    //v.setBackgroundColor(Color.GRAY);
+                    //System.out.println("Row clicked: " + v.getId());
                     //Track toPlay = (Track) v.getTag();
+                    Player mPlayer = state.getPlayer();
+                    mPlayer.play((String)v.getTag());
                 }
 
             });
+
         }
     }
 

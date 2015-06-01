@@ -15,6 +15,7 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.attu.attu.R;
+import com.attu.display.ColorOnHover;
 import com.attu.models.Song;
 import com.attu.models.SongQueue;
 import com.attu.models.SongRoom;
@@ -122,14 +123,8 @@ public class SongRoomHomeActivity extends Activity implements Observer, Runnable
             down.setBackgroundColor(Color.alpha(0));
             up.setTextColor(Color.GREEN);
             down.setTextColor(Color.RED);
-            View.OnClickListener upThumb = new View.OnClickListener() {
-                APIUser user = State.getState().getUser();
-
-                @Override
-                public void onClick(View view) {
-                    user.upvote(plTrack);
-                }
-            };
+            up.setOnClickListener(new UpThumb(plTrack));
+            down.setOnClickListener(new DownThumb(plTrack));
 
             row.addView(t1);
             row.addView(up);
@@ -149,6 +144,7 @@ public class SongRoomHomeActivity extends Activity implements Observer, Runnable
             queue_tracks_table.addView(row, params);
 
             row.setClickable(true); //allows you to select a specific row
+
             row.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     // here is where we will need to swap out view with
