@@ -17,6 +17,7 @@ import kaaes.spotify.webapi.android.models.Pager;
 import kaaes.spotify.webapi.android.models.PlaylistTrack;
 import kaaes.spotify.webapi.android.models.User;
 import retrofit.RetrofitError;
+import java.util.ArrayList;
 
 
 /**
@@ -29,14 +30,12 @@ public class SongRoomHomeThread extends Observable implements Runnable{
     public String name;
     APIUser apiUser;
 
-
     @Override
     public void run() {
         State state = State.getState();
-        apiUser = state.getUser();
-        apiUser.createSR(name);
-
         if(state != null) {
+            apiUser = state.getUser();
+            apiUser.createSR(name);
             ts = null;
             try {
                 SpotifyService spotify = state.getSpotifyService();
@@ -51,10 +50,12 @@ public class SongRoomHomeThread extends Observable implements Runnable{
                 SongRoom songRoom = apiUser.getSongRoom();
                 SongQueue songQueue = songRoom.getQueue();
                 Log.d("Queue", "got queue");
+                List<String> trackUris = new ArrayList<String>();
                 for (PlaylistTrack plTrack : ts) {
-                    songQueue.enqueue(plTrack.track.uri);
-                    Log.d("enqueued: ", plTrack.track.name);
+                    trackUris.add(plTrack.track.uri);
+                    Log.d("Queue", plTrack.track.uri);
                 }
+                songQueue.bulkEnq(trackUris);
                 setChanged();
                 notifyObservers();
             }

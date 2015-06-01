@@ -33,7 +33,7 @@ public class SongRoomHomeActivity extends Activity implements Observer, Runnable
     private String plist;
     private SongRoomHomeThread upThread;
 
-    TableLayout playlist_tracks_table;
+    TableLayout queue_tracks_table;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +60,7 @@ public class SongRoomHomeActivity extends Activity implements Observer, Runnable
 
         //for (Song s : songs) {
         //}
+
         TextView t1, t2;
         TableRow row;
         //Converting to dip unit
@@ -86,7 +87,7 @@ public class SongRoomHomeActivity extends Activity implements Observer, Runnable
             row.addView(t2);
             row.setTag(plTrack.track);
 
-            playlist_tracks_table.addView(row, new TableLayout.LayoutParams(
+            queue_tracks_table.addView(row, new TableLayout.LayoutParams(
                     ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
             row.setClickable(true); //allows you to select a specific row
