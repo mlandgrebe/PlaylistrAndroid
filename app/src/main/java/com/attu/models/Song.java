@@ -37,4 +37,6 @@ public class Song extends SpotifySong {
     public Song setServer(Server server) {
         return (Song)super.setServer(server);
     }
+
+
 }

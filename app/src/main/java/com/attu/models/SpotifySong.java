@@ -40,4 +40,8 @@ public class SpotifySong extends Identified {
                 "spotifyURI='" + spotifyURI + '\'' +
                 "} " + super.toString();
     }
+
+    public String getSpotifyURI() {
+        return spotifyURI;
+    }
 }

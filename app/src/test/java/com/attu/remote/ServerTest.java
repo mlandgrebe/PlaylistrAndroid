@@ -232,6 +232,39 @@ public class ServerTest extends TestCase {
         SongRoom room = server.createSR(user.getId(), loc, "testSR");
         SongQueue queue = room.getQueue();
 
+        assertThat(room.getPlaying().getVal(), is(nullValue()));
 
+        queue.enqueue("test");
+        List<Song> two = queue.enqueue("test2");
+
+        Maybe<Song> s11 = room.popSong();
+        assertThat(s11.isEmpty(), is(false));
+        assertThat(s11.getVal().getSpotifyURI(), equalTo("test"));
+
+        Maybe<Song> s1 = room.getPlaying();
+        assertThat(s1.isEmpty(), is(false));
+        assertThat(s1.getVal().getSpotifyURI(), is("test"));
+        assertThat(s1.getVal(), equalTo(s11.getVal()));
+
+
+        assertThat(s1.getVal().getStart(), is(nullValue()));
+
+        room.startPlaying();
+
+        assertThat(s1.getVal().getStart(), is(not(nullValue())));
+        assertThat(s1.getVal().getStop(), is(nullValue()));
+
+        Thread.sleep(10);
+
+        room.stopPlaying();
+
+        assertThat(s1.getVal().getStop(), is(nullValue()));
+
+        assertThat(room.getPlaying().isEmpty(), is(true));
+
+        Date startTime = s1.getVal().getStart();
+        Date stopTime = s1.getVal().getStop();
+
+        assertThat(startTime.before(stopTime), is(true));
     }
 }

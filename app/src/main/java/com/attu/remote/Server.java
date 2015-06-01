@@ -5,6 +5,7 @@ import android.location.Location;
 import com.attu.models.*;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonParseException;
 import kaaes.spotify.webapi.android.models.User;
 import retrofit.RestAdapter;
 import retrofit.converter.GsonConverter;
@@ -116,11 +117,12 @@ public class Server {
         Gson gson = new GsonBuilder()
                 .registerTypeAdapter(ObjectId.class, new ObjectIdDeserializer())
                 .registerTypeAdapter(PointLocation.class, new PointLocationDeserializer())
+                .setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
                 .create();
 
         RestAdapter adapter = new RestAdapter.Builder().setEndpoint(host)
                 .setConverter(new GsonConverter(gson))
-                .setLogLevel(RestAdapter.LogLevel.BASIC)
+                .setLogLevel(RestAdapter.LogLevel.FULL)
                 .build();
         api = adapter.create(RestAPI.class);
     }
@@ -233,7 +235,12 @@ public class Server {
 
     @GET("/getStart")
     public Date getStart(@Query(SONG_ID) ObjectId songId) {
-        return api.getStart(songId);
+        try {
+            return api.getStart(songId);
+        } catch (JsonParseException e) {
+            System.out.println("e = " + e);
+            return null;
+        }
     }
 
     @GET("/getStop")
