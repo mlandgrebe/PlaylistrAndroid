@@ -32,8 +32,6 @@ import kaaes.spotify.webapi.android.models.User;
 import kaaes.spotify.webapi.android.SpotifyApi;
 import kaaes.spotify.webapi.android.SpotifyService;
 
-import kaaes.spotify.webapi.android.*;
-
 public class MainActivity extends Activity implements
         PlayerNotificationCallback, ConnectionStateCallback {
 
@@ -84,7 +82,7 @@ public class MainActivity extends Activity implements
         public void onClick(View v) {
             v.setBackgroundColor(Color.GREEN);
             System.out.println("Button clicked: " + v.getId());
-            Intent i = new Intent(v.getContext(), SongRoomHomeActivity.class);
+            Intent i = new Intent(v.getContext(), JoinSongRoomActivity.class);
             startActivity(i);
         }
     };
