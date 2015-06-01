@@ -310,6 +310,29 @@ public class ServerTest extends TestCase {
         queue.bulkEnq(Arrays.asList(uris));
 
         assertThat(queue.getSongs(), hasSize(uris.length));
-
     }
+
+//    @Test
+//    public void testSorting() throws Exception {
+//        Server server = new Server("http://localhost:5000");
+//        server.dropUsers();
+//
+//        APIUser user = server.createUser(spotifyUser);
+//        PointLocation loc = new PointLocation(15, 16);
+//
+//        SongRoom room = server.createSR(user.getId(), loc, "testSR");
+//        SongQueue queue = room.getQueue();
+//
+//        Song song = server.createSong("foo:bar");
+//        Song song2 = server.createSong("bar:baz");
+//
+//        List<Song> oneSong = queue.enqueue(song);
+//        List<Song> oneSong2 = queue.getSongs();
+//
+//        assertThat(oneSong, hasSize(1));
+//        assertThat(oneSong, contains(song));
+//        assertThat(oneSong2, equalTo(oneSong));
+//
+//        List<Song> emptyAgain = queue.dequeue(song);
+//    }
 }
