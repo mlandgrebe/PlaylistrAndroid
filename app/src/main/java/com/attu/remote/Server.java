@@ -11,6 +11,7 @@ import retrofit.converter.GsonConverter;
 import retrofit.http.GET;
 import retrofit.http.Query;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -97,6 +98,12 @@ public class Server {
 
         @GET("/stopPlaying")
         String stopPlaying(@Query(SR_ID) ObjectId srId);
+
+        @GET("/getStart")
+        Date getStart(@Query(SONG_ID) ObjectId songId);
+
+        @GET("/getStop")
+        Date getStop(@Query(SONG_ID) ObjectId songId);
     }
 
 
@@ -222,5 +229,15 @@ public class Server {
     @GET("/stopPlaying")
     public void stopPlaying(@Query(SR_ID) ObjectId srId) {
         api.stopPlaying(srId);
+    }
+
+    @GET("/getStart")
+    public Date getStart(@Query(SONG_ID) ObjectId songId) {
+        return api.getStart(songId);
+    }
+
+    @GET("/getStop")
+    public Date getStop(@Query(SONG_ID) ObjectId songId) {
+        return api.getStop(songId);
     }
 }

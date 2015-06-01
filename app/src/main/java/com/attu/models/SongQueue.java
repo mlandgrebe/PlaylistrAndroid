@@ -23,9 +23,13 @@ public class SongQueue extends Identified {
         return changeQueue(song, true);
     }
 
-    public List<Song> enqueue(SpotifySong spotifySong) {
-        Song song = server.createSong(spotifySong.spotifyURI);
+    public List<Song> enqueue(String spotifyURI) {
+        Song song = server.createSong(spotifyURI);
         return enqueue(song);
+    }
+
+    public List<Song> enqueue(SpotifySong spotifySong) {
+        return enqueue(spotifySong.spotifyURI);
     }
 
     // See comment above
