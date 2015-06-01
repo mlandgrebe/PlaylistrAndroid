@@ -103,7 +103,7 @@ public class UpdatePlaylistTracksActivity extends Activity implements Observer, 
                     // for Admin & User and in SongRoom or Your Music
                     v.setBackgroundColor(Color.GRAY);
                     System.out.println("Row clicked: " + v.getId());
-                    Track toPlay = (Track) v.getTag();
+                    //Track toPlay = (Track) v.getTag();
                 }
 
             });

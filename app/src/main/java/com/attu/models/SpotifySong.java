@@ -44,4 +44,8 @@ public class SpotifySong extends Identified {
     public String getSpotifyURI() {
         return spotifyURI;
     }
+
+    public String getSpotifyTrackIdFromUri(){
+        return spotifyURI.substring(14);
+    }
 }
