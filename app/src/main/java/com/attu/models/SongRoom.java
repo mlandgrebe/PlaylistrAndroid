@@ -1,6 +1,7 @@
 package com.attu.models;
 
 import android.location.Location;
+import com.attu.util.Maybe;
 
 import java.util.List;
 
@@ -31,6 +32,22 @@ public class SongRoom extends Identified {
 
     public List<APIUser> getMembers() {
         return server.srMembers(getId());
+    }
+
+    public Maybe<Song> getPlaying() {
+        return new Maybe<>(server.getPlaying(getId()));
+    }
+
+    public void startPlaying() {
+        server.startPlaying(getId());
+    }
+
+    public void stopPlaying() {
+        server.stopPlaying(getId());
+    }
+
+    public Maybe<Song> popSong() {
+        return new Maybe<>(server.popSong(getId()));
     }
 
     @Override

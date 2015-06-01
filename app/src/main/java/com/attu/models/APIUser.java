@@ -117,4 +117,6 @@ public class APIUser extends Identified implements Serializable {
     public boolean inRoom() {
         return songRoom != null;
     }
+
+
 }

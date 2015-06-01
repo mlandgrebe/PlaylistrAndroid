@@ -85,6 +85,18 @@ public class Server {
         // Needs a return type to compile
         @GET("/dropUsers")
         String dropUsers();
+
+        @GET("/popSong")
+        Song popSong(@Query(SR_ID) ObjectId srId);
+
+        @GET("/getPlaying")
+        Song getPlaying(@Query(SR_ID) ObjectId srId);
+
+        @GET("/startPlaying")
+        String startPlaying(@Query(SR_ID) ObjectId srId);
+
+        @GET("/stopPlaying")
+        String stopPlaying(@Query(SR_ID) ObjectId srId);
     }
 
 
@@ -192,4 +204,23 @@ public class Server {
         return (Song)api.createSong(spotifyUri).setServer(this);
     }
 
+    @GET("/getPlaying")
+    public Song getPlaying(@Query(SR_ID) ObjectId srId) {
+        return (Song) api.getPlaying(srId).setServer(this);
+    }
+
+    @GET("/popSong")
+    public Song popSong(@Query(SR_ID) ObjectId srId) {
+        return api.popSong(srId).setServer(this);
+    }
+
+    @GET("/startPlaying")
+    public void startPlaying(@Query(SR_ID) ObjectId srId) {
+        api.startPlaying(srId);
+    }
+
+    @GET("/stopPlaying")
+    public void stopPlaying(@Query(SR_ID) ObjectId srId) {
+        api.stopPlaying(srId);
+    }
 }

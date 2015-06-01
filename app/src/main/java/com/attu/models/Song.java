@@ -1,5 +1,8 @@
 package com.attu.models;
 
+import com.attu.remote.Server;
+
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -17,8 +20,21 @@ public class Song extends SpotifySong {
         return server.getVotes(getId());
     }
 
+    public Date getStart() {
+        return null;
+    }
+
+    public Date getStop() {
+        return null;
+    }
+
     @Override
     public String toString() {
         return "Song{} " + super.toString();
+    }
+
+    @Override
+    public Song setServer(Server server) {
+        return (Song)super.setServer(server);
     }
 }

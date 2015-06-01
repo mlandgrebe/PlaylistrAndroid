@@ -1,5 +1,7 @@
 package com.attu.models;
 
+import com.attu.util.Maybe;
+
 import java.util.List;
 
 /**

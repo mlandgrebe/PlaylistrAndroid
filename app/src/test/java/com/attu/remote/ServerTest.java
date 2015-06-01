@@ -221,4 +221,17 @@ public class ServerTest extends TestCase {
         assertThat(shouldBeJust.isEmpty(), equalTo(false));
         assertThat(shouldBeJust.getVal(), equalTo(nearRoom));
     }
+
+    @Test
+    public void testQueuePop() throws Exception {
+        Server server = new Server("http://localhost:5000");
+        server.dropUsers();
+
+        APIUser user = server.createUser(spotifyUser);
+        PointLocation loc = new PointLocation(15, 16);
+
+        SongRoom room = server.createSR(user.getId(), loc, "testSR");
+        SongQueue queue = room.getQueue();
+
+    }
 }
