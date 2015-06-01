@@ -130,6 +130,7 @@ public class Server {
                 .registerTypeAdapter(ObjectId.class, new ObjectIdDeserializer())
                 .registerTypeAdapter(PointLocation.class, new PointLocationDeserializer())
                 .registerTypeAdapter(Date.class, new DateDeserializer())
+                .registerTypeAdapter(MotionInstant.class, new MotionInstantDeserializer())
                 .create();
 
         RestAdapter adapter = new RestAdapter.Builder().setEndpoint(host)
