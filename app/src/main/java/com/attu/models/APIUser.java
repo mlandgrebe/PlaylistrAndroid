@@ -118,5 +118,7 @@ public class APIUser extends Identified implements Serializable {
         return songRoom != null;
     }
 
-
+    public SongRoom getSongRoom() {
+        return songRoom;
+    }
 }
