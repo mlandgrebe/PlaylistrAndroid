@@ -76,7 +76,7 @@ public class MainActivity extends Activity implements
 
     View.OnClickListener createSongRoomHandler = new View.OnClickListener() {
         public void onClick(View v) {
-            v.setBackgroundColor(Color.RED);
+//            v.setBackgroundColor(Color.RED);
             Intent i = new Intent(v.getContext(), CreateSongRoomActivity.class);
             startActivity(i);
         }
@@ -84,7 +84,7 @@ public class MainActivity extends Activity implements
 
     View.OnClickListener joinSongRoomHandler = new View.OnClickListener() {
         public void onClick(View v) {
-            v.setBackgroundColor(Color.GREEN);
+//            v.setBackgroundColor(Color.GREEN);
             System.out.println("Button clicked: " + v.getId());
             Intent i = new Intent(v.getContext(), JoinSongRoomActivity.class);
             startActivity(i);

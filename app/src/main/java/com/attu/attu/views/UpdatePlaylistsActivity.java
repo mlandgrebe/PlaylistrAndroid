@@ -92,7 +92,7 @@ public class UpdatePlaylistsActivity extends Activity implements Observer, Runna
                     LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
 
             row.setClickable(true); //allows you to select a specific row
-            row.setOnTouchListener(new TemporaryColor(GRAY));
+//            row.setOnTouchListener(new TemporaryColor(GRAY));
             row.setOnClickListener(new OnClickListener() {
                 public void onClick(View v) {
                     // here is where we will need to swap out view with view of the playlist's tracks

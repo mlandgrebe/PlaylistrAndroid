@@ -10,6 +10,7 @@ import android.view.View;
 public class TemporaryColor implements View.OnTouchListener {
     int color;
     int oldColor;
+    boolean beenSet;
 
     public TemporaryColor(int color) {
         this.color = color;
@@ -20,8 +21,9 @@ public class TemporaryColor implements View.OnTouchListener {
         Log.d("TemporaryColor", "onHover");
         if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
             view.setBackgroundColor(oldColor);
-        } else if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
+        } else if (!beenSet && motionEvent.getAction() == MotionEvent.ACTION_UP) {
             oldColor = view.getDrawingCacheBackgroundColor();
+            beenSet = true;
             view.setBackgroundColor(color);
         }
         return true;

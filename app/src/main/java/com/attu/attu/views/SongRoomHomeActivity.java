@@ -139,7 +139,7 @@ public class SongRoomHomeActivity extends Activity implements Observer, Runnable
 
             row.setClickable(true); //allows you to select a specific row
 
-            row.setOnTouchListener(new TemporaryColor(Color.GRAY));
+//            row.setOnTouchListener(new TemporaryColor(Color.GRAY));
 
 //            row.setOnClickListener(new View.OnClickListener() {
 //                public void onClick(View v) {

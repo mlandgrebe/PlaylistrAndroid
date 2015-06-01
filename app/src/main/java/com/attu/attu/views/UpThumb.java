@@ -19,7 +19,7 @@ public class UpThumb implements OnClickListener {
     }
 
     public void onClick(View v) {
-        v.setBackgroundColor(Color.GRAY);
+//        v.setBackgroundColor(Color.GRAY);
         State state = State.getState();
         APIUser user = state.getUser();
         user.upvote(toThumb);
