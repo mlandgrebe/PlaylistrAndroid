@@ -21,11 +21,11 @@ public class Song extends SpotifySong {
     }
 
     public Date getStart() {
-        return null;
+        return server.getStart(getId());
     }
 
     public Date getStop() {
-        return null;
+        return server.getStop(getId());
     }
 
     @Override
@@ -37,4 +37,6 @@ public class Song extends SpotifySong {
     public Song setServer(Server server) {
         return (Song)super.setServer(server);
     }
+
+
 }

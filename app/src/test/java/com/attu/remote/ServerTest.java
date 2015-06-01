@@ -13,12 +13,11 @@ import org.junit.runners.BlockJUnit4ClassRunner;
 import retrofit.RetrofitError;
 
 import java.util.Date;
-import java.util.List;
 
 import static org.hamcrest.CoreMatchers.*;
-//import static org.hamcrest;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.hamcrest.collection.IsEmptyCollection.empty;
+import java.util.List;
 import static org.hamcrest.collection.IsIterableContainingInAnyOrder.containsInAnyOrder;
 import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
 import static org.junit.Assert.*;
@@ -233,5 +232,42 @@ public class ServerTest extends TestCase {
         SongRoom room = server.createSR(user.getId(), loc, "testSR");
         SongQueue queue = room.getQueue();
 
+        assertThat(room.getPlaying().getVal(), is(nullValue()));
+
+        queue.enqueue("test");
+        List<Song> two = queue.enqueue("test2");
+
+        Maybe<Song> s11 = room.popSong();
+        assertThat(s11.isEmpty(), is(false));
+        assertThat(s11.getVal().getSpotifyURI(), equalTo("test"));
+
+        Maybe<Song> s1 = room.getPlaying();
+        assertThat(s1.isEmpty(), is(false));
+        assertThat(s1.getVal().getSpotifyURI(), is("test"));
+        assertThat(s1.getVal(), equalTo(s11.getVal()));
+
+
+        assertThat(s1.getVal().getStart(), is(nullValue()));
+
+        room.startPlaying();
+
+        assertThat(s1.getVal().getStart(), is(not(nullValue())));
+        assertThat(s1.getVal().getStop(), is(nullValue()));
+
+        Thread.sleep(1000);
+
+        room.stopPlaying();
+
+        assertThat(s1.getVal().getStop(), is(not(nullValue())));
+
+        assertThat(room.getPlaying().isEmpty(), is(true));
+
+        Date startTime = s1.getVal().getStart();
+        Date stopTime = s1.getVal().getStop();
+
+        System.out.println("startTime = " + startTime);
+        System.out.println("stopTime = " + stopTime);
+
+        assertThat(startTime.before(stopTime), is(true));
     }
 }

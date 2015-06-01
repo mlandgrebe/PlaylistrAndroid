@@ -35,7 +35,9 @@ public class SongRoom extends Identified {
     }
 
     public Maybe<Song> getPlaying() {
-        return new Maybe<>(server.getPlaying(getId()));
+        Song playing = server.getPlaying(getId());
+
+        return new Maybe<>(playing.getId() == null ? null : playing);
     }
 
     public void startPlaying() {

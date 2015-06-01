@@ -5,12 +5,15 @@ import android.location.Location;
 import com.attu.models.*;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonParseException;
 import kaaes.spotify.webapi.android.models.User;
 import retrofit.RestAdapter;
+import retrofit.RetrofitError;
 import retrofit.converter.GsonConverter;
 import retrofit.http.GET;
 import retrofit.http.Query;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -97,6 +100,12 @@ public class Server {
 
         @GET("/stopPlaying")
         String stopPlaying(@Query(SR_ID) ObjectId srId);
+
+        @GET("/getStart")
+        Date getStart(@Query(SONG_ID) ObjectId songId);
+
+        @GET("/getStop")
+        Date getStop(@Query(SONG_ID) ObjectId songId);
     }
 
 
@@ -109,6 +118,7 @@ public class Server {
         Gson gson = new GsonBuilder()
                 .registerTypeAdapter(ObjectId.class, new ObjectIdDeserializer())
                 .registerTypeAdapter(PointLocation.class, new PointLocationDeserializer())
+                .registerTypeAdapter(Date.class, new DateDeserializer())
                 .create();
 
         RestAdapter adapter = new RestAdapter.Builder().setEndpoint(host)
@@ -222,5 +232,15 @@ public class Server {
     @GET("/stopPlaying")
     public void stopPlaying(@Query(SR_ID) ObjectId srId) {
         api.stopPlaying(srId);
+    }
+
+    @GET("/getStart")
+    public Date getStart(@Query(SONG_ID) ObjectId songId) {
+        return api.getStart(songId);
+    }
+
+    @GET("/getStop")
+    public Date getStop(@Query(SONG_ID) ObjectId songId) {
+        return api.getStop(songId);
     }
 }
