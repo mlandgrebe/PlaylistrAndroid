@@ -71,7 +71,8 @@ public class Server {
 
         @FormUrlEncoded
         @POST("/bulkEnq")
-        String bulkEnq(@Field("spotifyURIs") List<String> spotifyURIs, @Query(QUEUE_ID) ObjectId songQueueId);
+        String bulkEnq(@Field("spotifyURIs") List<String> spotifyURIs, @Field("names") List<String> names, @Query
+                (QUEUE_ID) ObjectId songQueueId);
 
         @GET("/leaveSR")
         String leaveSR(@Query(USER_ID) ObjectId userId, @Query(SR_ID) ObjectId songRoomId);
@@ -265,8 +266,10 @@ public class Server {
         return api.getActivity(userId);
     }
 
-    @GET("/bulkEnq")
-    public void bulkEnq(@Query("spotifyURIs") List<String> spotifyURIs, @Query(QUEUE_ID) ObjectId songQueueId) {
-        api.bulkEnq(spotifyURIs, songQueueId);
+    @FormUrlEncoded
+    @POST("/bulkEnq")
+    public String bulkEnq(@Field("spotifyURIs") List<String> spotifyURIs, @Field("names") List<String> names, @Query
+            (QUEUE_ID) ObjectId songQueueId) {
+        return api.bulkEnq(spotifyURIs, names, songQueueId);
     }
 }

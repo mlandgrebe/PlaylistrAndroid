@@ -96,15 +96,16 @@ public class SongRoomHomeActivity extends Activity implements Observer, Runnable
             up.setText("+");
             down.setText("-");
 
-            Log.d("SRHomeActivity", plTrack.toString());
+            String name = plTrack.getName();
+            Log.d("SRHomeActivity", name);
 
-//            if(plTrack.toString().length() > 23){
-//                String s = plTrack.toString().substring(0,23);
-//                t1.setText(s + "...");
-//            }
-//            else{
-            t1.setText(plTrack.toString());
-//            }
+            if(name.length() > 23){
+                String s = name.substring(0, 23);
+                t1.setText(s + "...");
+            }
+            else{
+                t1.setText(name);
+            }
 
             t1.setTypeface(null, 1);
 
@@ -112,7 +113,7 @@ public class SongRoomHomeActivity extends Activity implements Observer, Runnable
             up.setTextSize(25);
             down.setTextSize(25);
 
-            t1.setWidth(300 * dip);
+            t1.setWidth(150 * dip);
             //t1.setPadding(20 * dip, 0, 0, 0);
 
             up.setWidth(50 * dip);

@@ -14,6 +14,12 @@ public class SpotifySong extends Identified {
         this.spotifyURI = spotifyURI;
     }
 
+    public SpotifySong(ObjectId id, String spotifyURI, String name) {
+        super(id);
+        this.spotifyURI = spotifyURI;
+        this.name = name;
+    }
+
     // There should be some method to fetch the spotify info about this, i dont know what that is though
 
     // Something here about playing? I dont know, that will probably be a thing with the views
@@ -48,6 +54,10 @@ public class SpotifySong extends Identified {
 
     public String getSpotifyTrackIdFromUri(){
         return spotifyURI.substring(14);
+    }
+
+    public static String getSpotifyTrackIdFromUri(String s){
+        return s.substring(14);
     }
 
     public void setName(String name){

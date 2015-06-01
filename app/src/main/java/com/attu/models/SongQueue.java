@@ -42,7 +42,7 @@ public class SongQueue extends Identified {
         return server.getSongs(getId());
     }
 
-    public void bulkEnq(List<String> spotifyURIs) {
-        server.bulkEnq(spotifyURIs, getId());
+    public void bulkEnq(List<String> spotifyURIs, List<String> names) {
+        server.bulkEnq(spotifyURIs, names, getId());
     }
 }

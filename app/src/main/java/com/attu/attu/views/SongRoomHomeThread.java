@@ -54,23 +54,25 @@ public class SongRoomHomeThread extends Observable implements Runnable{
                     SongQueue songQueue = songRoom.getQueue();
                     Log.d("Queue", "got queue");
                     List<String> trackUris = new ArrayList<String>();
+                    List<String> trackNames = new ArrayList<>();
                     for (PlaylistTrack plTrack : ts) {
                         trackUris.add(plTrack.track.uri);
+                        trackNames.add(plTrack.track.name);
                         Log.d("Queue", plTrack.track.name);
                     }
-                    songQueue.bulkEnq(trackUris);
-                    List<Song> queue = state.getUser().getSongRoom().getQueue().getSongs();
-                    for(Song s: queue){
-                        String trackID = s.getSpotifyTrackIdFromUri();
-                        Track t = spotify.getTrack(trackID);
-                        s.setName(t.name);
-                    }
+                    songQueue.bulkEnq(trackUris, trackNames);
+//                    List<Song> queue = state.getUser().getSongRoom().getQueue().getSongs();
+//                    for(Song s: queue){
+//                        String trackID = s.getSpotifyTrackIdFromUri();
+//                        Track t = spotify.getTrack(trackID);
+//                        s.setName(t.name);
+//                    }
                     setChanged();
                     notifyObservers();
                 }
             }
         }
-        if(state.getUser().getHostStatus() == false){
+        if(!state.getUser().getHostStatus()){
             List<Song> queue = state.getUser().getSongRoom().getQueue().getSongs();
             String trackIds = "";
             int count = 0;
