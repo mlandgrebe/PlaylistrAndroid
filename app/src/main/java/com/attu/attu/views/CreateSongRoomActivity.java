@@ -133,6 +133,8 @@ public class CreateSongRoomActivity extends Activity implements
             Intent intent = new Intent(this, SongRoomHomeActivity.class);
             intent.putExtra("plist", plistTag);
             intent.putExtra("srname", name);
+            State state = State.getState();
+            state.getUser().setHostStatus(true);
             this.startActivity(intent);
         }
     }

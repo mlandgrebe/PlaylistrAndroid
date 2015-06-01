@@ -23,4 +23,5 @@
     <string name="title_activity_song_room_thread">SongRoomThread</string>
     <string name="title_activity_load__song_room__options">load_SongRoom_Options</string>
     <string name="title_activity_song_room_home">SongRoomHome</string>
+    <string name="title_activity_join_song_room">JoinSongRoom</string>
 </resources>

@@ -17,6 +17,7 @@ public class APIUser extends Identified implements Serializable {
     private SongRoom songRoom;
     private final MotionMonitor motionMonitor;
     private final float DEFAULT_DISTANCE_CUTOFF_METERS = 100.0f;
+    private boolean isHost;
 
     // The LocationListener should set this
     private PointLocation location;
@@ -118,7 +119,16 @@ public class APIUser extends Identified implements Serializable {
         return songRoom != null;
     }
 
+<<<<<<< HEAD
+    public void setHostStatus(boolean host) {
+        isHost = host;
+    }
+
+    public boolean getHostStatus(){
+        return isHost;
+=======
     public SongRoom getSongRoom() {
         return songRoom;
+>>>>>>> 3073968547609384b7cb661a5a0dfb528c14efee
     }
 }

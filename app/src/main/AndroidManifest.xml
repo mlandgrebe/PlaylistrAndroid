@@ -40,6 +40,10 @@
             android:name=".views.SongRoomHomeActivity"
             android:label="@string/title_activity_song_room_home" >
         </activity>
+        <activity
+            android:name=".views.JoinSongRoomActivity"
+            android:label="@string/title_activity_join_song_room" >
+        </activity>
     </application>
 
 </manifest>
