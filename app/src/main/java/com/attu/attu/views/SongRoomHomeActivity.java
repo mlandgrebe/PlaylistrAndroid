@@ -39,10 +39,11 @@ public class SongRoomHomeActivity extends Activity implements Observer, Runnable
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d("SRHA", "onCreate");
         setContentView(R.layout.activity_song_room_home);
         State s = State.getState();
         SpotifyService spotify = s.getSpotifyService();
-        if(s.getUser().getHostStatus() == true) {
+        if(s.getUser().getHostStatus()) {
             name = (String) getIntent().getSerializableExtra("srname");
             plist = (String) getIntent().getSerializableExtra("plist");
 
@@ -57,7 +58,7 @@ public class SongRoomHomeActivity extends Activity implements Observer, Runnable
             Thread t = new Thread(upThread);
             t.start();
         }
-        if(s.getUser().getHostStatus() == false){
+        if(!s.getUser().getHostStatus()){
             upThread = new SongRoomHomeThread();
             upThread.addObserver(this);
             Thread t = new Thread(upThread);
@@ -68,6 +69,7 @@ public class SongRoomHomeActivity extends Activity implements Observer, Runnable
     }
 
     public void run() {
+        Log.d("SRHA", "run starting");
         //State state = State.getState();
         //APIUser apiUser = state.getUser();
         //SongRoom songRoom = apiUser.getSongRoom();
@@ -94,14 +96,15 @@ public class SongRoomHomeActivity extends Activity implements Observer, Runnable
             up.setText("+");
             down.setText("-");
 
+            Log.d("SRHomeActivity", plTrack.toString());
 
-            if(plTrack.getName().length() > 23){
-                String s = plTrack.getName().substring(0,23);
-                t1.setText(s + "...");
-            }
-            else{
-                t1.setText(plTrack.getName());
-            }
+//            if(plTrack.toString().length() > 23){
+//                String s = plTrack.toString().substring(0,23);
+//                t1.setText(s + "...");
+//            }
+//            else{
+            t1.setText(plTrack.toString());
+//            }
 
             t1.setTypeface(null, 1);
 
@@ -120,6 +123,7 @@ public class SongRoomHomeActivity extends Activity implements Observer, Runnable
             down.setTextColor(Color.RED);
             View.OnClickListener upThumb = new View.OnClickListener() {
                 APIUser user = State.getState().getUser();
+
                 @Override
                 public void onClick(View view) {
                     user.upvote(plTrack);
@@ -130,11 +134,18 @@ public class SongRoomHomeActivity extends Activity implements Observer, Runnable
             row.addView(up);
             row.addView(down);
             row.setTag(plTrack);
-            if(row == null){
-                Log.d("Eroor", "row null");
-            }
-            queue_tracks_table.addView(row, new TableLayout.LayoutParams(
-                    ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+
+
+            TableLayout.LayoutParams params = new TableLayout.LayoutParams(
+                    ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+
+            Log.d("SRHA", "queue_tracks_table null ? " + (queue_tracks_table == null));
+
+            queue_tracks_table = (TableLayout) findViewById(R.id.queue_tracks_table);
+
+            Log.d("SRHA", "queue_tracks_table null ? " + (queue_tracks_table == null));
+
+            queue_tracks_table.addView(row, params);
 
             row.setClickable(true); //allows you to select a specific row
             row.setOnClickListener(new View.OnClickListener() {
