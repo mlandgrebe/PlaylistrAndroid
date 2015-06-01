@@ -94,6 +94,7 @@ public class SongRoomHomeActivity extends Activity implements Observer, Runnable
             up.setText("+");
             down.setText("-");
 
+
             if(plTrack.getName().length() > 23){
                 String s = plTrack.getName().substring(0,23);
                 t1.setText(s + "...");
