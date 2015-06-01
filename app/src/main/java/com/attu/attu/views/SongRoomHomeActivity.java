@@ -84,8 +84,8 @@ public class SongRoomHomeActivity extends Activity implements Observer, Runnable
         int dip = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
                 (float) 1, getResources().getDisplayMetrics());
         State state = State.getState();
-        List<Song> songs = state.getUser().getSongRoom().getQueue().getSongs();
-        for (Song plTrack : songs) {
+        final List<Song> songs = state.getUser().getSongRoom().getQueue().getSongs();
+        for (final Song plTrack : songs) {
             row = new TableRow(this);
             t1 = new TextView(this);
             up = new Button(this);
@@ -117,8 +117,14 @@ public class SongRoomHomeActivity extends Activity implements Observer, Runnable
             down.setBackgroundColor(Color.alpha(0));
             up.setTextColor(Color.GREEN);
             down.setTextColor(Color.RED);
-            UpThumb onUP = new UpThumb(plTrack);
-            up.setOnClickListener(onUP);
+            View.OnClickListener upThumb = new View.OnClickListener() {
+                APIUser user = State.getState().getUser();
+                @Override
+                public void onClick(View view) {
+                    user.upvote(plTrack);
+                }
+            };
+
             row.addView(t1);
             row.addView(up);
             row.addView(down);

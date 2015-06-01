@@ -1,5 +1,6 @@
 package com.attu.util;
 
+import android.location.LocationManager;
 import com.attu.models.APIUser;
 import com.attu.remote.Server;
 import com.spotify.sdk.android.player.Player;
@@ -14,6 +15,7 @@ public class State {
     private APIUser user;
     private SpotifyService spotifyService;
     private Player player;
+    private LocationManager locationManager;
 
     private State() {
 
@@ -57,5 +59,13 @@ public class State {
 
     public void setPlayer(Player player) {
         this.player = player;
+    }
+
+    public LocationManager getLocationManager() {
+        return locationManager;
+    }
+
+    public void setLocationManager(LocationManager locationManager) {
+        this.locationManager = locationManager;
     }
 }

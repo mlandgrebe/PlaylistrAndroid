@@ -50,6 +50,8 @@ public class MainActivity extends Activity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Log.d("MainActivity", "onCreate starting");
+
         // needed to add these two lines of code to silence runtime errors
         ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
@@ -66,6 +68,8 @@ public class MainActivity extends Activity implements
         create_songroom_button.setOnClickListener(createSongRoomHandler);
         join_songroom_button.setOnClickListener(joinSongRoomHandler);
         listen_yourself_button.setOnClickListener(listenYourselfHandler);
+
+        Log.d("MainActivity", "launching new activity");
 
         AuthenticationClient.openLoginActivity(this, REQUEST_CODE, request);
     }
@@ -133,11 +137,17 @@ public class MainActivity extends Activity implements
                 locationManager.requestLocationUpdates(locationManager.NETWORK_PROVIDER, 0, 0, srLocationListener);
                 locationManager.requestLocationUpdates(locationManager.GPS_PROVIDER, 0, 0, srLocationListener);
 
+                Log.d("MainActivity", "about to initialize");
+
                 State state = State.getState();
                 state.setServer(server);
                 state.setUser(apiUser);
                 state.setSpotifyService(spotify);
                 state.setPlayer(mPlayer);
+                state.setLocationManager(locationManager);
+
+                Log.d("MainActivity", "initialized");
+
             }
         }
     }
