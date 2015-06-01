@@ -25,7 +25,7 @@ public class Song extends SpotifySong {
     }
 
     public Date getStop() {
-        return server.getStart(getId());
+        return server.getStop(getId());
     }
 
     @Override

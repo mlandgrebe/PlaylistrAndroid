@@ -254,16 +254,19 @@ public class ServerTest extends TestCase {
         assertThat(s1.getVal().getStart(), is(not(nullValue())));
         assertThat(s1.getVal().getStop(), is(nullValue()));
 
-        Thread.sleep(10);
+        Thread.sleep(1000);
 
         room.stopPlaying();
 
-        assertThat(s1.getVal().getStop(), is(nullValue()));
+        assertThat(s1.getVal().getStop(), is(not(nullValue())));
 
         assertThat(room.getPlaying().isEmpty(), is(true));
 
         Date startTime = s1.getVal().getStart();
         Date stopTime = s1.getVal().getStop();
+
+        System.out.println("startTime = " + startTime);
+        System.out.println("stopTime = " + stopTime);
 
         assertThat(startTime.before(stopTime), is(true));
     }
