@@ -119,16 +119,15 @@ public class APIUser extends Identified implements Serializable {
         return songRoom != null;
     }
 
-<<<<<<< HEAD
     public void setHostStatus(boolean host) {
         isHost = host;
     }
 
-    public boolean getHostStatus(){
+    public boolean getHostStatus() {
         return isHost;
-=======
+    }
+
     public SongRoom getSongRoom() {
         return songRoom;
->>>>>>> 3073968547609384b7cb661a5a0dfb528c14efee
     }
 }
