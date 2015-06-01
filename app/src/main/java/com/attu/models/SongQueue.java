@@ -41,4 +41,8 @@ public class SongQueue extends Identified {
         System.out.println(getId());
         return server.getSongs(getId());
     }
+
+    public void bulkEnq(List<String> spotifyURIs) {
+        server.bulkEnq(spotifyURIs, getId());
+    }
 }

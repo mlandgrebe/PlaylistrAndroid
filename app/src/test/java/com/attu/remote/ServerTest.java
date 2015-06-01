@@ -2,6 +2,7 @@ package com.attu.remote;
 
 import android.content.Intent;
 import android.location.Location;
+import com.attu.data.MotionInstant;
 import com.attu.models.*;
 import com.attu.util.Maybe;
 import junit.framework.TestCase;
@@ -12,11 +13,14 @@ import org.junit.runner.RunWith;
 import org.junit.runners.BlockJUnit4ClassRunner;
 import retrofit.RetrofitError;
 
+import java.util.Arrays;
 import java.util.Date;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.hamcrest.collection.IsEmptyCollection.empty;
+
+import java.util.LinkedList;
 import java.util.List;
 import static org.hamcrest.collection.IsIterableContainingInAnyOrder.containsInAnyOrder;
 import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
@@ -269,5 +273,43 @@ public class ServerTest extends TestCase {
         System.out.println("stopTime = " + stopTime);
 
         assertThat(startTime.before(stopTime), is(true));
+    }
+
+    @Test
+    public void testSubmitActivity() throws Exception {
+
+        Server server = new Server("http://localhost:5000");
+        server.dropUsers();
+
+        APIUser user = server.createUser(spotifyUser);
+        MotionInstant mis[] = {
+                new MotionInstant(1l, 2),
+                new MotionInstant(2l, 3)
+        };
+
+        // TODO: WRAPPER METHOD
+        server.submitActivity(user.getId(), Arrays.asList(mis));
+        List<MotionInstant> res = server.getActivity(user.getId());
+        assertThat(res, equalTo(Arrays.asList(mis)));
+    }
+
+    @Test
+    public  void testBulkEnq() throws Exception {
+        Server server = new Server("http://localhost:5000");
+        server.dropUsers();
+
+        APIUser user = server.createUser(spotifyUser);
+        PointLocation loc = new PointLocation(15, 16);
+
+        SongRoom room = server.createSR(user.getId(), loc, "testSR");
+        SongQueue queue = room.getQueue();
+        String uris[] = {"a", "b", "c", "d", "e", "f"};
+
+        assertThat(queue.getSongs(), empty());
+
+        queue.bulkEnq(Arrays.asList(uris));
+
+        assertThat(queue.getSongs(), hasSize(uris.length));
+
     }
 }

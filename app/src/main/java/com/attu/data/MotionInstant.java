@@ -16,11 +16,16 @@ public class MotionInstant {
         norm = Math.sqrt(norm);
     }
 
+    public MotionInstant(long timestamp, double norm) {
+        this.timestamp = timestamp;
+        this.norm = norm;
+    }
+
     @Override
     public String toString() {
         return "{" +
-                "timestamp=" + timestamp +
-                ", norm=" + norm +
+                "\"timestamp\":" + timestamp +
+                ", \"norm\":" + norm +
                 '}';
     }
 }

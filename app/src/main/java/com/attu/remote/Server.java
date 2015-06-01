@@ -2,6 +2,7 @@ package com.attu.remote;
 
 
 import android.location.Location;
+import com.attu.data.MotionInstant;
 import com.attu.models.*;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -10,8 +11,7 @@ import kaaes.spotify.webapi.android.models.User;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.converter.GsonConverter;
-import retrofit.http.GET;
-import retrofit.http.Query;
+import retrofit.http.*;
 
 import java.util.Date;
 import java.util.List;
@@ -69,6 +69,10 @@ public class Server {
                                @Query(SONG_ID) ObjectId songId,
                                @Query("isEnq") boolean isEnq);
 
+        @FormUrlEncoded
+        @POST("/bulkEnq")
+        String bulkEnq(@Field("spotifyURIs") List<String> spotifyURIs, @Query(QUEUE_ID) ObjectId songQueueId);
+
         @GET("/leaveSR")
         String leaveSR(@Query(USER_ID) ObjectId userId, @Query(SR_ID) ObjectId songRoomId);
 
@@ -106,6 +110,13 @@ public class Server {
 
         @GET("/getStop")
         Date getStop(@Query(SONG_ID) ObjectId songId);
+
+        @FormUrlEncoded
+        @POST("/submitActivity")
+        String submitActivity(@Field(USER_ID) ObjectId userId, @Field("instants") List<MotionInstant> instants);
+
+        @GET("/getActivity")
+        List<MotionInstant> getActivity(@Query(USER_ID) ObjectId userId);
     }
 
 
@@ -242,5 +253,19 @@ public class Server {
     @GET("/getStop")
     public Date getStop(@Query(SONG_ID) ObjectId songId) {
         return api.getStop(songId);
+    }
+
+    public void submitActivity(ObjectId userId, List<MotionInstant> instants) {
+        api.submitActivity(userId, instants);
+    }
+
+    @GET("/getActivity")
+    public List<MotionInstant> getActivity(@Query(USER_ID) ObjectId userId) {
+        return api.getActivity(userId);
+    }
+
+    @GET("/bulkEnq")
+    public void bulkEnq(@Query("spotifyURIs") List<String> spotifyURIs, @Query(QUEUE_ID) ObjectId songQueueId) {
+        api.bulkEnq(spotifyURIs, songQueueId);
     }
 }
