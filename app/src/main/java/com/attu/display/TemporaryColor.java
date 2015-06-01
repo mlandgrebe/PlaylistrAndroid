@@ -7,20 +7,20 @@ import android.view.View;
 /**
  * Created by patrick on 6/1/15.
  */
-public class ColorOnHover implements View.OnHoverListener  {
+public class TemporaryColor implements View.OnTouchListener {
     int color;
     int oldColor;
 
-    public ColorOnHover(int color) {
+    public TemporaryColor(int color) {
         this.color = color;
     }
 
     @Override
-    public boolean onHover(View view, MotionEvent motionEvent) {
-        Log.d("ColorOnHover", "onHover");
-        if (motionEvent.getAction() == MotionEvent.ACTION_HOVER_EXIT) {
+    public boolean onTouch(View view, MotionEvent motionEvent) {
+        Log.d("TemporaryColor", "onHover");
+        if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
             view.setBackgroundColor(oldColor);
-        } else if (motionEvent.getAction() == MotionEvent.ACTION_HOVER_ENTER) {
+        } else if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
             oldColor = view.getDrawingCacheBackgroundColor();
             view.setBackgroundColor(color);
         }

@@ -2,7 +2,6 @@ package com.attu.attu.views;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.TypedValue;
@@ -12,16 +11,16 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.*;
 import android.content.Context;
-import com.attu.util.State;
+import com.attu.display.TemporaryColor;
 
 import com.attu.attu.R;
 
 import java.util.Observable;
 import java.util.Observer;
-import com.attu.util.State;
 
 import kaaes.spotify.webapi.android.models.*;
-import kaaes.spotify.webapi.android.*;
+
+import static android.graphics.Color.GRAY;
 
 public class UpdatePlaylistsActivity extends Activity implements Observer, Runnable {
 
@@ -93,11 +92,12 @@ public class UpdatePlaylistsActivity extends Activity implements Observer, Runna
                     LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
 
             row.setClickable(true); //allows you to select a specific row
+            row.setOnTouchListener(new TemporaryColor(GRAY));
             row.setOnClickListener(new OnClickListener() {
                 public void onClick(View v) {
                     // here is where we will need to swap out view with view of the playlist's tracks
-                    v.setBackgroundColor(Color.GRAY);
-                    System.out.println("Row clicked: " + v.getId());
+//                    v.setBackgroundColor(Color.GRAY);
+//                    System.out.println("Row clicked: " + v.getId());
                     Context x = v.getContext();
                     Intent i = new Intent(x, UpdatePlaylistTracksActivity.class);
                     i.putExtra("plist", (String)v.getTag());

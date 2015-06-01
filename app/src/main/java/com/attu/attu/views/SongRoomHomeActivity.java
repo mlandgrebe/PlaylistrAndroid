@@ -7,7 +7,6 @@ import android.util.Log;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TableLayout;
@@ -15,19 +14,14 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.attu.attu.R;
-import com.attu.display.ColorOnHover;
+import com.attu.display.TemporaryColor;
 import com.attu.models.Song;
-import com.attu.models.SongQueue;
-import com.attu.models.SongRoom;
-import com.attu.models.APIUser;
 import com.attu.util.State;
 
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
-import kaaes.spotify.webapi.android.models.PlaylistTrack;
-import kaaes.spotify.webapi.android.models.Track;
 import kaaes.spotify.webapi.android.SpotifyService;
 
 public class SongRoomHomeActivity extends Activity implements Observer, Runnable{
@@ -145,17 +139,19 @@ public class SongRoomHomeActivity extends Activity implements Observer, Runnable
 
             row.setClickable(true); //allows you to select a specific row
 
-            row.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
-                    // here is where we will need to swap out view with
-                    // song details view, need to handle this differently
-                    // for Admin & User and in SongRoom or Your Music
-                    v.setBackgroundColor(Color.GRAY);
-                    System.out.println("Row clicked: " + v.getId());
-                    //Track toPlay = (Track) v.getTag();
-                }
+            row.setOnTouchListener(new TemporaryColor(Color.GRAY));
 
-            });
+//            row.setOnClickListener(new View.OnClickListener() {
+//                public void onClick(View v) {
+//                    // here is where we will need to swap out view with
+//                    // song details view, need to handle this differently
+//                    // for Admin & User and in SongRoom or Your Music
+//                    v.setBackgroundColor(Color.GRAY);
+//                    System.out.println("Row clicked: " + v.getId());
+//                    //Track toPlay = (Track) v.getTag();
+//                }
+//
+//            });
         }
     }
 
