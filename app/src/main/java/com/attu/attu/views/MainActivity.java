@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.*;
 import android.os.StrictMode;
 import android.os.StrictMode.ThreadPolicy;
+import android.location.LocationManager;
+import com.attu.data.SRLocationListener;
 
 import com.attu.attu.R;
 import com.attu.models.APIUser;
@@ -126,6 +128,12 @@ public class MainActivity extends Activity implements
                 Server server = new Server("http://54.191.46.253:5000");
                 User spotifyUser = spotify.getMe();
                 APIUser apiUser =  server.createUser(spotifyUser);
+
+                // Acquire a reference to the system Location Manager
+                LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+                SRLocationListener srLocationListener = new SRLocationListener(apiUser);
+                locationManager.requestLocationUpdates(locationManager.NETWORK_PROVIDER, 0, 0, srLocationListener);
+                locationManager.requestLocationUpdates(locationManager.GPS_PROVIDER, 0, 0, srLocationListener);
 
                 State state = State.getState();
                 state.setServer(server);

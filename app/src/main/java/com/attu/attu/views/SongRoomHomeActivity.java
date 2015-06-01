@@ -16,6 +16,7 @@ import java.util.Observer;
 
 public class SongRoomHomeActivity extends Activity implements Observer, Runnable{
     private String name;
+    private String plistTag;
     private SongRoomHomeThread upThread;
 
     @Override
@@ -23,6 +24,7 @@ public class SongRoomHomeActivity extends Activity implements Observer, Runnable
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_song_room_home);
         name = (String) getIntent().getSerializableExtra("srname");
+        plistTag = (String) getIntent().getSerializableExtra("plistTag");
 
         upThread = new SongRoomHomeThread();
         upThread.name = name;

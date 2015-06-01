@@ -28,7 +28,7 @@ public class CreateSongRoomActivity extends Activity implements
         View.OnClickListener, Observer, Runnable {
 
     private CreateSongRoomThread upThread;
-    String plistTag;
+    private String plistTag;
 
     EditText text_sr_input;
     TableLayout playlist_options;
@@ -132,6 +132,7 @@ public class CreateSongRoomActivity extends Activity implements
             }
             Intent intent = new Intent(this, SongRoomHomeActivity.class);
             intent.putExtra("plist", plistTag);
+            intent.putExtra("srname", name);
             this.startActivity(intent);
         }
     }
