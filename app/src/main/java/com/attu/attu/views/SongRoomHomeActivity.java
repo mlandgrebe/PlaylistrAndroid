@@ -39,16 +39,26 @@ public class SongRoomHomeActivity extends Activity implements Observer, Runnable
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_song_room_home);
-        name = (String) getIntent().getSerializableExtra("srname");
-        plist = (String) getIntent().getSerializableExtra("plist");
+        State s = State.getState();
+        if(s.getUser().getHostStatus() == true) {
+            name = (String) getIntent().getSerializableExtra("srname");
+            plist = (String) getIntent().getSerializableExtra("plist");
 
-        upThread = new SongRoomHomeThread();
-        upThread.toUpdate = this;
-        upThread.name = name;
-        upThread.uri = plist;
-        upThread.addObserver(this);
-        Thread t = new Thread(upThread);
-        t.start();
+
+            queue_tracks_table = (TableLayout) findViewById(R.id.queue_tracks_table);
+
+            upThread = new SongRoomHomeThread();
+            upThread.toUpdate = this;
+            upThread.name = name;
+            upThread.uri = plist;
+            upThread.addObserver(this);
+            Thread t = new Thread(upThread);
+            t.start();
+        }
+        if(s.getUser().getHostStatus() == false){
+
+
+        }
     }
 
     public void run() {
@@ -68,25 +78,20 @@ public class SongRoomHomeActivity extends Activity implements Observer, Runnable
                 (float) 1, getResources().getDisplayMetrics());
         for (PlaylistTrack plTrack : upThread.ts) {
             row = new TableRow(this);
-
             t1 = new TextView(this);
-            t2 = new TextView(this);
 
             t1.setText(plTrack.track.name);
-            t2.setText(plTrack.track.uri);
             t1.setTypeface(null, 1);
-            t2.setTypeface(null, 1);
 
             t1.setTextSize(15);
-            t2.setTextSize(15);
 
-            t1.setWidth(50 * dip);
-            t2.setWidth(150 * dip);
+            t1.setWidth(350 * dip);
             t1.setPadding(20 * dip, 0, 0, 0);
             row.addView(t1);
-            row.addView(t2);
             row.setTag(plTrack.track);
-
+            if(row == null){
+                Log.d("Eroor", "row null");
+            }
             queue_tracks_table.addView(row, new TableLayout.LayoutParams(
                     ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 

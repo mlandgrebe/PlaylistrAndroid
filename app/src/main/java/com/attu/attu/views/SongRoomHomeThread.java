@@ -53,7 +53,7 @@ public class SongRoomHomeThread extends Observable implements Runnable{
                 List<String> trackUris = new ArrayList<String>();
                 for (PlaylistTrack plTrack : ts) {
                     trackUris.add(plTrack.track.uri);
-                    Log.d("Queue", plTrack.track.uri);
+                    Log.d("Queue", plTrack.track.name);
                 }
                 songQueue.bulkEnq(trackUris);
                 setChanged();
