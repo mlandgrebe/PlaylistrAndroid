@@ -7,6 +7,7 @@ import com.attu.remote.Server;
  */
 public class SpotifySong extends Identified {
     protected String spotifyURI;
+    protected String name;
 
     public SpotifySong(ObjectId id, String spotifyURI) {
         super(id);
@@ -47,5 +48,13 @@ public class SpotifySong extends Identified {
 
     public String getSpotifyTrackIdFromUri(){
         return spotifyURI.substring(14);
+    }
+
+    public void setName(String name){
+        this.name = name;
+    }
+
+    public String getName(){
+        return this.name;
     }
 }

@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -40,6 +41,7 @@ public class SongRoomHomeActivity extends Activity implements Observer, Runnable
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_song_room_home);
         State s = State.getState();
+        SpotifyService spotify = s.getSpotifyService();
         if(s.getUser().getHostStatus() == true) {
             name = (String) getIntent().getSerializableExtra("srname");
             plist = (String) getIntent().getSerializableExtra("plist");
@@ -56,6 +58,10 @@ public class SongRoomHomeActivity extends Activity implements Observer, Runnable
             t.start();
         }
         if(s.getUser().getHostStatus() == false){
+            upThread = new SongRoomHomeThread();
+            upThread.addObserver(this);
+            Thread t = new Thread(upThread);
+            t.start();
 
 
         }
@@ -72,23 +78,51 @@ public class SongRoomHomeActivity extends Activity implements Observer, Runnable
         //}
 
         TextView t1, t2;
+        Button up, down;
         TableRow row;
         //Converting to dip unit
         int dip = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
                 (float) 1, getResources().getDisplayMetrics());
-        for (PlaylistTrack plTrack : upThread.ts) {
+        State state = State.getState();
+        List<Song> songs = state.getUser().getSongRoom().getQueue().getSongs();
+        for (Song plTrack : songs) {
             row = new TableRow(this);
             t1 = new TextView(this);
+            up = new Button(this);
+            down = new Button(this);
 
-            t1.setText(plTrack.track.name);
+            up.setText("+");
+            down.setText("-");
+
+            if(plTrack.getName().length() > 23){
+                String s = plTrack.getName().substring(0,23);
+                t1.setText(s + "...");
+            }
+            else{
+                t1.setText(plTrack.getName());
+            }
+
             t1.setTypeface(null, 1);
 
             t1.setTextSize(15);
+            up.setTextSize(25);
+            down.setTextSize(25);
 
-            t1.setWidth(350 * dip);
-            t1.setPadding(20 * dip, 0, 0, 0);
+            t1.setWidth(300 * dip);
+            //t1.setPadding(20 * dip, 0, 0, 0);
+
+            up.setWidth(50 * dip);
+            down.setWidth(50 * dip);
+            up.setBackgroundColor(Color.alpha(0));
+            down.setBackgroundColor(Color.alpha(0));
+            up.setTextColor(Color.GREEN);
+            down.setTextColor(Color.RED);
+            UpThumb onUP = new UpThumb(plTrack);
+            up.setOnClickListener(onUP);
             row.addView(t1);
-            row.setTag(plTrack.track);
+            row.addView(up);
+            row.addView(down);
+            row.setTag(plTrack);
             if(row == null){
                 Log.d("Eroor", "row null");
             }
