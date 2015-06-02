@@ -94,11 +94,11 @@ public class QueueSongActivity extends Activity implements Observer, Runnable {
             t1.setTextSize(15);
             t2.setTextSize(15);
 
-            t1.setWidth(50 * dip);
+            t1.setWidth(150 * dip);
             t2.setWidth(150 * dip);
             t1.setPadding(20 * dip, 0, 0, 0);
             row.addView(t1);
-            row.addView(t2);
+           // row.addView(t2);
             row.setTag(plTrack.track);
 
             playlist_tracks_table.addView(row, new TableLayout.LayoutParams(

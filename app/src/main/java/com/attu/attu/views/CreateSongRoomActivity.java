@@ -121,15 +121,7 @@ public class CreateSongRoomActivity extends Activity implements
     public void onClick(View v) {
         String name = text_sr_input.getText().toString();
         Log.d("Text Entered: ", name);
-        if (name != null) {
-            if (plistTag != null) {
-                // call createSR that Patrick needs to write
-                // it should allow user to set a playlist for the sr
-            }
-            else{
-                // call createSR that Patrick needs to write
-                // it should allow user to set a playlist for the sr
-            }
+        if (name != null && plistTag != null) {
             Intent intent = new Intent(this, SongRoomHomeActivity.class);
             intent.putExtra("plist", plistTag);
             intent.putExtra("srname", name);

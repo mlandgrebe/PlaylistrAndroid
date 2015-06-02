@@ -95,7 +95,7 @@ public class UpdatePlaylistsActivity extends Activity implements Observer, Runna
             t2.setWidth(150 * dip);
             t1.setPadding(20 * dip, 0, 0, 0);
             row.addView(t1);
-            row.addView(t2);
+           // row.addView(t2);
             row.setTag(play.id);
 
             playlist_table.addView(row, new TableLayout.LayoutParams(

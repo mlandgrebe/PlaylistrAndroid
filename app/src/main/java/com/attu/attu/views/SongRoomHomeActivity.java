@@ -18,7 +18,9 @@ import android.widget.TextView;
 
 import com.attu.attu.R;
 import com.attu.models.Song;
+import com.attu.models.SongRoom;
 import com.attu.models.Vote;
+import com.attu.util.Maybe;
 import com.attu.util.State;
 import com.spotify.sdk.android.player.Player;
 
@@ -84,6 +86,26 @@ public class SongRoomHomeActivity extends Activity implements Observer, Runnable
 
     public void run() {
         Log.d("SRHA", "run starting");
+        State st = State.getState();
+        final SongRoom room = State.getState().getUser().getSongRoom();
+        if (st.getUser().getHostStatus()) {
+            Maybe<Song> toplay = room.popSong();
+            if (!toplay.isEmpty()) {
+                Player mPlayer = st.getPlayer();
+                Song toPlay = (Song) toplay.getVal();
+                // start: just added
+                //SongRoom room = State.getState().getUser().getSongRoom();
+
+                Maybe<Song> nextSong = room.popSong();
+                if (!nextSong.isEmpty()) {
+                    Song song = nextSong.getVal();
+                    room.startPlaying();
+                    mPlayer.play(song.getSpotifyURI());
+                }
+                // end: just added
+                mPlayer.play(toPlay.getSpotifyURI());
+            }
+        }
 
         TextView t1, t2;
         Button up, down;
@@ -175,11 +197,7 @@ public class SongRoomHomeActivity extends Activity implements Observer, Runnable
             row.setClickable(true);
             row.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-                    if (state.getUser().getHostStatus()) {
-                        Player mPlayer = state.getPlayer();
-                        Song toPlay = (Song) v.getTag();
-                        mPlayer.play(toPlay.getSpotifyURI());
-                    }
+
                 }
             });
         }

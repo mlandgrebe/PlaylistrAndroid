@@ -62,7 +62,8 @@ public class MainActivity extends Activity implements
 
         AuthenticationRequest.Builder builder =
                 new AuthenticationRequest.Builder(CLIENT_ID, AuthenticationResponse.Type.TOKEN, REDIRECT_URI);
-        builder.setScopes(new String[]{"user-read-private", "streaming", "user-library-read"});
+        builder.setScopes(new String[]{"user-read-private", "playlist-read-private",
+                "playlist-read-collaborative", "streaming", "user-library-read"});
         AuthenticationRequest request = builder.build();
 
         create_songroom_button = (Button) findViewById(R.id.create_songroom_button);
@@ -170,7 +171,7 @@ public class MainActivity extends Activity implements
             }
         }
     }
-    public void onPlayerState(PlayerState state){
+    public void onPlayerState(PlayerState state) {
         Log.d("MainActivity", "Current Track Playing = " + state.trackUri);
     }
 
