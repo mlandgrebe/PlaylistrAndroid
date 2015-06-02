@@ -58,6 +58,8 @@ public class SongRoomHomeActivity extends Activity implements Observer, Runnable
                 startActivity(i);
             }
         });
+        TextView title = (TextView) findViewById(R.id.srName);
+        title.setText((String) getIntent().getSerializableExtra("srname"));
 
         State s = State.getState();
         SpotifyService spotify = s.getSpotifyService();
@@ -116,9 +118,14 @@ public class SongRoomHomeActivity extends Activity implements Observer, Runnable
 
             String name = plTrack.getName();
             Log.d("SRHomeActivity", name);
+            t1.setTextSize(15);
+            if(name.length() > 10){
+                t1.setTextSize(10);
+                String s = name;
+                if(name.length() > 15){
+                   s = name.substring(0,14);
+                }
 
-            if(name.length() > 15){
-                String s = name.substring(0, 14);
                 t1.setText(s + "...");
             }
             else{

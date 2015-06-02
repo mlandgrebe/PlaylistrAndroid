@@ -88,6 +88,7 @@ public class JoinSongRoomActivity extends Activity
         public void onClick(View v) {
             Log.d("Click", "Clicked join");
             Intent intent = new Intent(v.getContext(), SongRoomHomeActivity.class);
+            intent.putExtra("srname", toJoin.getName());
             State state = State.getState();
             state.getUser().setHostStatus(false);
             Runnable r = new Runnable() {
