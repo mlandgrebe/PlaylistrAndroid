@@ -81,6 +81,16 @@ public class UpdatePlaylistTracksActivity extends Activity implements Observer, 
             t1 = new TextView(this);
             t2 = new TextView(this);
 
+            String s;
+            String name = plTrack.track.name;
+            if(name.length() > 12){
+                s = name.substring(0,11);
+                t1.setText(s + "...");
+            }
+            else{
+                t1.setText(name);
+            }
+
             t1.setText(plTrack.track.name);
             t2.setText(plTrack.track.uri);
             t1.setTypeface(null, 1);
@@ -93,7 +103,7 @@ public class UpdatePlaylistTracksActivity extends Activity implements Observer, 
             t2.setWidth(150 * dip);
             t1.setPadding(20 * dip, 0, 0, 0);
             row.addView(t1);
-            row.addView(t2);
+            //row.addView(t2);
             row.setTag(plTrack.track.uri);
 
             playlist_tracks_table.addView(row, new TableLayout.LayoutParams(
@@ -102,12 +112,6 @@ public class UpdatePlaylistTracksActivity extends Activity implements Observer, 
             row.setClickable(true); //allows you to select a specific row
             row.setOnClickListener(new OnClickListener() {
                 public void onClick(View v) {
-                    // here is where we will need to swap out view with
-                    // song details view, need to handle this differently
-                    // for Admin & User and in SongRoom or Your Music
-                    //v.setBackgroundColor(Color.GRAY);
-                    //System.out.println("Row clicked: " + v.getId());
-                    //Track toPlay = (Track) v.getTag();
                     Player mPlayer = state.getPlayer();
                     mPlayer.play((String) v.getTag());
                 }

@@ -73,6 +73,16 @@ public class UpdatePlaylistsActivity extends Activity implements Observer, Runna
             t1 = new TextView(this);
             t2 = new TextView(this);
 
+            String s;
+            String name = play.name;
+            if(name.length() > 12){
+                s = name.substring(0,11);
+                t1.setText(s + "...");
+            }
+            else{
+                t1.setText(name);
+            }
+
             t1.setText(play.name);
             t2.setText(play.uri);
             t1.setTypeface(null, 1);
@@ -92,12 +102,8 @@ public class UpdatePlaylistsActivity extends Activity implements Observer, Runna
                     LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
 
             row.setClickable(true); //allows you to select a specific row
-//            row.setOnTouchListener(new TemporaryColor(GRAY));
             row.setOnClickListener(new OnClickListener() {
                 public void onClick(View v) {
-                    // here is where we will need to swap out view with view of the playlist's tracks
-//                    v.setBackgroundColor(Color.GRAY);
-//                    System.out.println("Row clicked: " + v.getId());
                     Context x = v.getContext();
                     Intent i = new Intent(x, UpdatePlaylistTracksActivity.class);
                     i.putExtra("plist", (String)v.getTag());
