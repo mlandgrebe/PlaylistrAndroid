@@ -7,6 +7,7 @@ import android.util.Log;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TableLayout;
@@ -36,6 +37,16 @@ public class SongRoomHomeActivity extends Activity implements Observer, Runnable
         super.onCreate(savedInstanceState);
         Log.d("SRHA", "onCreate");
         setContentView(R.layout.activity_song_room_home);
+        Button update = (Button) findViewById(R.id.update_button);
+        update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SongRoomHomeActivity x = (SongRoomHomeActivity) v.getContext();
+                x.queue_tracks_table.removeAllViews();
+                runOnUiThread(x);
+            }
+        });
+
         State s = State.getState();
         SpotifyService spotify = s.getSpotifyService();
         if(s.getUser().getHostStatus()) {
@@ -94,8 +105,8 @@ public class SongRoomHomeActivity extends Activity implements Observer, Runnable
             String name = plTrack.getName();
             Log.d("SRHomeActivity", name);
 
-            if(name.length() > 23){
-                String s = name.substring(0, 23);
+            if(name.length() > 15){
+                String s = name.substring(0, 14);
                 t1.setText(s + "...");
             }
             else{
@@ -111,6 +122,17 @@ public class SongRoomHomeActivity extends Activity implements Observer, Runnable
             t1.setWidth(150 * dip);
             //t1.setPadding(20 * dip, 0, 0, 0);
 
+            t2 = new TextView(this);
+            t2.setText("0");
+            if(plTrack.getVotes() != null) {
+                String t2txt = new Integer(plTrack.getVotes().size()).toString();
+                t2.setText(t2txt);
+            }
+            t2.setTypeface(null, 1);
+            t2.setTextSize(15);
+            t2.setWidth(25 * dip);
+
+
             up.setWidth(50 * dip);
             down.setWidth(50 * dip);
             up.setBackgroundColor(Color.alpha(0));
@@ -123,6 +145,8 @@ public class SongRoomHomeActivity extends Activity implements Observer, Runnable
             row.addView(t1);
             row.addView(up);
             row.addView(down);
+            row.addView(t2);
+
             row.setTag(plTrack);
 
 

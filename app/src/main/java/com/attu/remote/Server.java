@@ -219,7 +219,12 @@ public class Server {
 
 
     public List<Song> getSongs(ObjectId songQueueId) {
-        return api.getSongs(songQueueId);
+        List<Song> toRet = api.getSongs(songQueueId);
+        for (Song s : toRet) {
+            s.setServer(this);
+        }
+
+        return toRet;
     }
 
     @GET("/createSong")

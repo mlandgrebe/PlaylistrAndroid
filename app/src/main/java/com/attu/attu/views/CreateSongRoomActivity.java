@@ -102,7 +102,7 @@ public class CreateSongRoomActivity extends Activity implements
             row.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     // change a clicked row's color to gray & get playlist ID for selected playlist
-//                    v.setBackgroundColor(Color.GRAY);
+                    v.setBackgroundColor(Color.GRAY);
                     plistTag = (String)v.getTag();
                 }
             });
