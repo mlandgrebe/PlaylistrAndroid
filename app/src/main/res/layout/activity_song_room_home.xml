@@ -25,7 +25,8 @@
         android:layout_height="fill_parent"
         android:paddingBottom="20dip"
         android:layout_below="@+id/srName"
-        android:layout_alignParentBottom="true">
+        android:layout_alignParentBottom="true"
+        android:fillViewport="false">
         <TableLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
@@ -48,4 +49,14 @@
         android:layout_above="@+id/view_init_queue_opts"
         android:layout_toLeftOf="@+id/srName"
         android:layout_toStartOf="@+id/srName" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="+ Song"
+        android:id="@+id/add_button"
+        android:layout_above="@+id/view_init_queue_opts"
+        android:layout_toRightOf="@+id/srName"
+        android:layout_toEndOf="@+id/srName" />
 </RelativeLayout>

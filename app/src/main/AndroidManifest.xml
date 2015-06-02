@@ -44,6 +44,14 @@
             android:name=".views.JoinSongRoomActivity"
             android:label="@string/title_activity_join_song_room" >
         </activity>
+        <activity
+            android:name=".views.PlayListQueueActivity"
+            android:label="@string/title_activity_play_list_queue" >
+        </activity>
+        <activity
+            android:name=".views.QueueSongActivity"
+            android:label="@string/title_activity_queue_song" >
+        </activity>
     </application>
 
 </manifest>

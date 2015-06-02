@@ -21,6 +21,6 @@ public class DownThumb implements OnClickListener {
 //        v.setBackgroundColor(Color.GRAY);
         State state = State.getState();
         APIUser user = state.getUser();
-        user.upvote(toThumb);
+        user.downvote(toThumb);
     }
 }

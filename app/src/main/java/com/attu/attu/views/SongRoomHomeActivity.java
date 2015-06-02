@@ -1,6 +1,8 @@
 package com.attu.attu.views;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,6 +19,7 @@ import android.widget.TextView;
 import com.attu.attu.R;
 import com.attu.display.TemporaryColor;
 import com.attu.models.Song;
+import com.attu.models.Vote;
 import com.attu.util.State;
 
 import java.util.List;
@@ -44,6 +47,15 @@ public class SongRoomHomeActivity extends Activity implements Observer, Runnable
                 SongRoomHomeActivity x = (SongRoomHomeActivity) v.getContext();
                 x.queue_tracks_table.removeAllViews();
                 runOnUiThread(x);
+            }
+        });
+        Button addToQueue = (Button) findViewById(R.id.add_button);
+        addToQueue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Context con = v.getContext();
+                Intent i = new Intent(con, PlayListQueueActivity.class);
+                startActivity(i);
             }
         });
 
@@ -125,7 +137,17 @@ public class SongRoomHomeActivity extends Activity implements Observer, Runnable
             t2 = new TextView(this);
             t2.setText("0");
             if(plTrack.getVotes() != null) {
-                String t2txt = new Integer(plTrack.getVotes().size()).toString();
+                List<Vote> votes = plTrack.getVotes();
+                int tot = 0;
+                for(Vote v: votes){
+                    if(v.isUp()){
+                        tot += 1;
+                    }
+                    if(!v.isUp()){
+                        tot -= 1;
+                    }
+                }
+                String t2txt = new Integer(tot).toString();
                 t2.setText(t2txt);
             }
             t2.setTypeface(null, 1);

@@ -24,4 +24,6 @@
     <string name="title_activity_load__song_room__options">load_SongRoom_Options</string>
     <string name="title_activity_song_room_home">SongRoomHome</string>
     <string name="title_activity_join_song_room">JoinSongRoom</string>
+    <string name="title_activity_play_list_queue">PlayListQueueActivity</string>
+    <string name="title_activity_queue_song">QueueSongActivity</string>
 </resources>
