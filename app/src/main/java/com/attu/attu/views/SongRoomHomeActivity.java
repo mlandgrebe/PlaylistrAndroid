@@ -83,8 +83,6 @@ public class SongRoomHomeActivity extends Activity implements Observer, Runnable
             upThread.addObserver(this);
             Thread t = new Thread(upThread);
             t.start();
-
-
         }
     }
 
@@ -170,7 +168,6 @@ public class SongRoomHomeActivity extends Activity implements Observer, Runnable
 
             row.setTag(plTrack);
 
-
             TableLayout.LayoutParams params = new TableLayout.LayoutParams(
                     ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
@@ -181,14 +178,15 @@ public class SongRoomHomeActivity extends Activity implements Observer, Runnable
             Log.d("SRHA", "queue_tracks_table null ? " + (queue_tracks_table == null));
 
             queue_tracks_table.addView(row, params);
-            if(state.getUser().getHostStatus()){
-                row.setClickable(true);
-            }
+
+            row.setClickable(true);
             row.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-                    Player mPlayer = state.getPlayer();
-                    Song toPlay = (Song) v.getTag();
-                    mPlayer.play(toPlay.getSpotifyURI());
+                    if (state.getUser().getHostStatus()) {
+                        Player mPlayer = state.getPlayer();
+                        Song toPlay = (Song) v.getTag();
+                        mPlayer.play(toPlay.getSpotifyURI());
+                    }
                 }
             });
         }
