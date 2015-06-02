@@ -1,0 +1,12 @@
+<facet type="java-gradle" name="Java-Gradle">
+       <configuration>		       <configuration>
+         <option name="BUILD_FOLDER_PATH" value="$MODULE_DIR$/build" />		         <option name="BUILD_FOLDER_PATH" value="$MODULE_DIR$/build" />
++        <option name="BUILDABLE" value="false" />
+       </configuration>		  		       </configuration>
+     </facet>						     </facet>
+   </component>							   </component>
+ @@ -15,5 +16,4 @@
+     <orderEntry type="inheritedJdk" />		     <orderEntry type="inheritedJdk" />
+     <orderEntry type="sourceFolder" forTests="false" />	 		          <orderEntry type="sourceFolder" forTests="false" />
+   </component>	 		        </component>
+-</module>					+</module> 
