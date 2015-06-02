@@ -15,8 +15,11 @@ import com.attu.data.SRLocationListener;
 
 import com.attu.attu.R;
 import com.attu.models.APIUser;
+import com.attu.models.Song;
+import com.attu.models.SongRoom;
 import com.attu.remote.Server;
 
+import com.attu.util.Maybe;
 import com.spotify.sdk.android.authentication.AuthenticationClient;
 import com.spotify.sdk.android.authentication.AuthenticationRequest;
 import com.spotify.sdk.android.authentication.AuthenticationResponse;
@@ -25,6 +28,7 @@ import com.spotify.sdk.android.player.ConnectionStateCallback;
 import com.spotify.sdk.android.player.Player;
 import com.spotify.sdk.android.player.PlayerNotificationCallback;
 import com.spotify.sdk.android.player.PlayerState;
+import com.spotify.sdk.android.player.PlayerStateCallback;
 import com.spotify.sdk.android.player.Spotify;
 import com.attu.util.State;
 
@@ -33,7 +37,7 @@ import kaaes.spotify.webapi.android.SpotifyApi;
 import kaaes.spotify.webapi.android.SpotifyService;
 
 public class MainActivity extends Activity implements
-        PlayerNotificationCallback, ConnectionStateCallback {
+        PlayerNotificationCallback, ConnectionStateCallback, PlayerStateCallback {
 
     private static final String CLIENT_ID = "2de62f40903247208d3dd5e91846c410";
     private static final String REDIRECT_URI = "attuapp://callback";
@@ -113,15 +117,31 @@ public class MainActivity extends Activity implements
                     @Override
                     public void onInitialized(Player player) {
                         mPlayer.addConnectionStateCallback(MainActivity.this);
-                        mPlayer.addPlayerNotificationCallback(MainActivity.this);
-                    }
+                        mPlayer.addPlayerNotificationCallback(new PlayerNotificationCallback() {
+                            @Override
+                            public void onPlaybackEvent(EventType eventType, PlayerState playerState) {
+                                if (eventType == EventType.TRACK_END) {
+                                    SongRoom room = State.getState().getUser().getSongRoom();
+                                    room.stopPlaying();
+                                    Maybe<Song> nextSong = room.popSong();
+                                    if (!nextSong.isEmpty()) {
+                                        Song song = nextSong.getVal();
+                                        room.startPlaying();
+                                        mPlayer.play(song.getSpotifyURI());
+                                    }
+                                }
+                            }
+                            @Override
+                            public void onPlaybackError(ErrorType errorType, String s) {
 
+                            }
+                        });
+                    }
                     @Override
                     public void onError(Throwable throwable) {
                         Log.e("MainActivity", "Could not initialize player: " + throwable.getMessage());
                     }
                 });
-
                 SpotifyApi api = new SpotifyApi();
                 api.setAccessToken(response.getAccessToken());
                 final SpotifyService spotify = api.getService();
@@ -149,6 +169,9 @@ public class MainActivity extends Activity implements
 
             }
         }
+    }
+    public void onPlayerState(PlayerState state){
+        Log.d("MainActivity", "Current Track Playing = " + state.trackUri);
     }
 
     @Override

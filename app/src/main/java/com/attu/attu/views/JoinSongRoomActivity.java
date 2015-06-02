@@ -72,7 +72,7 @@ public class JoinSongRoomActivity extends Activity
             row.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     // change a clicked row's color to gray & get playlist ID for selected playlist
-//                    v.setBackgroundColor(Color.GRAY);
+                    v.setBackgroundColor(Color.GRAY);
                     toJoin = (SongRoom)v.getTag();
                 }
             });

@@ -26,8 +26,6 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
-import kaaes.spotify.webapi.android.SpotifyService;
-
 public class SongRoomHomeActivity extends Activity implements Observer, Runnable{
     private String name;
     private String plist;
@@ -60,9 +58,7 @@ public class SongRoomHomeActivity extends Activity implements Observer, Runnable
         });
         TextView title = (TextView) findViewById(R.id.srName);
         title.setText((String) getIntent().getSerializableExtra("srname"));
-
         State s = State.getState();
-        SpotifyService spotify = s.getSpotifyService();
         if(s.getUser().getHostStatus()) {
             name = (String) getIntent().getSerializableExtra("srname");
             plist = (String) getIntent().getSerializableExtra("plist");
