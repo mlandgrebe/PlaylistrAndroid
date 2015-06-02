@@ -17,10 +17,10 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.attu.attu.R;
-import com.attu.display.TemporaryColor;
 import com.attu.models.Song;
 import com.attu.models.Vote;
 import com.attu.util.State;
+import com.spotify.sdk.android.player.Player;
 
 import java.util.List;
 import java.util.Observable;
@@ -90,14 +90,6 @@ public class SongRoomHomeActivity extends Activity implements Observer, Runnable
 
     public void run() {
         Log.d("SRHA", "run starting");
-        //State state = State.getState();
-        //APIUser apiUser = state.getUser();
-        //SongRoom songRoom = apiUser.getSongRoom();
-        //SongQueue songQueue = songRoom.getQueue();
-        //List<Song> songs = songQueue.getSongs();
-
-        //for (Song s : songs) {
-        //}
 
         TextView t1, t2;
         Button up, down;
@@ -105,7 +97,7 @@ public class SongRoomHomeActivity extends Activity implements Observer, Runnable
         //Converting to dip unit
         int dip = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
                 (float) 1, getResources().getDisplayMetrics());
-        State state = State.getState();
+        final State state = State.getState();
         final List<Song> songs = state.getUser().getSongRoom().getQueue().getSongs();
         for (final Song plTrack : songs) {
             row = new TableRow(this);
@@ -189,22 +181,16 @@ public class SongRoomHomeActivity extends Activity implements Observer, Runnable
             Log.d("SRHA", "queue_tracks_table null ? " + (queue_tracks_table == null));
 
             queue_tracks_table.addView(row, params);
-
-            row.setClickable(true); //allows you to select a specific row
-
-//            row.setOnTouchListener(new TemporaryColor(Color.GRAY));
-
-//            row.setOnClickListener(new View.OnClickListener() {
-//                public void onClick(View v) {
-//                    // here is where we will need to swap out view with
-//                    // song details view, need to handle this differently
-//                    // for Admin & User and in SongRoom or Your Music
-//                    v.setBackgroundColor(Color.GRAY);
-//                    System.out.println("Row clicked: " + v.getId());
-//                    //Track toPlay = (Track) v.getTag();
-//                }
-//
-//            });
+            if(state.getUser().getHostStatus()){
+                row.setClickable(true);
+            }
+            row.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    Player mPlayer = state.getPlayer();
+                    Song toPlay = (Song) v.getTag();
+                    mPlayer.play(toPlay.getSpotifyURI());
+                }
+            });
         }
     }
 

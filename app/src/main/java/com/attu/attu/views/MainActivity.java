@@ -114,7 +114,6 @@ public class MainActivity extends Activity implements
                     public void onInitialized(Player player) {
                         mPlayer.addConnectionStateCallback(MainActivity.this);
                         mPlayer.addPlayerNotificationCallback(MainActivity.this);
-                        //mPlayer.play("spotify:track:2TpxZ7JUBn3uw46aR7qd6V");
                     }
 
                     @Override
